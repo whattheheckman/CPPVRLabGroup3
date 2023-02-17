@@ -15,8 +15,19 @@ tracker = &"left_hand"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHand"]
 mesh = SubResource("BoxMesh_itlk0")
 
-[node name="XRToolsFunctionTeleport" type="CharacterBody3D" parent="LeftHand"]
+[node name="Teleport" type="CharacterBody3D" parent="LeftHand"]
 script = ExtResource("1_08t5y")
+enabled = true
+can_teleport_color = Color(0, 1, 0, 1)
+cant_teleport_color = Color(1, 0, 0, 1)
+no_collision_color = Color(0.176471, 0.313726, 0.862745, 1)
+player_height = 1.8
+player_radius = 0.4
+strength = 5.0
+max_slope = 20.0
+valid_teleport_mask = -1
+teleport_button_action = "trigger_click"
+rotation_action = "primary"
 
 [node name="RightHand" type="XRController3D" parent="."]
 tracker = &"right_hand"
