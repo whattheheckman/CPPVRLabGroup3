@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://kvm5pgsk57b3"]
+[gd_scene load_steps=4 format=3 uid="uid://cl0q0un6cenqc"]
 
 [ext_resource type="Script" path="res://XRInit.gd" id="1_5ovcd"]
 [ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_floor.tscn" id="2_q54p3"]
-[ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_bare.tscn" id="3_8o2lx"]
+[ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="3_7mm0t"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5ovcd")
@@ -16,4 +16,4 @@ text = "Enter VR"
 
 [node name="10m_floor" parent="." instance=ExtResource("2_q54p3")]
 
-[node name="XR Setup Bare" parent="." instance=ExtResource("3_8o2lx")]
+[node name="XR Player" parent="." instance=ExtResource("3_7mm0t")]

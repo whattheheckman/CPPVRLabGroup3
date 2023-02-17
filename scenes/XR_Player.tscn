@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://d21r1mmp0snev"]
+
+[ext_resource type="Script" path="res://godot-xr-tools/addons/godot-xr-tools/functions/function_teleport.gd" id="1_08t5y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_itlk0"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="LeftHand" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHand"]
+mesh = SubResource("BoxMesh_itlk0")
+
+[node name="XRToolsFunctionTeleport" type="CharacterBody3D" parent="LeftHand"]
+script = ExtResource("1_08t5y")
+
+[node name="RightHand" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightHand"]
+mesh = SubResource("BoxMesh_itlk0")
