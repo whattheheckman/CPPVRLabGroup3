@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://kvm5pgsk57b3"]
-
-[ext_resource type="Script" path="res://XRInit.gd" id="1_pwinh"]
+[gd_scene load_steps=2 format=3 uid="uid://d21r1mmp0snev"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_itlk0"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="Node3D" type="Node3D"]
-script = ExtResource("1_pwinh")
+[node name="XR Bare" type="Node"]
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
@@ -23,10 +20,3 @@ tracker = &"right_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
 mesh = SubResource("BoxMesh_itlk0")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Enter VR"
