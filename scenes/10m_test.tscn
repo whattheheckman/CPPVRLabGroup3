@@ -1,37 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb8hytpefouc3"]
+[gd_scene load_steps=5 format=3 uid="uid://cb8hytpefouc3"]
 
-[ext_resource type="Texture2D" uid="uid://lcg0lx20dqdt" path="res://assets/textures/kenney_prototypetextures/Orange/texture_02.png" id="1_nlln8"]
-[ext_resource type="Texture2D" uid="uid://maacki2qdob0" path="res://assets/textures/kenney_prototypetextures/Green/texture_01.png" id="2_72grx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivs73"]
-albedo_texture = ExtResource("1_nlln8")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_r6eso"]
-size = Vector2(10, 10)
+[ext_resource type="Texture2D" uid="uid://cwgkp47y0pkrm" path="res://assets/textures/Floor_10m x 10m.png" id="1_4c158"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_00q83"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puxns"]
-albedo_texture = ExtResource("2_72grx")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivs73"]
+albedo_texture = ExtResource("1_4c158")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r6eso"]
+size = Vector2(10, 10)
 
 [node name="env_test" type="Node"]
 
-[node name="Floor Plane" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_ivs73")
-mesh = SubResource("PlaneMesh_r6eso")
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor Plane"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor Plane/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_00q83")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Floor Plane"]
-transform = Transform3D(1, 0, 0, 0, 0.999983, 0.00582937, 0, -0.00582937, 0.999983, 1.5, 1.5, 1.5)
-material_override = SubResource("StandardMaterial3D_puxns")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Floor Plane"]
-transform = Transform3D(1, 0, 0, 0, 0.999983, 0.00582937, 0, -0.00582937, 0.999983, 0.707, 0.707, 0.707)
-material_override = SubResource("StandardMaterial3D_puxns")
-size = Vector3(0.5, 0.5, 0.5)
+[node name="Floor Plane" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_ivs73")
+mesh = SubResource("PlaneMesh_r6eso")
+skeleton = NodePath("../..")
