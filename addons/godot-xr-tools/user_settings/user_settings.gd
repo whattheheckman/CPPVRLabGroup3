@@ -19,7 +19,7 @@ const WebXRPrimaryName := {
 @export var player_height_adjust : float = 0.0: set = set_player_height_adjust
 
 ## User setting for WebXR primary
-@export_enum(WebXRPrimary) var webxr_primary : int = WebXRPrimary.AUTO: set = set_webxr_primary
+@export var webxr_primary : int = WebXRPrimary.AUTO: set = set_webxr_primary
 
 ## Settings file name to persist user settings
 var settings_file_name : String = "user://xtools_user_settings.json"

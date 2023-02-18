@@ -1,24 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl0q0un6cenqc"]
+[gd_scene load_steps=4 format=3 uid="uid://rxjat33kmf72"]
 
-[ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_floor.tscn" id="2_q54p3"]
+[ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_test.tscn" id="1_ql5iv"]
 [ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="3_7mm0t"]
-[ext_resource type="Script" path="res://godot-xr-tools/addons/godot-xr-tools/xr/start_xr.gd" id="3_d4081"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="3_ogxsc"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Floor Plane" parent="." instance=ExtResource("1_ql5iv")]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Enter VR"
+[node name="XROrigin3D" parent="." instance=ExtResource("3_7mm0t")]
 
-[node name="10m_floor" parent="." instance=ExtResource("2_q54p3")]
-
-[node name="XR Player" parent="." instance=ExtResource("3_7mm0t")]
-
-[node name="XRToolsStartXR" type="Node" parent="."]
-script = ExtResource("3_d4081")
-auto_initialize = true
-enable_passthrough = false
-physics_rate_multiplier = 1
+[node name="StartXR" parent="." instance=ExtResource("3_ogxsc")]

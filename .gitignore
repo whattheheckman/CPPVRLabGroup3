@@ -2,7 +2,7 @@
 .godot/
 
 #exported builds
-export/
+.export/
 
 #vscode settings
 .vscode/

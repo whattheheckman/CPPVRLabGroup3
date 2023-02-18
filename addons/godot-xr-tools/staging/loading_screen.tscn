@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bqumugyvkct4r"]
 
-[ext_resource type="Texture2D" uid="uid://cwhk1tibwsjh0" path="res://icon.svg" id="1"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="1"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/loading_screen.gd" id="2"]
 [ext_resource type="Shader" uid="uid://4i0pwdtfmtsv" path="res://addons/godot-xr-tools/staging/loading_screen/loading_screen_shader.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://clbtsf0ahb3fm" path="res://addons/godot-xr-tools/assets/misc/progress_bar.png" id="4"]
@@ -62,5 +62,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_k8dyo")
 
 [node name="HoldButton" parent="PressToContinue" instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55766, 0, 0)
+hold_time = 0.5
+color = Color(0, 0.717647, 1, 1)
 
 [connection signal="pressed" from="PressToContinue/HoldButton" to="." method="_on_HoldButton_pressed"]
