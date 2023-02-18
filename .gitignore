@@ -3,3 +3,6 @@
 
 #exported builds
 export/
+
+#vscode settings
+.vscode/
