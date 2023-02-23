@@ -11,13 +11,26 @@ config_version=5
 [application]
 
 config/name="CPP VR Lab Group 3"
-run/main_scene="res://test.tscn"
+run/main_scene="res://scenes/test.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
 
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 
 [xr]
 

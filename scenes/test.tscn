@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://rxjat33kmf72"]
+
+[ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_test.tscn" id="1_ql5iv"]
+[ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="3_7mm0t"]
+[ext_resource type="Texture2D" uid="uid://c2cdtgcgljqq7" path="res://assets/hdri/spaichingen_hill_4k.exr" id="4_gxfs2"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_wlxvo"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_m0ytj"]
+panorama = ExtResource("4_gxfs2")
+
+[sub_resource type="Sky" id="Sky_tlcd6"]
+sky_material = SubResource("PanoramaSkyMaterial_m0ytj")
+
+[sub_resource type="Environment" id="Environment_xykgq"]
+background_mode = 2
+sky = SubResource("Sky_tlcd6")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor Plane" parent="." instance=ExtResource("1_ql5iv")]
+
+[node name="XROrigin3D" parent="." instance=ExtResource("3_7mm0t")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xykgq")
+
+[node name="StartXR" parent="." instance=ExtResource("4_wlxvo")]
