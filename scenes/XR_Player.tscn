@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d21r1mmp0snev"]
+[gd_scene load_steps=9 format=3 uid="uid://d21r1mmp0snev"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_3sor3"]
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="2_21cuy"]
 [ext_resource type="PackedScene" uid="uid://bn2tdayatqv04" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_t0jfa"]
 [ext_resource type="Material" uid="uid://jtf3u63b03ve" path="res://addons/godot-xr-tools/hands/materials/african_hands_realistic.material" id="3_tu7x6"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="4_5r1ix"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="5_ygktt"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_g21ae"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="7_uf2gi"]
 
@@ -32,5 +33,8 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("3_tu7x6")
 
 [node name="MovementTurn" parent="RightController" instance=ExtResource("6_g21ae")]
+
+[node name="FunctionPickup" parent="RightController" instance=ExtResource("5_ygktt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
 [node name="PlayerBody" parent="." instance=ExtResource("7_uf2gi")]

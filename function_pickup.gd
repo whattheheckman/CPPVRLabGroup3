@@ -1,44 +1,37 @@
-extends RigidBody3D
+extends Area3D
 
-@onready var original_parent = get_parent()
-var original_collision_mask
-var original_collision_layer
+@export var impulse_factor = 10.0
 
-var picked_up_by = null
+var object_in_area = Array()
+var picked_up_object = null
 
-func pick_up(by):
-	if picked_up_by == by:
-		return
-		
-	if picked_up_by:
-		let_go()
-		
-	picked_up_by = by
-	var mode = RigidBody3D.FREEZE_MODE_STATIC
-	collision_layer = 0
-	collision_mask = 0
-	
-	original_parent.remove_child(self)
-	picked_up_by.add_child(self)
-	
-	transform = Transform3D()
+var last_position = Vector3(0.0, 0.0, 0.0)
+var velocity = Vector3(0.0, 0.0, 0.0)
 
-func let_go(impulse = Vector3(0.0, 0.0, 0.0)):
-	if picked_up_by:
-		var t = global_transform
-		
-		picked_up_by.remove_child(self)
-		original_parent.add_child(self)
-		
-		global_transform = t
-		var mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-		collision_mask = original_collision_mask
-		collision_layer = original_collision_layer
-		apply_impulse(Vector3(0.0, 0.0, 0.0), impulse)
-		
-		picked_up_by = null
-		
 
+func _on_body_entered(body):
+	if body.has_method('pick_up') and object_in_area.find(body) == -1:
+		object_in_area.push_back(body)
+
+
+func _on_body_exited(body):
+	if object_in_area.find(body) != -1:
+		object_in_area.erase(body)
+
+func _on_button_pressed(p_button):
+	if p_button == 2:
+		if picked_up_object:
+			picked_up_object.let_go(velocity * impulse_factor)
+			picked_up_object = null
+		elif !object_in_area.empty():
+			picked_up_object = object_in_area[0]
+			picked_up_object.pick_up(self)
+			
 func _ready():
-	original_collision_layer = collision_layer
-	original_collision_mask = collision_mask
+	#get_parent().connect("button_pressed", self, "_on_button_pressed")
+	last_position = global_transform.origin
+	
+func _process(delta):
+	velocity = global_transform.origin - last_position / delta
+	last_position = global_transform.origin
+			
