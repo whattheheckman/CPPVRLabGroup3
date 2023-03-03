@@ -14,7 +14,7 @@ func pick_up(by):
 		let_go()
 		
 	picked_up_by = by
-	#mode = RigidBody.MODE_STATIC
+	var mode = RigidBody3D.FREEZE_MODE_STATIC
 	collision_layer = 0
 	collision_mask = 0
 	
@@ -31,7 +31,7 @@ func let_go(impulse = Vector3(0.0, 0.0, 0.0)):
 		original_parent.add_child(self)
 		
 		global_transform = t
-		#mode = RigidBody.MODE_RIGID
+		var mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 		collision_mask = original_collision_mask
 		collision_layer = original_collision_layer
 		apply_impulse(Vector3(0.0, 0.0, 0.0), impulse)
