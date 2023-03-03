@@ -1,23 +1,37 @@
-@tool
-extends CSGBox3D
+extends MeshInstance3D
 
-var box = CSGBox3D.new()
-var sizing = Vector3(1,1,1)
 
-# Called when the node enters the scene tree for the first time.
+@export(int) var height;
+@export(int) var width;
+@export(int) var depth;
+
+
+
+
 func _ready():
-	
-	
-	pass # Replace with function body.
+    var surface_array = []
+    surface_array.resize(Mesh.ARRAY_MAX)
+
+    # PackedVector**Arrays for mesh construction.
+    var verts = PackedVector3Array()
+    var uvs = PackedVector2Array()
+    var normals = PackedVector3Array()
+    var indices = PackedInt32Array()
+
+    #######################################
+    ## Insert code here to generate mesh ##
+    #######################################
+
+	# calulate height by returning 2 vector3 with y coming from export var height
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	
-	
-	
-	box.set_size(sizing)
-	pass
 
+    # Assign arrays to surface array.
+    surface_array[Mesh.ARRAY_VERTEX] = verts
+    surface_array[Mesh.ARRAY_TEX_UV] = uvs
+    surface_array[Mesh.ARRAY_NORMAL] = normals
+    surface_array[Mesh.ARRAY_INDEX] = indices
 
-## make 8 vertices where ever the player places the first point, when they place the second point moove vertices 3&4 to it. when they move move ot the right for the 3rd point, palce verts 5&6, when they move to the back , move 2/4/6 all with 8 to the back
+    # Create mesh surface from mesh array.
+    # No blendshapes, lods, or compression used.
+    mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
