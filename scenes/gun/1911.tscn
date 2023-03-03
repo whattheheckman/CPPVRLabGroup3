@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://ygxmtqfc3pfw"]
+
+[ext_resource type="PackedScene" uid="uid://cjcl40i0q4dx7" path="res://assets/1911.FBX" id="1_mwpne"]
+[ext_resource type="Texture2D" uid="uid://hso3kh6yowgt" path="res://scenes/gun/257.jpg" id="2_idv7b"]
+[ext_resource type="Texture2D" uid="uid://dtghmc1k18dv7" path="res://scenes/gun/N_1911_normal.png" id="3_7kvcd"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="4_u1ajc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7qxw"]
+albedo_texture = ExtResource("2_idv7b")
+normal_enabled = true
+normal_texture = ExtResource("3_7kvcd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p4jjh"]
+size = Vector3(3.39273, 21.8336, 33.6021)
+
+[node name="1911" instance=ExtResource("1_mwpne")]
+transform = Transform3D(-0.007, 0, 6.11959e-10, 0, 0.007, 0, -6.11959e-10, 0, -0.007, 0, 0, 0)
+
+[node name="gunbody" parent="RootNode" index="1"]
+transform = Transform3D(100, -1.0842e-19, 0, 0, 100, -1.62921e-05, 0, 1.62921e-05, 100, 1.90735e-06, -0.769701, 9.53674e-07)
+surface_material_override/0 = SubResource("StandardMaterial3D_q7qxw")
+
+[node name="PickableObject" parent="." index="2" instance=ExtResource("4_u1ajc")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PickableObject" index="1"]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_p4jjh")

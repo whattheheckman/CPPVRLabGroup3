@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfwlwtp7w42e1"]
+[gd_scene load_steps=4 format=3 uid="uid://dpu5mc4khhgki"]
 
-[ext_resource type="PackedScene" uid="uid://bsqbxt3gkigey" path="res://pickable_object.tscn" id="1_1128g"]
-[ext_resource type="PackedScene" uid="uid://cjcl40i0q4dx7" path="res://1911.FBX" id="2_21q5k"]
+[ext_resource type="PackedScene" uid="uid://bsqbxt3gkigey" path="res://scenes/misc/pickable_object.tscn" id="1_1128g"]
+[ext_resource type="PackedScene" uid="uid://cjcl40i0q4dx7" path="res://assets/1911.FBX" id="2_21q5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sb5mq"]
 size = Vector3(0.0256161, 0.160234, 0.246513)
