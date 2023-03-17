@@ -10,9 +10,11 @@ extends XRController3D
 var start_point = null
 var end_point = null
 
-@export var max_height : int = 10.0
-@export var max_width : int = 10.0
-@export var max_depth : int = 10.0
+var binger_mode  = null
+
+@export var max_height : float = 10.0
+@export var max_width : float = 10.0
+@export var max_depth : float = 10.0
 
 @onready var controller := XRHelpers.get_xr_controller(self)
 
@@ -20,7 +22,11 @@ var end_point = null
 var mesh_count = 0
 
 func _physics_process(_delta):
-	if controller.is_button_pressed(create_button): # 15 is the index for the trigger button on most VR controllers
+	if controller.is_button_pressed(create_button) or controller.is_button_pressed(delete_button):
+		$FunctionTeleport.enabled = false
+		
+	if controller.is_button_pressed(create_button): 
+		
 		if start_point == null:
 			start_point = controller.get_global_transform().origin
 		else:
@@ -64,5 +70,5 @@ func create_mesh(height,width,depth):
 	add_child(staticBody)
 
 func remove_mesh(mesh):
-	queue_free()
+	mesh.queue_free()
 	pass
