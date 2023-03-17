@@ -16,6 +16,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="VRCommonShaderCache" parent="XRCamera3D" instance=ExtResource("1_3sor3")]
 
+[node name="User Interface" type="Control" parent="XRCamera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="XRCamera3D/User Interface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="create mode" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
+layout_mode = 2
+
+[node name="delete mode" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
+layout_mode = 2
+
+[node name="max cubes" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
+layout_mode = 2
+
+[node name="number of cubes" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
+layout_mode = 2
+
 [node name="LeftController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.75, -0.5)
 tracker = &"left_hand"
