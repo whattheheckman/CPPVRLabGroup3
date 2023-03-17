@@ -27,7 +27,6 @@ hand_material_override = ExtResource("3_tu7x6")
 
 [node name="Binger" type="Node" parent="LeftController"]
 script = ExtResource("5_ndy58")
-binger_button = null
 
 [node name="RightController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, -0.5)
