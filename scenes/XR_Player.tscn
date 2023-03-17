@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://d21r1mmp0snev"]
+[gd_scene load_steps=8 format=3 uid="uid://d21r1mmp0snev"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_3sor3"]
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="2_21cuy"]
-[ext_resource type="PackedScene" uid="uid://bn2tdayatqv04" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_t0jfa"]
 [ext_resource type="Material" uid="uid://jtf3u63b03ve" path="res://addons/godot-xr-tools/hands/materials/african_hands_realistic.material" id="3_tu7x6"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="4_5r1ix"]
-[ext_resource type="Script" path="res://assets/scripts/Binger.gd" id="5_ndy58"]
+[ext_resource type="Script" path="res://assets/scripts/box_create_simple.gd" id="4_ccbkv"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_g21ae"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="7_uf2gi"]
 
-[node name="XROrigin3D" type="XROrigin3D"]
+[node name="XR_Player" type="XROrigin3D"]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -29,15 +28,19 @@ offset_bottom = 40.0
 
 [node name="create mode" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
 layout_mode = 2
+text = "create mode"
 
 [node name="delete mode" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
 layout_mode = 2
+text = "delete mode"
 
 [node name="max cubes" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
 layout_mode = 2
+text = "max cubes"
 
 [node name="number of cubes" type="Label" parent="XRCamera3D/User Interface/VBoxContainer"]
 layout_mode = 2
+text = "number of cubes"
 
 [node name="LeftController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.75, -0.5)
@@ -46,10 +49,11 @@ tracker = &"left_hand"
 [node name="LeftHand" parent="LeftController" instance=ExtResource("2_21cuy")]
 hand_material_override = ExtResource("3_tu7x6")
 
-[node name="FunctionTeleport" parent="LeftController" instance=ExtResource("3_t0jfa")]
-
-[node name="Binger" type="Node" parent="LeftController"]
-script = ExtResource("5_ndy58")
+[node name="Binger" type="Node3D" parent="LeftController"]
+script = ExtResource("4_ccbkv")
+max_height = 0.5
+max_width = 0.5
+max_depth = 0.5
 
 [node name="RightController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, -0.5)
@@ -59,5 +63,6 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("3_tu7x6")
 
 [node name="MovementTurn" parent="RightController" instance=ExtResource("6_g21ae")]
+step_turn_angle = 45.0
 
 [node name="PlayerBody" parent="." instance=ExtResource("7_uf2gi")]

@@ -1,4 +1,4 @@
-extends XRController3D
+extends Node3D
 
 
 
@@ -11,8 +11,8 @@ extends XRController3D
 var start_point = null
 var end_point = null
 
-var create_mode = false
-var delete_mode = false
+@export var create_mode : bool = false
+@export var delete_mode : bool = false
 
 @export var max_height : float = 10.0
 @export var max_width : float = 10.0
@@ -20,13 +20,21 @@ var delete_mode = false
 
 @onready var controller := XRHelpers.get_xr_controller(self)
 
-@export_range(1,10) var max_meshes : int = 5
+@export var max_meshes : int = 5
 var mesh_count = 0
 
-func _physics_process(_delta):
-	if create_mode == false and delete_mode == false:
-		$FunctionTeleport.enabled = true
+
+
+@export var teleport : bool = false
+
 		
+func _physics_process(_delta):
+	
+	if Engine.is_editor_hint():
+		$"../FunctionTeleport".set_enabled(false)
+	
+	#if create_mode == false and delete_mode == false:
+		#$"../FunctionTeleport".set_enabled(true)
 		
 	if create_mode == true and delete_mode == false and controller.is_button_pressed(trigger):
 		Input.start_joy_vibration(0, .5,0,.3)
@@ -84,7 +92,11 @@ func _input(_event):
 	
 	if controller.is_button_pressed(create_button): 
 		create_mode = !create_mode
+		if create_mode == true:
+			$"../FunctionTeleport".set_enabled(false)
 		delete_mode = false
 	elif controller.is_button_pressed(delete_button):
 		delete_mode = !delete_mode
+		if delete_mode == true:
+			$"../FunctionTeleport".set_enabled(false)
 		create_mode = false

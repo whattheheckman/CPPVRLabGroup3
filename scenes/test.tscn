@@ -19,9 +19,9 @@ sky = SubResource("Sky_tlcd6")
 
 [node name="Floor Plane" parent="." instance=ExtResource("1_ql5iv")]
 
-[node name="XROrigin3D" parent="." instance=ExtResource("3_7mm0t")]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xykgq")
 
 [node name="StartXR" parent="." instance=ExtResource("4_wlxvo")]
+
+[node name="XR_Player" parent="." instance=ExtResource("3_7mm0t")]
