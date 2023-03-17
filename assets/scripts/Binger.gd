@@ -5,12 +5,14 @@ extends XRController3D
 
 @export var create_button : String = "ax_button"
 @export var delete_button : String = "by_button"
+@export var trigger : String = "trigger_click"
 
 
 var start_point = null
 var end_point = null
 
-var binger_mode  = null
+var create_mode = false
+var delete_mode = false
 
 @export var max_height : float = 10.0
 @export var max_width : float = 10.0
@@ -22,11 +24,12 @@ var binger_mode  = null
 var mesh_count = 0
 
 func _physics_process(_delta):
-	if controller.is_button_pressed(create_button) or controller.is_button_pressed(delete_button):
-		$FunctionTeleport.enabled = false
+	if create_mode == false and delete_mode == false:
+		$FunctionTeleport.enabled = true
 		
-	if controller.is_button_pressed(create_button): 
 		
+	if create_mode == true and delete_mode == false and controller.is_button_pressed(trigger):
+		Input.start_joy_vibration(0, .5,0,.3)
 		if start_point == null:
 			start_point = controller.get_global_transform().origin
 		else:
@@ -39,13 +42,14 @@ func _physics_process(_delta):
 
 			if mesh_count < max_meshes:
 				create_mesh(height,width,depth)
+
 				mesh_count += 1
 
 			start_point = null
 			end_point = null
 	
 	# Check for deletion of meshes
-	if controller.is_button_pressed(delete_button): # 1 is the index for the grip button on most VR controllers
+	if delete_mode == true and create_mode == false and controller.is_button_pressed(trigger): # 1 is the index for the grip button on most VR controllers
 		var ray_from = controller.get_global_transform().origin 
 		var ray_to = ray_from+controller.get_global_transform().basis.z*-10000 # raycast distance is hard coded here 
 		var space_state = get_world_3d().direct_space_state 
@@ -68,7 +72,19 @@ func create_mesh(height,width,depth):
 	staticBody.add_child(collisionShape)
 	
 	add_child(staticBody)
+	Input.start_joy_vibration(0, 0,.5,.5)
+	create_mode = false
 
 func remove_mesh(mesh):
 	mesh.queue_free()
+	Input.start_joy_vibration(0, 0,.5,.5)
 	pass
+	
+func _input(_event):
+	
+	if controller.is_button_pressed(create_button): 
+		create_mode = !create_mode
+		delete_mode = false
+	elif controller.is_button_pressed(delete_button):
+		delete_mode = !delete_mode
+		create_mode = false
