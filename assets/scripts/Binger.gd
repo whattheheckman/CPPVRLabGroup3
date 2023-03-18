@@ -1,35 +1,50 @@
 extends Node3D
 
+############################################
+#SCRIPT VARS
+############################################
 
+# for easy access to text labels in UI
+@onready var create_label = $"../../XRCamera3D/User Interface/Create"
+@onready var delete_label = $"../../XRCamera3D/User Interface/Delete"
+@onready var count_label = $"../../XRCamera3D/User Interface/Count"
 
+@onready var controller := XRHelpers.get_xr_controller(self)
 
+var start_point = null
+var end_point = null
+
+var mesh_count = 0
+
+############################################
+#USER VARS
+############################################
+
+@export_category("Controller Mappings")
 @export var create_button : String = "ax_button"
 @export var delete_button : String = "by_button"
 @export var trigger : String = "trigger_click"
 
 
-var start_point = null
-var end_point = null
-
-@export var create_mode : bool = false
-@export var delete_mode : bool = false
-
+@export_category("Limits")
 @export var max_height : float = 10.0
 @export var max_width : float = 10.0
 @export var max_depth : float = 10.0
-
-@onready var controller := XRHelpers.get_xr_controller(self)
-
 @export var max_meshes : int = 5
-var mesh_count = 0
 
+
+@export_category("Materials")
 @export var material : Material
 
+@export_category("Debug Switches")
+@export var create_mode : bool = false
+@export var delete_mode : bool = false
 @export var teleport : bool = false
 
 		
 func _physics_process(_delta):
 	
+
 	if Engine.is_editor_hint():
 		$"../FunctionTeleport".set_enabled(false)
 	
@@ -51,7 +66,6 @@ func _physics_process(_delta):
 			if mesh_count < max_meshes:
 				create_mesh(height,width,depth)
 
-				mesh_count += 1
 
 			start_point = null
 			end_point = null
@@ -69,23 +83,34 @@ func _physics_process(_delta):
 func create_mesh(height,width,depth):
 	var meshInstance=MeshInstance3D.new()
 	meshInstance.add_to_group("mesh")
+	meshInstance.set_surface_override_material(0,material)
+	
+	var staticBody=StaticBody3D.new()
+	meshInstance.add_child(meshInstance)
 	
 	var boxShape=BoxShape3D.new()
 	boxShape.extents=Vector3(width/2,height/2,depth/2)
 	
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
+	staticBody.add_child(staticBody)
 	
-	var staticBody=StaticBody3D.new()
-	staticBody.add_child(collisionShape)
 	
-	add_child(staticBody)
+	mesh_count += 1
+	meshInstance.name = "BingerBox" + mesh_count
+	add_child(meshInstance)
 	Input.start_joy_vibration(0, 0,.5,.5)
-	create_mode = false
+	count_label.text = mesh_count + " / " +  max_meshes
+	
+	pass
 
 func remove_mesh(mesh):
+	
 	mesh.queue_free()
+	mesh_count -= 1
 	Input.start_joy_vibration(0, 0,.5,.5)
+	count_label.text = mesh_count + " / " +  max_meshes
+
 	pass
 	
 func _input(_event):
@@ -95,8 +120,15 @@ func _input(_event):
 		if create_mode == true:
 			$"../FunctionTeleport".set_enabled(false)
 		delete_mode = false
+
+		create_label.text = "Create mode: " + str(create_mode)
+		delete_label.text = "Delete mode: " + str(delete_mode)
+
 	elif controller.is_button_pressed(delete_button):
 		delete_mode = !delete_mode
 		if delete_mode == true:
 			$"../FunctionTeleport".set_enabled(false)
 		create_mode = false
+	
+		create_label.text = "Create mode: " + str(create_mode)
+		delete_label.text = "Delete mode: " + str(delete_mode)

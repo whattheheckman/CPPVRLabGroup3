@@ -1,18 +1,45 @@
 extends Node3D
+
+############################################
+#SCRIPT VARS
+############################################
+
+# for easy access to text labels in UI
+@onready var create_label = $"../../XRCamera3D/User Interface/Create"
+@onready var delete_label = $"../../XRCamera3D/User Interface/Delete"
+@onready var count_label = $"../../XRCamera3D/User Interface/Count"
+
+@onready var controller := XRHelpers.get_xr_controller(self)
+
+var start_point = null
+var end_point = null
+
+var mesh_count = 0
+
+############################################
+#USER VARS
+############################################
+
+@export_category("Controller Mappings")
+@export var create_button : String = "ax_button"
+@export var delete_button : String = "by_button"
+@export var trigger : String = "trigger_click"
+
+
+@export_category("Limits")
 @export var max_height : float = 10.0
 @export var max_width : float = 10.0
 @export var max_depth : float = 10.0
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 @export var max_meshes : int = 5
 
+
+@export_category("Materials")
 @export var material : Material
-var mesh_count = 0
+
+@export_category("Debug Switches")
+@export var create_mode : bool = false
+@export var delete_mode : bool = false
+@export var teleport : bool = false
 
 
 func _input(_event):
@@ -35,10 +62,13 @@ func create_mesh(height,width,depth):
 	
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
-	staticBody.add_child(collisionShape)
+	staticBody.add_child(staticBody)
 	
+	
+	mesh_count += 1
 	meshInstance.name = "BingerBox" + mesh_count
-
 	add_child(meshInstance)
 	Input.start_joy_vibration(0, 0,.5,.5)
-
+	count_label.text = mesh_count + " / " +  max_meshes
+	
+	pass
