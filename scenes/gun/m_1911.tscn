@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpu5mc4khhgki"]
+[gd_scene load_steps=6 format=3 uid="uid://dpu5mc4khhgki"]
 
 [ext_resource type="PackedScene" uid="uid://bsqbxt3gkigey" path="res://scenes/misc/pickable_object.tscn" id="1_1128g"]
 [ext_resource type="PackedScene" uid="uid://cjcl40i0q4dx7" path="res://assets/1911.FBX" id="2_21q5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sb5mq"]
 size = Vector3(0.0256161, 0.160234, 0.246513)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8escq"]
+radius = 0.01
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0wig"]
+albedo_color = Color(1, 0, 0, 0.341176)
 
 [node name="M1911" instance=ExtResource("1_1128g")]
 
@@ -18,3 +25,8 @@ transform = Transform3D(-0.007, 0, -6.11959e-10, 0, 0.007, 0, 6.11959e-10, 0, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0530889, -0.12317)
 target_position = Vector3(0, 0, -1)
 collision_mask = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.334914)
+mesh = SubResource("SphereMesh_8escq")
+surface_material_override/0 = SubResource("StandardMaterial3D_c0wig")
