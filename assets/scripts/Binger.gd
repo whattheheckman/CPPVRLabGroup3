@@ -23,7 +23,7 @@ var end_point = null
 @export var max_meshes : int = 5
 var mesh_count = 0
 
-
+@export var material : Material
 
 @export var teleport : bool = false
 

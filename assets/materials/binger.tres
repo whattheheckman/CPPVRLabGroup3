@@ -1,0 +1,51 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cji8tp6l4xc8m"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_6434d"]
+constant = Color(0, 0.532848, 0.55076, 1)
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_kbvme"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8rw6n"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_5nbem"]
+constant = 2.0
+
+[resource]
+code = "shader_type spatial;
+
+
+
+void fragment() {
+// FloatConstant:5
+	float n_out5p0 = 2.000000;
+
+
+// Fresnel:3
+	float n_out3p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_out5p0);
+
+
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(0.000000, 0.532848, 0.550760, 1.000000);
+
+
+// VectorOp:4
+	vec3 n_out4p0 = vec3(n_out3p0) * vec3(n_out2p0.xyz);
+
+
+// Output:0
+	ALBEDO = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-378.907, -157.156)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_6434d")
+nodes/fragment/2/position = Vector2(-120, 420)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFresnel_kbvme")
+nodes/fragment/3/position = Vector2(-220, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_8rw6n")
+nodes/fragment/4/position = Vector2(120, 260)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_5nbem")
+nodes/fragment/5/position = Vector2(-500, 240)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 1, 3, 0, 4, 0, 5, 0, 3, 3, 4, 0, 0, 0)

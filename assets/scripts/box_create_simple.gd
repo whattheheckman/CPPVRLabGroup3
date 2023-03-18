@@ -10,10 +10,12 @@ func _ready():
 
 
 @export var max_meshes : int = 5
+
+@export var material : Material
 var mesh_count = 0
 
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("ui_accept"):
 		if mesh_count < max_meshes:
 			create_mesh(max_height,max_width,max_depth)
@@ -21,15 +23,12 @@ func _input(event):
 
 
 func create_mesh(height,width,depth):
-	
-	var staticBody=StaticBody3D.new()
-	
-	
-	
 	var meshInstance=MeshInstance3D.new()
 	meshInstance.add_to_group("mesh")
-
-	staticBody.add_child(meshInstance)
+	meshInstance.set_surface_override_material(0,material)
+	
+	var staticBody=StaticBody3D.new()
+	meshInstance.add_child(meshInstance)
 	
 	var boxShape=BoxShape3D.new()
 	boxShape.extents=Vector3(width/2,height/2,depth/2)
@@ -38,6 +37,8 @@ func create_mesh(height,width,depth):
 	collisionShape.shape=boxShape
 	staticBody.add_child(collisionShape)
 	
-	add_child(staticBody)
+	meshInstance.name = "BingerBox" + mesh_count
+
+	add_child(meshInstance)
 	Input.start_joy_vibration(0, 0,.5,.5)
 
