@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var impulse_factor = 10.0
-
+@export var action_button_id = 15
 var object_in_area = Array()
 var picked_up_object = null
 
@@ -26,6 +26,9 @@ func _on_button_pressed(p_button):
 		elif !object_in_area.empty():
 			picked_up_object = object_in_area[0]
 			picked_up_object.pick_up(self)
+	elif p_button == action_button_id:
+		if picked_up_object and picked_up_object.has_method("action"):
+			picked_up_object.action()
 			
 func _ready():
 	#get_parent().connect("button_pressed", self, "_on_button_pressed")
