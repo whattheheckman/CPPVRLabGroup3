@@ -32,6 +32,12 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 import/blender/enabled=false
 
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Environment"
+3d_physics/layer_3="Enemies"
+
 [rendering]
 
 renderer/rendering_method="mobile"
