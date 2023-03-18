@@ -57,74 +57,24 @@ func _input(_event):
 func create_mesh(height,width,depth):
 
 	##########################################
-	######     GEOMETRY CREATION      ########
-	##########################################
-
-	# Create a new SurfaceTool instance
-	var st = SurfaceTool.new()
-
-	# Begin the surface tool and set the primitive type to triangles
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	# Generate the vertices of the cube
-	st.set_uv(Vector2(0, 0))
-	st.add_vertex(Vector3(-width/2, height/2, -depth/2))
-	
-	st.set_uv(Vector2(0, 1))
-	st.add_vertex(Vector3(-width/2, height/2, depth/2))
-	
-	st.set_uv(Vector2(1, 1))
-	st.add_vertex(Vector3(width/2, height/2, depth/2))
-	
-	st.set_uv(Vector2(1, 0))
-	st.add_vertex(Vector3(width/2, height/2, -depth/2))
-	
-	st.set_uv(Vector2(0, 0))
-	st.add_vertex(Vector3(-width/2, -height/2, -depth/2))
-	
-	st.set_uv(Vector2(0, 1))
-	st.add_vertex(Vector3(-width/2, -height/2, depth/2))
-	
-	st.set_uv(Vector2(1, 1))
-	st.add_vertex(Vector3(width/2, -height/2, depth/2))
-	
-	st.set_uv(Vector2(1, 0))
-	st.add_vertex(Vector3(width/2, -height/2, -depth/2))
-	
-	st.set_uv(Vector2(0, 0))
-	st.add_vertex(Vector3(-width/2, height/2, -depth/2))
-	
-
-	# Set smooth groups for each face
-	st.set_smooth_group(0)
-
-	# Generate normals for the mesh
-	st.generate_normals()
-	st.generate_tangents()
-
-	# Index the vertices of the mesh
-	#st.index()
-
-	# Generate the surface tool mesh and assign it to a new Mesh instance
-	var mesh = st.commit()
-
-
-	##########################################
 	######    COLLISION + SCENETREE   ########
 	##########################################
 
 	# Create a new MeshInstance node and assign the generated mesh to it
 	var meshInstance=MeshInstance3D.new()
 	meshInstance.add_to_group("mesh")
+	var mesh = BoxMesh.new()
+	mesh.surface_set_material(0,material)
+	mesh.set_size(Vector3(width/2,height/2,depth/2))
 	meshInstance.mesh = mesh
-	meshInstance.set_surface_override_material(0,material)
+
 	
 	var staticBody=StaticBody3D.new()
 	meshInstance.add_child(staticBody)
 	
 	var boxShape=BoxShape3D.new()
 	boxShape.extents=Vector3(width/2,height/2,depth/2)
-	
+
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
 	staticBody.add_child(collisionShape)
@@ -132,10 +82,11 @@ func create_mesh(height,width,depth):
 	
 	mesh_count += 1
 	meshInstance.name = "BingerBox" + str(mesh_count)
-	meshInstance.position = start_point
-	add_child(meshInstance)
+	meshInstance.position = meshInstance.position - Vector3(-.1,0,0) # an offset so we don't get pushed by it
+	get_tree().root.add_child(meshInstance) # just add child would parent it to this Binger node
 	
 	Input.start_joy_vibration(0, 0,.5,.5)
 	count_label.text = str(mesh_count) + " / " +  str(max_meshes)
+
 	
 	pass
