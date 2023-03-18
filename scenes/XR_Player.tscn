@@ -1,12 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://d21r1mmp0snev"]
+[gd_scene load_steps=13 format=3 uid="uid://d21r1mmp0snev"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_3sor3"]
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="2_21cuy"]
 [ext_resource type="Material" uid="uid://jtf3u63b03ve" path="res://addons/godot-xr-tools/hands/materials/african_hands_realistic.material" id="3_tu7x6"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="4_5r1ix"]
 [ext_resource type="Script" path="res://assets/scripts/box_create_simple.gd" id="4_ccbkv"]
+[ext_resource type="Material" uid="uid://cie0rvff6ex1r" path="res://assets/materials/binger.material" id="5_rerch"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="6_denar"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_g21ae"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="7_uf2gi"]
+
+[sub_resource type="Environment" id="Environment_pldf7"]
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.6
 
 [sub_resource type="SystemFont" id="SystemFont_g25w8"]
 font_names = PackedStringArray("Consolas")
@@ -22,35 +29,43 @@ Label/fonts/font = SubResource("SystemFont_g25w8")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+environment = SubResource("Environment_pldf7")
+fov = 37.8493
 
 [node name="VRCommonShaderCache" parent="XRCamera3D" instance=ExtResource("1_3sor3")]
 
 [node name="User Interface" type="Control" parent="XRCamera3D"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 149.0
+offset_top = 150.0
+offset_right = 189.0
+offset_bottom = 190.0
 theme = SubResource("Theme_q4l5q")
 
 [node name="Create" type="Label" parent="XRCamera3D/User Interface"]
 layout_mode = 0
-offset_right = 98.0
-offset_bottom = 26.0
+anchor_right = 2.45
+anchor_bottom = 0.65
 text = "create mode"
+metadata/_edit_use_anchors_ = true
 
 [node name="Delete" type="Label" parent="XRCamera3D/User Interface"]
 layout_mode = 0
-offset_top = 26.0
-offset_right = 97.0
-offset_bottom = 52.0
+anchor_top = 0.65
+anchor_right = 2.425
+anchor_bottom = 1.3
 text = "delete mode"
+metadata/_edit_use_anchors_ = true
 
 [node name="Count" type="Label" parent="XRCamera3D/User Interface"]
 layout_mode = 2
-offset_top = 52.0
-offset_right = 131.0
-offset_bottom = 78.0
+anchor_top = 1.3
+anchor_right = 3.3
+anchor_bottom = 1.95
+offset_right = -1.0
 text = "number of cubes"
+metadata/_edit_use_anchors_ = true
 
 [node name="LeftController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.75, -0.5)
@@ -64,6 +79,9 @@ script = ExtResource("4_ccbkv")
 max_height = 0.5
 max_width = 0.5
 max_depth = 0.5
+material = ExtResource("5_rerch")
+
+[node name="FunctionPickup" parent="LeftController" instance=ExtResource("6_denar")]
 
 [node name="RightController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, -0.5)
@@ -74,5 +92,7 @@ hand_material_override = ExtResource("3_tu7x6")
 
 [node name="MovementTurn" parent="RightController" instance=ExtResource("6_g21ae")]
 step_turn_angle = 45.0
+
+[node name="FunctionPickup" parent="RightController" instance=ExtResource("6_denar")]
 
 [node name="PlayerBody" parent="." instance=ExtResource("7_uf2gi")]
