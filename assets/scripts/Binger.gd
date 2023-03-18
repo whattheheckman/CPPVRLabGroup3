@@ -100,7 +100,7 @@ func create_mesh(height,width,depth):
 	meshInstance.name = "BingerBox" + mesh_count
 	add_child(meshInstance)
 	Input.start_joy_vibration(0, 0,.5,.5)
-	count_label.text = mesh_count + " / " +  max_meshes
+	count_label.text = str(mesh_count) + " / " +  str(max_meshes)
 	
 	pass
 
@@ -109,7 +109,7 @@ func remove_mesh(mesh):
 	mesh.queue_free()
 	mesh_count -= 1
 	Input.start_joy_vibration(0, 0,.5,.5)
-	count_label.text = mesh_count + " / " +  max_meshes
+	count_label.text = str(mesh_count) + " / " +  str(max_meshes)
 
 	pass
 	

@@ -45,30 +45,97 @@ var mesh_count = 0
 func _input(_event):
 	if Input.is_action_pressed("ui_accept"):
 		if mesh_count < max_meshes:
-			create_mesh(max_height,max_width,max_depth)
+			##var timer = Timer.new()
+			##timer.autostart = true
+			##timer.start(1)
+			##if (timer.is_stopped()):
+				start_point = controller.position
+				create_mesh(max_height,max_width,max_depth)
 
 
 
 func create_mesh(height,width,depth):
+
+	##########################################
+	######     GEOMETRY CREATION      ########
+	##########################################
+
+	# Create a new SurfaceTool instance
+	var st = SurfaceTool.new()
+
+	# Begin the surface tool and set the primitive type to triangles
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Generate the vertices of the cube
+	st.set_uv(Vector2(0, 0))
+	st.add_vertex(Vector3(-width/2, height/2, -depth/2))
+	
+	st.set_uv(Vector2(0, 1))
+	st.add_vertex(Vector3(-width/2, height/2, depth/2))
+	
+	st.set_uv(Vector2(1, 1))
+	st.add_vertex(Vector3(width/2, height/2, depth/2))
+	
+	st.set_uv(Vector2(1, 0))
+	st.add_vertex(Vector3(width/2, height/2, -depth/2))
+	
+	st.set_uv(Vector2(0, 0))
+	st.add_vertex(Vector3(-width/2, -height/2, -depth/2))
+	
+	st.set_uv(Vector2(0, 1))
+	st.add_vertex(Vector3(-width/2, -height/2, depth/2))
+	
+	st.set_uv(Vector2(1, 1))
+	st.add_vertex(Vector3(width/2, -height/2, depth/2))
+	
+	st.set_uv(Vector2(1, 0))
+	st.add_vertex(Vector3(width/2, -height/2, -depth/2))
+	
+	st.set_uv(Vector2(0, 0))
+	st.add_vertex(Vector3(-width/2, height/2, -depth/2))
+	
+
+	# Set smooth groups for each face
+	st.set_smooth_group(0)
+
+	# Generate normals for the mesh
+	st.generate_normals()
+	st.generate_tangents()
+
+	# Index the vertices of the mesh
+	#st.index()
+
+	# Generate the surface tool mesh and assign it to a new Mesh instance
+	var mesh = st.commit()
+
+
+	##########################################
+	######    COLLISION + SCENETREE   ########
+	##########################################
+
+	# Create a new MeshInstance node and assign the generated mesh to it
 	var meshInstance=MeshInstance3D.new()
 	meshInstance.add_to_group("mesh")
+	meshInstance.mesh = mesh
 	meshInstance.set_surface_override_material(0,material)
 	
 	var staticBody=StaticBody3D.new()
-	meshInstance.add_child(meshInstance)
+	meshInstance.add_child(staticBody)
 	
 	var boxShape=BoxShape3D.new()
 	boxShape.extents=Vector3(width/2,height/2,depth/2)
 	
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
-	staticBody.add_child(staticBody)
+	staticBody.add_child(collisionShape)
 	
 	
 	mesh_count += 1
-	meshInstance.name = "BingerBox" + mesh_count
+	meshInstance.name = "BingerBox" + str(mesh_count)
+	meshInstance.position = start_point
 	add_child(meshInstance)
+	
 	Input.start_joy_vibration(0, 0,.5,.5)
-	count_label.text = mesh_count + " / " +  max_meshes
+	count_label.text = str(mesh_count) + " / " +  str(max_meshes)
 	
 	pass
