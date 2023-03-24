@@ -15,8 +15,8 @@ physics_rate_multiplier = 1
 
 [node name="XROrigin3D" parent="." instance=ExtResource("3_7mm0t")]
 
-[node name="PickableObject" parent="." instance=ExtResource("4_uln03")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545839, 0.985696, 0.469406)
+[node name="M1911" parent="." instance=ExtResource("4_w48ii")]
+transform = Transform3D(0.641222, 0.767355, 0, -0.767355, 0.641222, 0, 0, 0, 1, 0.545839, 0.985696, 0.469406)
 
-[node name="M1911" parent="PickableObject" instance=ExtResource("4_w48ii")]
-transform = Transform3D(0.641222, 0.767355, 0, -0.767355, 0.641222, 0, 0, 0, 1, 0, 0, 0)
+[node name="PickableObject" parent="M1911" instance=ExtResource("4_uln03")]
+transform = Transform3D(0.641222, -0.767356, 0, 0.767356, 0.641222, 0, 0, 0, 1, 0, 0, 0)

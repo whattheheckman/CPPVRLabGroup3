@@ -330,8 +330,8 @@ func _get_closest_grab() -> Node3D:
 	var new_closest_distance := MAX_GRAB_DISTANCE2
 	for o in _object_in_grab_area:
 		# skip objects that can not be picked up
-	#	if not o.can_pick_up(self):
-		#	continue
+		if not o.can_pick_up(self):
+			continue
 
 		# Save if this object is closer than the current best
 		var distance_squared := global_transform.origin.distance_squared_to(
@@ -351,8 +351,8 @@ func _get_closest_ranged() -> Node3D:
 	var hand_forwards := -global_transform.basis.z
 	for o in _object_in_ranged_area:
 		# skip objects that can not be picked up
-		if not o.can_pick_up(self):
-			continue
+		#if not o.can_pick_up(self):
+		#	continue
 
 		# Save if this object is closer than the current best
 		var object_direction: Vector3 = o.global_transform.origin - global_transform.origin

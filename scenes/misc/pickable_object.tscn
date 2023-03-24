@@ -6,6 +6,7 @@
 size = Vector3(0.148, 0.404, 0.552)
 
 [node name="PickableObject" type="RigidBody3D"]
+collision_layer = 8
 script = ExtResource("1_btngj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
