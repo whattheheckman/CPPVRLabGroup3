@@ -96,27 +96,29 @@ func _ready():
 
 
 # Verifies our staging has a valid configuration.
-func _get_configuration_warning():
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings := PackedStringArray()
+
 	# Report missing XR Origin
 	var test_origin : XROrigin3D = XRHelpers.get_xr_origin(self)
 	if !test_origin:
-		return "No XROrigin3D node found, please add one"
+		warnings.append("No XROrigin3D node found, please add one")
 
 	# Report missing XR Camera
 	var test_camera : XRCamera3D = XRHelpers.get_xr_camera(self)
 	if !test_camera:
-		return "No XRCamera3D node found, please add one to your XROrigin3D node"
+		warnings.append("No XRCamera3D node found, please add one to your XROrigin3D node")
 
 	# Report main scene not specified
 	if main_scene == "":
-		return "No main scene selected"
+		warnings.append("No main scene selected")
 
 	# Report main scene invalid
 	if !FileAccess.file_exists(main_scene):
-		return "Main scene doesn't exist"
+		warnings.append("Main scene doesn't exist")
 
-	# Passed validation
-	return ""
+	# Return warnings
+	return warnings
 
 
 # Add support for is_xr_class on XRTools classes
@@ -128,10 +130,6 @@ func is_xr_class(name : String) -> bool:
 func load_scene(p_scene_path : String) -> void:
 	# Do not load if in the editor
 	if Engine.is_editor_hint():
-		return
-
-	# Check if it's already loaded...
-	if p_scene_path == current_scene_path:
 		return
 
 	if !xr_origin:
@@ -213,7 +211,7 @@ func load_scene(p_scene_path : String) -> void:
 		_tween.kill()
 	_tween = get_tree().create_tween()
 	_tween.tween_method(set_fade, 0.0, 1.0, 1.0)
-	await _tween.finished	
+	await _tween.finished
 
 	# Hide our loading screen
 	$LoadingScreen.follow_camera = false
@@ -241,7 +239,7 @@ func load_scene(p_scene_path : String) -> void:
 		_tween.kill()
 	_tween = get_tree().create_tween()
 	_tween.tween_method(set_fade, 1.0, 0.0, 1.0)
-	await _tween.finished	
+	await _tween.finished
 
 	current_scene.scene_visible()
 	emit_signal("scene_visible", current_scene)
@@ -263,13 +261,15 @@ func set_fade(p_value : float):
 
 
 func _add_signals(p_scene : XRToolsSceneBase):
-	p_scene.connect("exit_to_main_menu", _on_exit_to_main_menu)
-	p_scene.connect("load_scene", _on_load_scene)
+	p_scene.connect("request_exit_to_main_menu", _on_exit_to_main_menu)
+	p_scene.connect("request_load_scene", _on_load_scene)
+	p_scene.connect("request_reset_scene", _on_reset_scene)
 
 
 func _remove_signals(p_scene : XRToolsSceneBase):
-	p_scene.disconnect("exit_to_main_menu", _on_exit_to_main_menu)
-	p_scene.disconnect("load_scene", _on_load_scene)
+	p_scene.disconnect("request_exit_to_main_menu", _on_exit_to_main_menu)
+	p_scene.disconnect("request_load_scene", _on_load_scene)
+	p_scene.disconnect("request_reset_scene", _on_reset_scene)
 
 
 func _on_exit_to_main_menu():
@@ -278,6 +278,10 @@ func _on_exit_to_main_menu():
 
 func _on_load_scene(p_scene_path : String):
 	load_scene(p_scene_path)
+
+
+func _on_reset_scene():
+	load_scene(current_scene_path)
 
 
 func _on_StartXR_xr_started():

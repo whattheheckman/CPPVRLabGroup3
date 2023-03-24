@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n1xq4cm67o07"
-path="res://.godot/imported/caucasian_realistic_baseColor.png-6d28d56c1e76917b749358861074492c.ctex"
+uid="uid://bfkcd3fkyahqu"
+path="res://.godot/imported/foot.svg-9e361563e010aa07be49bfb25fdb6639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-xr-tools/hands/textures/caucasian_realistic_baseColor.png"
-dest_files=["res://.godot/imported/caucasian_realistic_baseColor.png-6d28d56c1e76917b749358861074492c.ctex"]
+source_file="res://addons/godot-xr-tools/editor/icons/foot.svg"
+dest_files=["res://.godot/imported/foot.svg-9e361563e010aa07be49bfb25fdb6639.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

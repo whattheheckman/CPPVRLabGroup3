@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjcl40i0q4dx7" path="res://assets/1911.FBX" id="2_21q5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sb5mq"]
-size = Vector3(0.0256161, 0.160234, 0.246513)
+size = Vector3(0.0312928, 0.160234, 0.246513)
 
 [sub_resource type="SphereMesh" id="SphereMesh_8escq"]
 radius = 0.01
@@ -16,6 +16,8 @@ shading_mode = 0
 albedo_color = Color(1, 0, 0, 0.341176)
 
 [node name="M1911" instance=ExtResource("1_1128g")]
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("BoxShape3D_sb5mq")

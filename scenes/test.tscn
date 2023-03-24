@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dinaewmiffhm8"]
+[gd_scene load_steps=6 format=3 uid="uid://dinaewmiffhm8"]
 
 [ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_test.tscn" id="1_ql5iv"]
 [ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="3_7mm0t"]
+[ext_resource type="PackedScene" uid="uid://bsqbxt3gkigey" path="res://scenes/misc/pickable_object.tscn" id="4_uln03"]
 [ext_resource type="PackedScene" uid="uid://dpu5mc4khhgki" path="res://scenes/gun/m_1911.tscn" id="4_w48ii"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_wlxvo"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="StartXR" parent="." instance=ExtResource("4_wlxvo")]
+physics_rate_multiplier = 1
 
 [node name="env_test" parent="." instance=ExtResource("1_ql5iv")]
 
 [node name="XROrigin3D" parent="." instance=ExtResource("3_7mm0t")]
 
-[node name="M1911" parent="." instance=ExtResource("4_w48ii")]
-transform = Transform3D(0.641222, 0.767355, 0, -0.767355, 0.641222, 0, 0, 0, 1, 0.393, 0.951, -1.496)
+[node name="PickableObject" parent="." instance=ExtResource("4_uln03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545839, 0.985696, 0.469406)
+
+[node name="M1911" parent="PickableObject" instance=ExtResource("4_w48ii")]
+transform = Transform3D(0.641222, 0.767355, 0, -0.767355, 0.641222, 0, 0, 0, 1, 0, 0, 0)

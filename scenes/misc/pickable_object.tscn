@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsqbxt3gkigey"]
+[gd_scene load_steps=3 format=3 uid="uid://bsqbxt3gkigey"]
 
 [ext_resource type="Script" path="res://pickable_object.gd" id="1_btngj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_am2vy"]
+size = Vector3(0.148, 0.404, 0.552)
 
 [node name="PickableObject" type="RigidBody3D"]
 script = ExtResource("1_btngj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_am2vy")
