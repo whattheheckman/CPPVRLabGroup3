@@ -34,12 +34,18 @@ var mesh_count = 0
 
 
 @export_category("Materials")
+@export var visualization_material : Material
 @export var material : Material
 
 @export_category("Debug Switches")
 @export var create_mode : bool = false
 @export var delete_mode : bool = false
 @export var teleport : bool = false
+
+var vismesh : MeshInstance3D
+
+func _ready():
+	create_vis_mesh()
 
 		
 func _physics_process(_delta):
@@ -57,6 +63,8 @@ func _physics_process(_delta):
 			start_point = controller.get_global_transform().origin
 		else:
 			end_point = controller.get_global_transform().origin
+			update_vis_mesh(vismesh)
+
 	else:
 		if start_point != null and end_point != null:
 			var height = min(abs(end_point.y - start_point.y), max_height)
@@ -81,29 +89,61 @@ func _physics_process(_delta):
 				remove_mesh(result.collider) # just remove it from the scene tree, no need to get fancy 
 
 func create_mesh(height,width,depth):
+
+	##########################################
+	######    COLLISION + SCENETREE   ########
+	##########################################
+
+	# Create a new MeshInstance node and assign the generated mesh to it
 	var meshInstance=MeshInstance3D.new()
 	meshInstance.add_to_group("mesh")
-	meshInstance.set_surface_override_material(0,material)
+	var mesh = BoxMesh.new()
+	mesh.surface_set_material(0,material)
+	mesh.set_size(Vector3(width/2,height/2,depth/2))
+	meshInstance.mesh = mesh
+
 	
 	var staticBody=StaticBody3D.new()
-	meshInstance.add_child(meshInstance)
+	meshInstance.add_child(staticBody)
 	
 	var boxShape=BoxShape3D.new()
 	boxShape.extents=Vector3(width/2,height/2,depth/2)
-	
+
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
-	staticBody.add_child(staticBody)
+	staticBody.add_child(collisionShape)
 	
 	
 	mesh_count += 1
-	meshInstance.name = "BingerBox" + mesh_count
-	add_child(meshInstance)
+	meshInstance.name = "BingerBox" + str(mesh_count)
+	meshInstance.position = meshInstance.position - Vector3(-.1,0,0) # an offset so we don't get pushed by it
+	get_tree().root.add_child(meshInstance) # just add child would parent it to this Binger node
+	
 	Input.start_joy_vibration(0, 0,.5,.5)
 	count_label.text = str(mesh_count) + " / " +  str(max_meshes)
+
 	
 	pass
-
+	
+	
+func create_vis_mesh():
+	var meshInstance=MeshInstance3D.new()
+	var mesh = BoxMesh.new()
+	meshInstance.mesh = mesh
+	meshInstance.name = "VisMesh"
+	vismesh = meshInstance
+	get_tree().root.add_child(meshInstance)
+	pass
+	
+func update_vis_mesh(mesh):
+	mesh.set_transform(start_point)
+	var height = min(abs(end_point.y - start_point.y), max_height)
+	var width = min(abs(end_point.x - start_point.x), max_width)
+	var depth = min(abs(end_point.z - start_point.z), max_depth)
+	mesh.set_size(Vector3(width/2,height/2,depth/2))
+	mesh.surface_set_material(0,material)
+	pass
+	
 func remove_mesh(mesh):
 	
 	mesh.queue_free()
@@ -114,7 +154,7 @@ func remove_mesh(mesh):
 	pass
 	
 func _input(_event):
-	
+
 	if controller.is_button_pressed(create_button): 
 		create_mode = !create_mode
 		if create_mode == true:

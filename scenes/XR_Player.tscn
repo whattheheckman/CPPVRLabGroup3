@@ -17,6 +17,7 @@ glow_intensity = 0.6
 
 [sub_resource type="SystemFont" id="SystemFont_g25w8"]
 font_names = PackedStringArray("Consolas")
+subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_q4l5q"]
 Label/colors/font_color = Color(0.00784314, 0.00392157, 0.00392157, 0.976471)
