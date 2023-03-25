@@ -1,12 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://d21r1mmp0snev"]
+[gd_scene load_steps=11 format=3 uid="uid://d21r1mmp0snev"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_3sor3"]
 [ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="2_21cuy"]
-[ext_resource type="PackedScene" uid="uid://bn2tdayatqv04" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_t0jfa"]
-[ext_resource type="Material" uid="uid://jtf3u63b03ve" path="res://addons/godot-xr-tools/hands/materials/african_hands_realistic.material" id="3_tu7x6"]
+[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_t0jfa"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="4_5r1ix"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_g21ae"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="7_uf2gi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_klweq"]
+load_path = "res://.godot/imported/african_realistic_baseColor.png-67cf0f3230115c16edbeaf7b76430f7c.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u04cg"]
+load_path = "res://.godot/imported/hands_normal.png-291c7217751274bfe1199e3de899450f.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ij1ml"]
+load_path = "res://.godot/imported/hands_occlusionRoughnessMetallic.png-73229fc54301aa8833117ebde8abfd4e.s3tc.ctex"
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_xuxu4"]
+albedo_texture = SubResource("CompressedTexture2D_klweq")
+orm_texture = SubResource("CompressedTexture2D_ij1ml")
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = SubResource("CompressedTexture2D_u04cg")
+subsurf_scatter_skin_mode = true
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -20,17 +36,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.75, -0.5)
 tracker = &"left_hand"
 
 [node name="LeftHand" parent="LeftController" instance=ExtResource("2_21cuy")]
-hand_material_override = ExtResource("3_tu7x6")
+hand_material_override = SubResource("ORMMaterial3D_xuxu4")
+grip_action = "grip"
+trigger_action = "trigger"
 
 [node name="FunctionTeleport" parent="LeftController" instance=ExtResource("3_t0jfa")]
+enabled = true
+can_teleport_color = Color(0, 1, 0, 1)
+cant_teleport_color = Color(1, 0, 0, 1)
+player_height = 1.8
+player_radius = 0.4
+strength = 5.0
+max_slope = 20.0
+valid_teleport_mask = -1
+teleport_button_action = "trigger_click"
+rotation_action = "primary"
 
 [node name="RightController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, -0.5)
 tracker = &"right_hand"
 
 [node name="RightHand" parent="RightController" instance=ExtResource("4_5r1ix")]
-hand_material_override = ExtResource("3_tu7x6")
+hand_material_override = SubResource("ORMMaterial3D_xuxu4")
+grip_action = "grip"
+trigger_action = "trigger"
 
 [node name="MovementTurn" parent="RightController" instance=ExtResource("6_g21ae")]
+order = 5
+turn_mode = 0
+smooth_turn_speed = 2.0
+step_turn_delay = 0.2
+step_turn_angle = 20.0
+input_action = "primary"
+enabled = true
 
 [node name="PlayerBody" parent="." instance=ExtResource("7_uf2gi")]
+enabled = true
+player_radius = 0.4
+player_head_height = 0.1
+player_height_min = 1.0
+player_height_max = 2.2
+eye_forward_offset = 0.66
+push_rigid_bodies = true
+physics = null
+collision_layer = 524288
+collision_mask = 1023

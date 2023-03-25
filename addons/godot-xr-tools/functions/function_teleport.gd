@@ -14,6 +14,10 @@ extends CharacterBody3D
 ## a teleport function on that controller.
 
 
+# Default teleport collision mask of all
+const DEFAULT_MASK := 0b1111_1111_1111_1111_1111_1111_1111_1111
+
+
 ## If true, teleporting is enabled
 @export var enabled : bool = true: set = set_enabled
 
@@ -39,7 +43,7 @@ extends CharacterBody3D
 @export var max_slope : float = 20.0
 
 ## Valid teleport layer mask
-@export_flags_3d_physics var valid_teleport_mask : int = ~0
+@export_flags_3d_physics var valid_teleport_mask : int = DEFAULT_MASK
 
 # once this is no longer a kinematic body, we'll need this..
 # export (int, LAYERS_3D_PHYSICS) var collision_mask = 1
@@ -140,7 +144,8 @@ func _physics_process(delta):
 		$Target.mesh.size = Vector2(ws, ws)
 		$Target/Player_figure.scale = Vector3(ws, ws, ws)
 
-	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button_action):
+	if controller and controller.get_is_active() and \
+			controller.is_button_pressed(teleport_button_action):
 		if !is_teleporting:
 			is_teleporting = true
 			$Teleport.visible = true
@@ -324,21 +329,23 @@ func _physics_process(delta):
 
 
 # This method verifies the teleport has a valid configuration.
-func _get_configuration_warning():
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings := PackedStringArray()
+
 	# Verify we can find the XROrigin3D
 	if !XRHelpers.get_xr_origin(self):
-		return "This node must be within a branch of an XROrigin3D node"
+		warnings.append("This node must be within a branch of an XROrigin3D node")
 
 	# Verify we can find the XRCamera3D
 	if !XRHelpers.get_xr_camera(self):
-		return "Unable to find XRCamera3D node"
+		warnings.append("Unable to find XRCamera3D node")
 
 	# Verify we can find the XRController3D
 	if !XRHelpers.get_xr_controller(self):
-		return "This node must be within a branch of an XRController3D node"
+		warnings.append("This node must be within a branch of an XRController3D node")
 
-	# Pass basic validation
-	return ""
+	# Return warnings
+	return warnings
 
 
 # Set enabled property

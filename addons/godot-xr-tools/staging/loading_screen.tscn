@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bqumugyvkct4r"]
 
-[ext_resource type="Texture2D" path="res://icon.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://ftrrxm7sxndi" path="res://assets/godot/splash.png" id="1"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/loading_screen.gd" id="2"]
 [ext_resource type="Shader" uid="uid://4i0pwdtfmtsv" path="res://addons/godot-xr-tools/staging/loading_screen/loading_screen_shader.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://clbtsf0ahb3fm" path="res://addons/godot-xr-tools/assets/misc/progress_bar.png" id="4"]

@@ -25,3 +25,6 @@ sky = SubResource("Sky_tlcd6")
 environment = SubResource("Environment_xykgq")
 
 [node name="StartXR" parent="." instance=ExtResource("4_wlxvo")]
+auto_initialize = true
+enable_passthrough = false
+physics_rate_multiplier = 1

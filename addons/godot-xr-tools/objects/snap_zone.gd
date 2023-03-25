@@ -1,3 +1,4 @@
+@tool
 class_name XRToolsSnapZone
 extends Area3D
 
@@ -66,8 +67,8 @@ func _ready():
 	# Set collision shape radius
 	$CollisionShape3D.shape.radius = grab_distance
 
-	# Show highlight when empty
-	emit_signal("highlight_updated", self, true)
+	# Perform updates
+	_update_snap_mode()
 
 	# Perform the initial object check when next idle
 	call_deferred("_initial_object_check")
@@ -94,7 +95,7 @@ func _process(_delta):
 			continue
 
 		# pick up our target
-		_pick_up_object(o)
+		pick_up_object(o)
 		return
 
 
@@ -167,7 +168,7 @@ func _initial_object_check() -> void:
 	# Check for an initial object
 	if initial_object:
 		# Force pick-up the initial object
-		_pick_up_object(get_node(initial_object))
+		pick_up_object(get_node(initial_object))
 	else:
 		# Show highlight when empty
 		emit_signal("highlight_updated", self, true)
@@ -200,8 +201,8 @@ func _on_snap_zone_body_entered(target: Node3D) -> void:
 
 	# If this snap zone is configured to snap objects that are dropped, then
 	# start listening for the objects dropped signal
-	if snap_mode == SnapMode.DROPPED:
-		target.connect("dropped", _on_target_dropped)
+	if snap_mode == SnapMode.DROPPED and target.has_signal("dropped"):
+		target.connect("dropped", _on_target_dropped, CONNECT_DEFERRED)
 
 	# Show highlight when something could be snapped
 	if not is_instance_valid(picked_up_object):
@@ -214,15 +215,21 @@ func _on_snap_zone_body_exited(target: Node3D) -> void:
 	_object_in_grab_area.erase(target)
 
 	# Stop listening for dropped signals
-	target.disconnect("dropped", _on_target_dropped)
+	if target.has_signal("dropped") and target.is_connected("dropped", _on_target_dropped):
+		target.disconnect("dropped", _on_target_dropped)
 
 	# Hide highlight when nothing could be snapped
 	if _object_in_grab_area.is_empty():
 		emit_signal("close_highlight_updated", self, false)
 
 
+# Test if this snap zone has a picked up object
+func has_snapped_object() -> bool:
+	return is_instance_valid(picked_up_object)
+
+
 # Pick up the specified object
-func _pick_up_object(target: Node3D) -> void:
+func pick_up_object(target: Node3D) -> void:
 	# check if already holding an object
 	if is_instance_valid(picked_up_object):
 		# skip if holding the target object
@@ -268,7 +275,7 @@ func _update_snap_mode() -> void:
 
 			# Start monitoring all objects in range for drop
 			for o in _object_in_grab_area:
-				o.connect("dropped", _on_target_dropped)
+				o.connect("dropped", _on_target_dropped, CONNECT_DEFERRED)
 
 		SnapMode.RANGE:
 			# Enable _process to scan for RANGE pickups
@@ -289,6 +296,10 @@ func _on_target_dropped(target: Node3D) -> void:
 	if is_instance_valid(picked_up_object):
 		return
 
+	# Skip if the target is not valid
+	if not is_instance_valid(target):
+		return
+
 	# Pick up the target if we can
 	if target.can_pick_up(self):
-		_pick_up_object(target)
+		pick_up_object(target)
