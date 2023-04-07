@@ -82,7 +82,7 @@ func create_mesh(height,width,depth):
 	
 	mesh_count += 1
 	meshInstance.name = "BingerBox" + str(mesh_count)
-	meshInstance.position = meshInstance.position - Vector3(-.1,0,0) # an offset so we don't get pushed by it
+	meshInstance.position = controller.position - Vector3(-.1,0,0) # an offset so we don't get pushed by it
 	get_tree().root.add_child(meshInstance) # just add child would parent it to this Binger node
 	
 	Input.start_joy_vibration(0, 0,.5,.5)

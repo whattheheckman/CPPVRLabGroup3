@@ -21,6 +21,7 @@ sky = SubResource("Sky_tlcd6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11216, 1.63752, 0)
+visible = false
 mesh = SubResource("BoxMesh_kpfdm")
 
 [node name="Floor Plane" parent="." instance=ExtResource("1_ql5iv")]
