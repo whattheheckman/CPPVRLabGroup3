@@ -55,7 +55,7 @@ const DEFAULT_MASK := 0b1111_1111_1111_1111_1111_1111_1111_1111
 @export var rotation_action : String = "primary"
 
 # limits how high player can teleport
-@export var height_limit : int = 10
+@export var height_limit : int = 1
 
 var is_on_floor : bool = true
 var is_teleporting : bool = false
@@ -396,7 +396,9 @@ func _update_player_radius():
 # Checks difference between capsule and player to see if teleportation is valid
 func _check_height_limit():
 	if capsule:
-		if absf(capsule.position.y - $"../../XRCamera3D".position.y) < height_limit:
+		var height_difference = absf(capsule.position.y - $"../../XRCamera3D".position.y)
+		print("difference = ",height_difference)
+		if  height_difference < height_limit:
 			return true
 		else:
 			return false
