@@ -36,6 +36,7 @@ sky = SubResource("Sky_oquxt")
 [node name="env_test" type="Node"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 65541
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_00q83")

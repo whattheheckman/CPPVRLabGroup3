@@ -34,10 +34,19 @@ import/blender/enabled=false
 
 [layer_names]
 
-3d_physics/layer_1="Player"
-3d_physics/layer_2="Environment"
-3d_physics/layer_3="Enemies"
-3d_physics/layer_4="Objects"
+3d_physics/layer_1="Static World"
+3d_physics/layer_2="Dynamic World"
+3d_physics/layer_3="Pickable Objects"
+3d_physics/layer_4="Wall Walking Surface"
+3d_physics/layer_17="Held Objects"
+3d_physics/layer_18="Player Hand"
+3d_physics/layer_20="Player Body"
+3d_physics/layer_21="Pointable"
+3d_physics/layer_22="Hand Pose Area"
+
+[physics]
+
+common/physics_ticks_per_second=90
 
 [rendering]
 
