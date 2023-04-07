@@ -23,6 +23,7 @@ tracker = &"left_hand"
 hand_material_override = ExtResource("3_tu7x6")
 
 [node name="FunctionTeleport" parent="LeftController" instance=ExtResource("3_t0jfa")]
+height_limit = null
 
 [node name="RightController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, -0.5)

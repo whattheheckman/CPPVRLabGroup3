@@ -54,6 +54,7 @@ const DEFAULT_MASK := 0b1111_1111_1111_1111_1111_1111_1111_1111
 ## Teleport rotation action
 @export var rotation_action : String = "primary"
 
+# limits how high player can teleport
 @export var height_limit : int = 10
 
 var is_on_floor : bool = true
@@ -297,7 +298,7 @@ func _physics_process(delta):
 			$Target.visible = false
 			$Teleport.get_surface_override_material(0).set_shader_parameter("mix_color", no_collision_color)
 	elif is_teleporting:
-		if can_teleport:
+		if can_teleport and _check_height_limit():
 
 			# make our target horizontal again
 			var new_transform = last_target_transform
@@ -392,9 +393,10 @@ func _update_player_radius():
 		capsule.mesh.height = player_height
 		capsule.mesh.radius = player_radius
 
+# Checks difference between capsule and player to see if teleportation is valid
 func _check_height_limit():
 	if capsule:
-		if absf(capsule.position.y - $"../../XRCamera3D".position.y):
+		if absf(capsule.position.y - $"../../XRCamera3D".position.y) < height_limit:
 			return true
 		else:
 			return false
