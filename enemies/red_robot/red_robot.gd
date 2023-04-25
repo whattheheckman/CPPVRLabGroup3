@@ -143,7 +143,7 @@ func _physics_process(delta):
 		return
 
 	if not player:
-		animation_tree["parameters/state/current"] = 0 # Go idle.
+		animation_tree["parameters/state/current"] = "idle" # Go idle.
 		set_velocity(gravity * delta)
 		set_up_direction(Vector3.UP)
 		move_and_slide()
@@ -162,11 +162,11 @@ func _physics_process(delta):
 		var angle_to_player = atan2(to_player_local.x, to_player_local.z)
 		var tolerance = deg_to_rad(PLAYER_AIM_TOLERANCE_DEGREES)
 		if angle_to_player > tolerance:
-			animation_tree["parameters/state/current"] = 1
+			animation_tree["parameters/state/current"] = "turn_left"
 		elif angle_to_player < -tolerance:
-			animation_tree["parameters/state/current"] = 2
+			animation_tree["parameters/state/current"] = "turn_right"
 		else:
-			animation_tree["parameters/state/current"] = 3
+			animation_tree["parameters/state/current"] = "idle"
 			# Facing player, try to shoot.
 			shoot_countdown -= delta
 			if shoot_countdown < 0:
@@ -245,9 +245,11 @@ func shoot_check():
 	test_shoot = true
 
 
+@warning_ignore("unused_parameter")
 func _clip_ray(length):
+	@warning_ignore("unused_variable")
 	var mesh_offset = ray_mesh.position.z
-	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset)
+#	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset)
 
 
 func _on_area_body_entered(body):
