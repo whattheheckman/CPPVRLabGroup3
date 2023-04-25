@@ -1,12 +1,12 @@
-extends KinematicBody
+extends CharacterBody3D
 
 const BULLET_VELOCITY = 20
 
 var time_alive = 5
 var hit = false
 
-onready var animation_player = $AnimationPlayer
-onready var collision_shape = $CollisionShape
+@onready var animation_player = $AnimationPlayer
+@onready var collision_shape = $CollisionShape3D
 
 func _physics_process(delta):
 	if hit:

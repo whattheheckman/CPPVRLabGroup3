@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 enum State {
 	APPROACH = 0,
@@ -14,8 +14,8 @@ const AIM_TIME = 1
 const AIM_PREPARE_TIME = 0.5
 const BLEND_AIM_SPEED = 0.05
 
-export(int) var health = 5
-export(bool) var test_shoot = false
+@export var health: int = 5
+@export var test_shoot: bool = false
 
 var state = State.APPROACH
 
@@ -25,31 +25,31 @@ var aim_preparing = AIM_PREPARE_TIME
 var dead = false
 
 var player = null
-var velocity = Vector3()
-var orientation = Transform()
+
+var orientation = Transform3D()
 
 var blast_scene = preload("res://enemies/red_robot/laser/impact_effect/impact_effect.tscn")
 
-onready var animation_tree = $AnimationTree
-onready var shoot_animation = $ShootAnimation
+@onready var animation_tree = $AnimationTree
+@onready var shoot_animation = $ShootAnimation
 
-onready var model = $RedRobotModel
-onready var ray_from = model.get_node(@"Armature/Skeleton/RayFrom")
-onready var ray_mesh = ray_from.get_node(@"RayMesh")
-onready var laser_raycast = ray_from.get_node(@"RayCast")
-onready var collision_shape = $CollisionShape
+@onready var model = $RedRobotModel
+@onready var ray_from = model.get_node("Armature/Skeleton3D/RayFrom")
+@onready var ray_mesh = ray_from.get_node("RayMesh")
+@onready var laser_raycast = ray_from.get_node("RayCast3D")
+@onready var collision_shape = $CollisionShape3D
 
-onready var explosion_sound = $SoundEffects/Explosion
-onready var hit_sound = $SoundEffects/Hit
+@onready var explosion_sound = $SoundEffects/Explosion
+@onready var hit_sound = $SoundEffects/Hit
 
-onready var death = $Death
-onready var death_shield1 = death.get_node(@"PartShield1")
-onready var death_shield2 = death.get_node(@"PartShield2")
-onready var death_head = death.get_node(@"PartHead")
-onready var death_detach_spark1 = death.get_node(@"DetachSpark1")
-onready var death_detach_spark2 = death.get_node(@"DetachSpark2")
+@onready var death = $Death
+@onready var death_shield1 = death.get_node("PartShield1")
+@onready var death_shield2 = death.get_node("PartShield2")
+@onready var death_head = death.get_node("PartHead")
+@onready var death_detach_spark1 = death.get_node("DetachSpark1")
+@onready var death_detach_spark2 = death.get_node("DetachSpark2")
 
-onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 func _ready():
 	orientation = global_transform
@@ -79,15 +79,14 @@ func hit():
 		death.visible = true
 		collision_shape.disabled = true
 
-		death_shield1.get_node(@"Col1").disabled = false
-		death_shield1.get_node(@"Col2").disabled = false
-		death_shield1.mode = RigidBody.MODE_RIGID
-		death_shield2.get_node(@"Col1").disabled = false
-		death_shield2.get_node(@"Col2").disabled = false
-		death_shield2.mode = RigidBody.MODE_RIGID
-		death_head.get_node(@"Col1").disabled = false
-		death_head.get_node(@"Col2").disabled = false
-		death_head.mode = RigidBody.MODE_RIGID
+		death_shield1.get_node("Col1").disabled = false
+		death_shield1.get_node("Col2").disabled = false
+
+		death_shield2.get_node("Col1").disabled = false
+		death_shield2.get_node("Col2").disabled = false
+
+		death_head.get_node("Col1").disabled = false
+		death_head.get_node("Col2").disabled = false
 
 		death_detach_spark1.emitting = true
 		death_detach_spark2.emitting = true
@@ -112,24 +111,24 @@ func shoot():
 	var ray_dir = -gt.basis.z
 	var max_dist = 1000
 
-	var col = get_world().direct_space_state.intersect_ray(ray_origin, ray_origin + ray_dir * max_dist, [self])
-	if not col.empty():
+	var col = get_world_3d().direct_space_state.intersect_ray(ray_origin + ray_dir * max_dist)
+	if not col.is_empty():
 		max_dist = ray_origin.distance_to(col.position)
 		if col.collider == player:
 			pass # Kill.
 	# Clip ray in shader.
 	_clip_ray(max_dist)
 	# Position laser ember particles
-	var mesh_offset = ray_mesh.translation.z
-	var laser_ember = $RedRobotModel/Armature/Skeleton/RayFrom/LaserEmber
-	laser_ember.translation = Vector3(0.0, 0.0, -max_dist / 2.0 - mesh_offset)
+	var mesh_offset = ray_mesh.position.z
+	var laser_ember = $RedRobotModel/Armature/Skeleton3D/RayFrom/LaserEmber
+	laser_ember.position = Vector3(0.0, 0.0, -max_dist / 2.0 - mesh_offset)
 	laser_ember.emission_box_extents.z = (max_dist - abs(mesh_offset)) / 2.0
-	if not col.empty():
-		var blast = blast_scene.instance()
+	if not col.is_empty():
+		var blast = blast_scene.instantiate()
 		get_tree().get_root().add_child(blast)
 		blast.global_transform.origin = col.position
 		if col.collider == player and player is Player:
-			yield(get_tree().create_timer(0.1), "timeout")
+			await get_tree().create_timer(0.1).timeout
 			player.add_camera_shake_trauma(13)
 
 
@@ -143,7 +142,10 @@ func _physics_process(delta):
 
 	if not player:
 		animation_tree["parameters/state/current"] = 0 # Go idle.
-		velocity = move_and_slide(gravity * delta, Vector3.UP)
+		set_velocity(gravity * delta)
+		set_up_direction(Vector3.UP)
+		move_and_slide()
+		velocity = velocity
 		return
 
 	if state == State.APPROACH:
@@ -153,10 +155,10 @@ func _physics_process(delta):
 				aim_preparing = 0
 			animation_tree["parameters/aiming/blend_amount"] = aim_preparing / AIM_PREPARE_TIME
 
-		var to_player_local = global_transform.xform_inv(player.global_transform.origin)
+		var to_player_local = player.global_transform.origin * global_transform
 		# The front of the robot is +Z, and atan2 is zero at +X, so we need to use the Z for the X parameter (second one).
 		var angle_to_player = atan2(to_player_local.x, to_player_local.z)
-		var tolerance = deg2rad(PLAYER_AIM_TOLERANCE_DEGREES)
+		var tolerance = deg_to_rad(PLAYER_AIM_TOLERANCE_DEGREES)
 		if angle_to_player > tolerance:
 			animation_tree["parameters/state/current"] = 1
 		elif angle_to_player < -tolerance:
@@ -169,8 +171,8 @@ func _physics_process(delta):
 				# See if player can be killed because in they're sight.
 				var ray_origin = ray_from.global_transform.origin
 				var ray_to = player.global_transform.origin + Vector3.UP # Above middle of player.
-				var col = get_world().direct_space_state.intersect_ray(ray_origin, ray_to, [self])
-				if not col.empty() and col.collider == player:
+				var col = get_world_3d().direct_space_state.intersect_ray(ray_to)
+				if not col.is_empty() and col.collider == player:
 					state = State.AIM
 					aim_countdown = AIM_TIME
 					aim_preparing = 0
@@ -194,8 +196,8 @@ func _physics_process(delta):
 		if aim_countdown < 0 and state == State.AIM:
 			var ray_origin = ray_from.global_transform.origin
 			var ray_to = player.global_transform.origin + Vector3.UP # Above middle of player.
-			var col = get_world().direct_space_state.intersect_ray(ray_origin, ray_to, [self])
-			if not col.empty() and col.collider == player:
+			var col = get_world_3d().direct_space_state.intersect_ray(ray_to)
+			if not col.is_empty() and col.collider == player:
 				state = State.SHOOTING
 				shoot_animation.play("shoot")
 				shoot_countdown = SHOOT_WAIT
@@ -203,9 +205,9 @@ func _physics_process(delta):
 				resume_approach()
 
 		if animation_tree.active:
-			var to_cannon_local = ray_mesh.global_transform.xform_inv(player.global_transform.origin + Vector3.UP)
-			var h_angle = rad2deg(atan2( to_cannon_local.x, -to_cannon_local.z ))
-			var v_angle = rad2deg(atan2( to_cannon_local.y, -to_cannon_local.z ))
+			var to_cannon_local = player.global_transform.origin + Vector3.UP * ray_mesh.global_transform
+			var h_angle = rad_to_deg(atan2( to_cannon_local.x, -to_cannon_local.z ))
+			var v_angle = rad_to_deg(atan2( to_cannon_local.y, -to_cannon_local.z ))
 			var blend_pos = animation_tree.get("parameters/aim/blend_position")
 			var h_motion = BLEND_AIM_SPEED * delta * -h_angle
 			blend_pos.x += h_motion
@@ -224,7 +226,10 @@ func _physics_process(delta):
 	velocity.x = h_velocity.x
 	velocity.z = h_velocity.z
 	velocity += gravity * delta
-	velocity = move_and_slide(velocity, Vector3.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	move_and_slide()
+	velocity = velocity
 
 	orientation.origin = Vector3() # Clear accumulated root motion displacement (was applied to speed).
 	orientation = orientation.orthonormalized() # orthonormalize orientation.
@@ -237,8 +242,8 @@ func shoot_check():
 
 
 func _clip_ray(length):
-	var mesh_offset = ray_mesh.translation.z
-	ray_mesh.get_surface_material(0).set_shader_param("clip", length + mesh_offset)
+	var mesh_offset = ray_mesh.position.z
+	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset)
 
 
 func _on_area_body_entered(body):

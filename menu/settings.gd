@@ -38,27 +38,30 @@ var shadow_enabled = true
 var fxaa = true
 var ssao_quality = SSAOQuality.DISABLED
 var bloom_quality = BloomQuality.HIGH
-var resolution = Resolution.NATIVE
+var resolution = Resolution.RES_720
 var fullscreen = true
 
 func _ready():
-	load_settings()
+	#load_settings()
+	pass
 
 
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = !OS.window_fullscreen
-		get_tree().set_input_as_handled()
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (!((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
+		get_viewport().set_input_as_handled()
 
 
 func load_settings():
-	var f = File.new()
-	var error = f.open("user://settings.json", File.READ)
-	if error:
+	var f = FileAccess.open("user://save_game.dat", FileAccess.READ)
+	
+	if !f.file_exists("save_game.dat"):
 		print("There are no settings to load.")
 		return
 
-	var d = parse_json(f.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(f.get_as_text())
+	var d = test_json_conv.get_data()
 	if typeof(d) != TYPE_DICTIONARY:
 		return
 
@@ -88,9 +91,8 @@ func load_settings():
 
 
 func save_settings():
-	var f = File.new()
-	var error = f.open("user://settings.json", File.WRITE)
-	assert(not error)
+	var f = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
+	assert(not f.file_exists("user://save_game.dat"))
 
 	var d = { "gi":gi_quality, "aa":aa_quality, "shadow_enabled":shadow_enabled, "fxaa":fxaa, "ssao":ssao_quality, "bloom":bloom_quality, "resolution":resolution, "fullscreen":fullscreen }
-	f.store_line(to_json(d))
+	f.store_line(JSON.new().stringify(d))

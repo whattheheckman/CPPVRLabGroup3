@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://enemies/red_robot/laser/impact_effect/SmokePuff.png" type="Texture" id=1]
-[ext_resource path="res://enemies/red_robot/laser/impact_effect/SmokePuffNormals.png" type="Texture" id=2]
+[ext_resource path="res://enemies/red_robot/laser/impact_effect/SmokePuff.png" type="Texture2D" id=1]
+[ext_resource path="res://enemies/red_robot/laser/impact_effect/SmokePuffNormals.png" type="Texture2D" id=2]
 [ext_resource path="res://enemies/red_robot/parts/part_disappear_effect/part_disappear.gd" type="Script" id=3]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="StandardMaterial3D" id=1]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_billboard_mode = 3
@@ -23,10 +23,10 @@ size = Vector2( 2, 2 )
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.384416, 1 ), 0.0777782, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.138122, 0.60221, 0.90884 )
-colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.164062, 0.154449, 0.154449, 1, 0.211765, 0.211765, 0.211765, 0 )
+offsets = PackedFloat32Array( 0, 0.138122, 0.60221, 0.90884 )
+colors = PackedColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.164062, 0.154449, 0.154449, 1, 0.211765, 0.211765, 0.211765, 0 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="StandardMaterial3D" id=5]
 albedo_color = Color( 0, 0, 0, 1 )
 emission_enabled = true
 emission = Color( 0, 1, 1, 1 )
@@ -41,7 +41,7 @@ height = 0.4
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 0 ), 0.0, 0.37234, 0, 0, Vector2( 0.462338, 0.981818 ), 5.18966, -5.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[node name="PartDisappearPuff" type="CPUParticles"]
+[node name="PartDisappearPuff" type="CPUParticles3D"]
 material_override = SubResource( 1 )
 cast_shadow = 0
 emitting = false
@@ -63,7 +63,7 @@ scale_amount_curve = SubResource( 3 )
 color_ramp = SubResource( 4 )
 script = ExtResource( 3 )
 
-[node name="MiniBlasts" type="CPUParticles" parent="."]
+[node name="MiniBlasts" type="CPUParticles3D" parent="."]
 material_override = SubResource( 5 )
 cast_shadow = 0
 emitting = false

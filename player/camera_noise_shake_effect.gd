@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 # Constant values of the effect.
 const SPEED = 1.0
@@ -12,13 +12,13 @@ const MAX_TRAUMA = 1.2
 var start_rotation = rotation
 var trauma = 0.0
 var time = 0.0
-var noise = OpenSimplexNoise.new()
+var noise = FastNoiseLite.new()
 var noise_seed = randi()
 
 
 func _ready():
 	noise.seed = noise_seed
-	noise.octaves = 1
+	noise.fractal_octaves = 1
 	noise.period = 256.0
 	noise.persistence = 0.5
 	noise.lacunarity = 1.0

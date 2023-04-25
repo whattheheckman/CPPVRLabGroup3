@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/walk.wav-9036336121ed9699b9a0fe895306c86a.sample"
+type="AudioStreamWAV"
+uid="uid://rrrlg3xsnyfj"
+path="res://.godot/imported/walk.wav-9036336121ed9699b9a0fe895306c86a.sample"
 
 [deps]
 
 source_file="res://enemies/red_robot/audio/walk.wav"
-dest_files=[ "res://.import/walk.wav-9036336121ed9699b9a0fe895306c86a.sample" ]
+dest_files=["res://.godot/imported/walk.wav-9036336121ed9699b9a0fe895306c86a.sample"]
 
 [params]
 

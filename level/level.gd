@@ -1,11 +1,11 @@
-extends Spatial
+extends Node3D
 
 
 signal quit
 #warning-ignore:unused_signal
 signal replace_main_scene # Useless, but needed as there is no clean way to check if a node exposes a signal
 
-onready var world_environment = $WorldEnvironment
+@onready var world_environment = $WorldEnvironment
 
 func _ready():
 	if Settings.gi_quality == Settings.GIQuality.HIGH:
@@ -13,17 +13,17 @@ func _ready():
 	elif Settings.gi_quality == Settings.GIQuality.LOW:
 		ProjectSettings["rendering/quality/voxel_cone_tracing/high_quality"] = false
 	else:
-		$GIProbe.hide()
+		$VoxelGI.hide()
 		$ReflectionProbes.show()
 
 	if Settings.aa_quality == Settings.AAQuality.AA_8X:
-		get_viewport().msaa = Viewport.MSAA_8X
+		get_viewport().msaa = SubViewport.MSAA_8X
 	elif Settings.aa_quality == Settings.AAQuality.AA_4X:
-		get_viewport().msaa = Viewport.MSAA_4X
+		get_viewport().msaa = SubViewport.MSAA_4X
 	elif Settings.aa_quality == Settings.AAQuality.AA_2X:
-		get_viewport().msaa = Viewport.MSAA_2X
+		get_viewport().msaa = SubViewport.MSAA_2X
 	else:
-		get_viewport().msaa = Viewport.MSAA_DISABLED
+		get_viewport().msaa = SubViewport.MSAA_DISABLED
 
 	if not Settings.shadow_enabled:
 		# Disable shadows on all lights present on level load,
@@ -52,18 +52,24 @@ func _ready():
 		world_environment.environment.glow_enabled = false
 		world_environment.environment.glow_bicubic_upscale = false
 
-	var window_size = OS.window_size
+	var window_size = get_window().size
 	if Settings.resolution == Settings.Resolution.NATIVE:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		DisplayServer.window_set_size(Vector2(1280, 720))
+		get_tree().root.set_content_scale_size(Vector2(window_size.x * 720 / window_size.y, 720.0))
 		pass
 	elif Settings.resolution == Settings.Resolution.RES_1080:
-		var minsize = Vector2(window_size.x * 1080 / window_size.y, 1080.0)
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_EXPAND, minsize)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		DisplayServer.window_set_size(Vector2(1920, 1080.0))
+		get_tree().root.set_content_scale_size(Vector2(window_size.x * 1080 / window_size.y, 1080.0))
 	elif Settings.resolution == Settings.Resolution.RES_720:
-		var minsize = Vector2(window_size.x * 720 / window_size.y, 720.0)
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_EXPAND, minsize)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		DisplayServer.window_set_size(Vector2(1280, 720))
+		get_tree().root.set_content_scale_size(Vector2(window_size.x * 720 / window_size.y, 720.0))
 	elif Settings.resolution == Settings.Resolution.RES_540:
-		var minsize = Vector2(window_size.x * 540 / window_size.y, 540.0)
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_EXPAND, minsize)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		get_tree().root.set_content_scale_size(Vector2(window_size.x * 540 / window_size.y, 540.0))
+
 
 
 func _input(event):
