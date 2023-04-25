@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CPP VR Lab Group 3"
-run/main_scene="res://scenes/test.tscn"
+run/main_scene="res://scenes/test2.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
@@ -43,10 +43,6 @@ import/blender/enabled=false
 3d_physics/layer_20="Player Body"
 3d_physics/layer_21="Pointable"
 3d_physics/layer_22="Hand Pose Area"
-
-[physics]
-
-common/physics_ticks_per_second=90
 
 [rendering]
 

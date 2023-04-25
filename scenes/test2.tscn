@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://b2deqfr0j1011"]
+
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_jp5gt"]
+[ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="2_cy2fv"]
+[ext_resource type="PackedScene" uid="uid://73a078hjce7" path="res://cube.tscn" id="3_vf4ej"]
+[ext_resource type="Texture2D" uid="uid://c2cdtgcgljqq7" path="res://assets/hdri/spaichingen_hill_4k.exr" id="4_ahgh5"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_23ifx"]
+points = PackedVector3Array(-5, 0, -5, -5, 0, 5, 5, 0, -5, 5, 0, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3foun"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4d2li"]
+albedo_color = Color(0.45098, 1, 0, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ahhd5"]
+panorama = ExtResource("4_ahgh5")
+
+[sub_resource type="Sky" id="Sky_oquxt"]
+sky_material = SubResource("PanoramaSkyMaterial_ahhd5")
+
+[sub_resource type="Environment" id="Environment_5ah76"]
+background_mode = 2
+sky = SubResource("Sky_oquxt")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 65541
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_23ifx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_3foun")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4d2li")
+
+[node name="cube" parent="." instance=ExtResource("3_vf4ej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215128, 1.2678, -1.05676)
+
+[node name="XROrigin3D" parent="." instance=ExtResource("2_cy2fv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.24499)
+
+[node name="StartXR" parent="." instance=ExtResource("1_jp5gt")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ah76")

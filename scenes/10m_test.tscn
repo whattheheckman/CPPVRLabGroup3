@@ -26,12 +26,12 @@ points = PackedVector3Array(0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mxi6r"]
 panorama = ExtResource("3_573e8")
 
-[sub_resource type="Sky" id="Sky_oquxt"]
+[sub_resource type="Sky" id="Sky_3wse1"]
 sky_material = SubResource("PanoramaSkyMaterial_mxi6r")
 
 [sub_resource type="Environment" id="Environment_57s15"]
 background_mode = 2
-sky = SubResource("Sky_oquxt")
+sky = SubResource("Sky_3wse1")
 
 [node name="env_test" type="Node"]
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://73a078hjce7"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_23sjb"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="2_sgfs7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ju2xo"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="cube" instance=ExtResource("1_23sjb")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_ju2xo")
+
+[node name="GrabPointHandRight" parent="." index="2" instance=ExtResource("2_sgfs7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0934576, 0, 0)

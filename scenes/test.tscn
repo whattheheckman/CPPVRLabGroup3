@@ -1,15 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dinaewmiffhm8"]
+[gd_scene load_steps=8 format=3 uid="uid://dinaewmiffhm8"]
 
 [ext_resource type="PackedScene" uid="uid://cb8hytpefouc3" path="res://scenes/10m_test.tscn" id="1_ql5iv"]
 [ext_resource type="PackedScene" uid="uid://d21r1mmp0snev" path="res://scenes/XR_Player.tscn" id="3_7mm0t"]
 [ext_resource type="PackedScene" uid="uid://cu8cptw03ca81" path="res://scenes/gun/gun_v2.tscn" id="4_jvj7x"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_wlxvo"]
 [ext_resource type="PackedScene" uid="uid://c42f3ko7kf2sd" path="res://scenes/gun/gun_rigid.tscn" id="5_7jdmp"]
-[ext_resource type="PackedScene" uid="uid://bsqbxt3gkigey" path="res://scenes/misc/pickable_object.tscn" id="6_iga7k"]
 [ext_resource type="PackedScene" uid="uid://csynke5wbotfc" path="res://scenes/gun/gun_from_scene.tscn" id="7_4bwg6"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_xlivo"]
-size = Vector3(0.2, 0.2, 0.2)
+[ext_resource type="PackedScene" uid="uid://73a078hjce7" path="res://cube.tscn" id="7_ch15f"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -29,11 +26,8 @@ continuous_cd = true
 transform = Transform3D(0.716268, -0.672007, 0.18806, 0.687998, 0.634983, -0.351363, 0.116704, 0.381054, 0.917157, 0.5, 1.16461, 0.5)
 visible = false
 
-[node name="PickableObject" parent="." instance=ExtResource("6_iga7k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.412287, 1.22488, 0.872638)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PickableObject"]
-mesh = SubResource("BoxMesh_xlivo")
-
 [node name="gun_from_scene" parent="." instance=ExtResource("7_4bwg6")]
 transform = Transform3D(0.907132, -0.420846, 0, 0.352277, 0.759333, 0.547096, -0.230243, -0.496288, 0.83707, 0.502748, 1.51317, 0.474504)
+
+[node name="cube" parent="." instance=ExtResource("7_ch15f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13639, 1.8027, 0.00736904)
