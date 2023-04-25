@@ -111,7 +111,9 @@ func shoot():
 	var ray_dir = -gt.basis.z
 	var max_dist = 1000
 
-	var col = get_world_3d().direct_space_state.intersect_ray(ray_origin + ray_dir * max_dist)
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_dir * max_dist, 1, [self])
+	
+	var col = get_world_3d().direct_space_state.intersect_ray(query)
 	if not col.is_empty():
 		max_dist = ray_origin.distance_to(col.position)
 		if col.collider == player:
@@ -171,7 +173,8 @@ func _physics_process(delta):
 				# See if player can be killed because in they're sight.
 				var ray_origin = ray_from.global_transform.origin
 				var ray_to = player.global_transform.origin + Vector3.UP # Above middle of player.
-				var col = get_world_3d().direct_space_state.intersect_ray(ray_to)
+				var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_to, 1, [self])
+				var col = get_world_3d().direct_space_state.intersect_ray(query)
 				if not col.is_empty() and col.collider == player:
 					state = State.AIM
 					aim_countdown = AIM_TIME
@@ -196,7 +199,8 @@ func _physics_process(delta):
 		if aim_countdown < 0 and state == State.AIM:
 			var ray_origin = ray_from.global_transform.origin
 			var ray_to = player.global_transform.origin + Vector3.UP # Above middle of player.
-			var col = get_world_3d().direct_space_state.intersect_ray(ray_to)
+			var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_to, 1, [self])
+			var col = get_world_3d().direct_space_state.intersect_ray(query)
 			if not col.is_empty() and col.collider == player:
 				state = State.SHOOTING
 				shoot_animation.play("shoot")
