@@ -55,7 +55,7 @@ func _input(event):
 func load_settings():
 	var f = FileAccess.open("user://save_game.dat", FileAccess.READ)
 	
-	if !f.file_exists("save_game.dat"):
+	if !FileAccess.file_exists("save_game.dat"):
 		print("There are no settings to load.")
 		return
 
@@ -93,7 +93,7 @@ func load_settings():
 
 func save_settings():
 	var f = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
-	assert(not  FileAccess.file_exists("user://save_game.dat"))
+	#assert(not FileAccess.file_exists("user://save_game.dat"))
 
 	var d = { "gi":gi_quality, "aa":aa_quality, "shadow_enabled":shadow_enabled, "fxaa":fxaa, "ssao":ssao_quality, "bloom":bloom_quality, "resolution":resolution, "fullscreen":fullscreen }
 	f.store_line(JSON.stringify(d))
