@@ -15,10 +15,9 @@ var _mat
 
 
 func _ready():
-	_mat = _mesh.mesh.surface_get_material(0).duplicate()
+	_mat = _mesh.mesh.surface_get_material(0)
 	_mesh.mesh.surface_set_material(0, _mat)
 	randomize()
-	_mat.next_pass = _mat.next_pass.duplicate()
 	_lifetime = lifetime + lifetime_random * randf()
 	pass
 
