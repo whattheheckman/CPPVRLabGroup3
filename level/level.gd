@@ -17,13 +17,13 @@ func _ready():
 		$ReflectionProbes.show()
 
 	if Settings.aa_quality == Settings.AAQuality.AA_8X:
-		get_viewport().msaa = SubViewport.MSAA_8X
+		get_viewport().msaa_3d = SubViewport.MSAA_8X
 	elif Settings.aa_quality == Settings.AAQuality.AA_4X:
-		get_viewport().msaa = SubViewport.MSAA_4X
+		get_viewport().msaa_3d = SubViewport.MSAA_4X
 	elif Settings.aa_quality == Settings.AAQuality.AA_2X:
-		get_viewport().msaa = SubViewport.MSAA_2X
+		get_viewport().msaa_3d = SubViewport.MSAA_2X
 	else:
-		get_viewport().msaa = SubViewport.MSAA_DISABLED
+		get_viewport().msaa_3d = SubViewport.MSAA_DISABLED
 
 	if not Settings.shadow_enabled:
 		# Disable shadows on all lights present on level load,
@@ -31,7 +31,9 @@ func _ready():
 		propagate_call("set", ["shadow_enabled", false])
 
 	if Settings.fxaa:
-		get_viewport().fxaa = true
+		get_viewport().screen_space_aa = 1
+	else:
+		get_viewport().screen_space_aa = 0
 
 	if Settings.ssao_quality == Settings.SSAOQuality.HIGH:
 		world_environment.environment.ssao_enabled = true
@@ -42,15 +44,13 @@ func _ready():
 	else:
 		world_environment.environment.ssao_enabled = false
 
+#TODO: MAKE ONLY 1 BLOOM SETTING
 	if Settings.bloom_quality == Settings.BloomQuality.HIGH:
 		world_environment.environment.glow_enabled = true
-		world_environment.environment.glow_bicubic_upscale = true
 	elif Settings.bloom_quality == Settings.BloomQuality.LOW:
 		world_environment.environment.glow_enabled = true
-		world_environment.environment.glow_bicubic_upscale = false
 	else:
 		world_environment.environment.glow_enabled = false
-		world_environment.environment.glow_bicubic_upscale = false
 
 	var window_size = get_window().size
 	if Settings.resolution == Settings.Resolution.NATIVE:
