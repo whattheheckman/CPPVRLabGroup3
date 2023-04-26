@@ -17,8 +17,8 @@ func _physics_process(delta):
 		animation_player.play("explode")
 	var col = move_and_collide(-delta * BULLET_VELOCITY * transform.basis.z)
 	if col:
-		if col.collider and col.collider.has_method("hit"):
-			col.collider.hit()
+		if col.get_collider() and col.get_collider().has_method("hit"):
+			col.get_collider().hit()
 		collision_shape.disabled = true
 		animation_player.play("explode")
 		hit = true
