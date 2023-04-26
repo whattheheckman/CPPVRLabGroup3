@@ -140,17 +140,17 @@ func _physics_process(delta):
 		on_air = true
 		# Increase airborne time so next frame on_air is still true
 		airborne_time = MIN_AIRBORNE_TIME
-		animation_tree["parameters/state/current"] = 2
+		animation_tree["parameters/state/current"] = "jump_up"
 		sound_effect_jump.play()
 
 	if on_air:
 		if (velocity.y > 0):
-			animation_tree["parameters/state/current"] = 2
+			animation_tree.set("parameters/state/transition_request", "jump_up")
 		else:
-			animation_tree["parameters/state/current"] = 3
+			animation_tree["parameters/state/transition_request"] = "jump_down"
 	elif aiming:
 		# Change state to strafe.
-		animation_tree["parameters/state/current"] = 0
+		animation_tree["parameters/state/current_index"] = 0
 
 		# Change aim according to camera rotation.
 		if camera_x_rot >= 0: # Aim up.
