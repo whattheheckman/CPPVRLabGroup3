@@ -26,7 +26,7 @@ var dead = false
 
 var player = null
 
-var orientation = Transform3D()
+var orientation : Transform3D
 
 var blast_scene = preload("res://enemies/red_robot/laser/impact_effect/impact_effect.tscn")
 
@@ -68,7 +68,8 @@ func resume_approach():
 func hit():
 	if dead:
 		return
-	animation_tree["parameters/hit" + str(randi() % 3 + 1) + "/active"] = true
+	var hit_num : String = str(randi() % 3 + 1)
+	animation_tree["parameters/hit" + hit_num + "/active"] = "Damage_take" + hit_num
 	hit_sound.play()
 	health -= 1
 	if health == 0:
@@ -225,11 +226,8 @@ func _physics_process(delta):
 			animation_tree["parameters/aim/blend_position"] = blend_pos
 
 	# Apply root motion to orientation.
-	orientation *= animation_tree.get_root_motion_position()
+	orientation = Transform3D(animation_tree.get_root_motion_rotation(), animation_tree.get_root_motion_position())
 
-	var root_motion_rotation : Vector3 = Vector3(0,0,0)
-	root_motion_rotation *= animation_tree.get_root_motion_rotation()
-	orientation *= root_motion_rotation
 	
 	
 
