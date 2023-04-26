@@ -39,10 +39,10 @@ var fxaa = true
 var ssao_quality = SSAOQuality.DISABLED
 var bloom_quality = BloomQuality.HIGH
 var resolution = Resolution.RES_720
-var fullscreen = true
+var fullscreen = false
 
 func _ready():
-	#load_settings()
+	load_settings()
 	pass
 
 
@@ -55,7 +55,7 @@ func _input(event):
 func load_settings():
 	var f = FileAccess.open("user://save_game.dat", FileAccess.READ)
 	
-	if !FileAccess.file_exists("save_game.dat"):
+	if not FileAccess.file_exists("save_game.dat"):
 		print("There are no settings to load.")
 		return
 
