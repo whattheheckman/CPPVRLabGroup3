@@ -66,6 +66,7 @@ func load_settings():
 		return
 
 	if "gi" in d:
+		@warning_ignore("int_as_enum_without_cast")
 		gi_quality = int(d.gi)
 
 	if "aa" in d:
@@ -92,7 +93,7 @@ func load_settings():
 
 func save_settings():
 	var f = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
-	assert(not f.file_exists("user://save_game.dat"))
+	assert(not  FileAccess.file_exists("user://save_game.dat"))
 
 	var d = { "gi":gi_quality, "aa":aa_quality, "shadow_enabled":shadow_enabled, "fxaa":fxaa, "ssao":ssao_quality, "bloom":bloom_quality, "resolution":resolution, "fullscreen":fullscreen }
-	f.store_line(JSON.new().stringify(d))
+	f.store_line(JSON.stringify(d))
