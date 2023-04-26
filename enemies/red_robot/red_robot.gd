@@ -143,7 +143,7 @@ func _physics_process(delta):
 		return
 
 	if not player:
-		animation_tree["parameters/state/current"] = "idle" # Go idle.
+		animation_tree["parameters/state/transition_request"] = "idle" # Go idle.
 		set_velocity(gravity * delta)
 		set_up_direction(Vector3.UP)
 		move_and_slide()
@@ -162,11 +162,12 @@ func _physics_process(delta):
 		var angle_to_player = atan2(to_player_local.x, to_player_local.z)
 		var tolerance = deg_to_rad(PLAYER_AIM_TOLERANCE_DEGREES)
 		if angle_to_player > tolerance:
-			animation_tree["parameters/state/current"] = "turn_left"
+			animation_tree["parameters/state/current_state"] = "turn_left"
 		elif angle_to_player < -tolerance:
-			animation_tree["parameters/state/current"] = "turn_right"
+			animation_tree["parameters/state/current_state"] = "turn_right"
 		else:
-			animation_tree["parameters/state/current"] = "idle"
+			animation_tree["parameters/state/transition_request"] = "idle"
+			
 			# Facing player, try to shoot.
 			shoot_countdown -= delta
 			if shoot_countdown < 0:
@@ -224,7 +225,13 @@ func _physics_process(delta):
 			animation_tree["parameters/aim/blend_position"] = blend_pos
 
 	# Apply root motion to orientation.
-	orientation *= animation_tree.get_root_motion_transform()
+	orientation *= animation_tree.get_root_motion_position()
+
+	var root_motion_rotation : Vector3 = Vector3(0,0,0)
+	root_motion_rotation *= animation_tree.get_root_motion_rotation()
+	orientation *= root_motion_rotation
+	
+	
 
 	var h_velocity = orientation.origin / delta
 	velocity.x = h_velocity.x
