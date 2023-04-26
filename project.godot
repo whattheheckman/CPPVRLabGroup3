@@ -214,6 +214,7 @@ common/physics_interpolation=true
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
+occlusion_culling/use_occlusion_culling=true
 environment/defaults/default_environment="res://default_env.tres"
 lights_and_shadows/shadow_atlas/size=2048
 quality/shading/use_physical_light_attenuation=true
