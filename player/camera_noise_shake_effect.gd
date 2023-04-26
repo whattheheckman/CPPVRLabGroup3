@@ -19,9 +19,8 @@ var noise_seed = randi()
 func _ready():
 	noise.seed = noise_seed
 	noise.fractal_octaves = 1
-	noise.period = 256.0
-	noise.persistence = 0.5
-	noise.lacunarity = 1.0
+	noise.frequency =  1 / 256.0
+	noise.fractal_lacunarity = 1.0
 
 	# This variable is reset if the camera position is changed by other scripts,
 	# such as when zooming in/out or focusing on a different position.
