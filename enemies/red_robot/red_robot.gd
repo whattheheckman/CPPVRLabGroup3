@@ -69,7 +69,7 @@ func hit():
 	if dead:
 		return
 	var hit_num : String = str(randi() % 3 + 1)
-	animation_tree["parameters/hit" + hit_num + "/active"] = "Damage_take" + hit_num
+	#animation_tree["parameters/hit" + hit_num + "/active"] = "Damage_take" + hit_num
 	hit_sound.play()
 	health -= 1
 	if health == 0:

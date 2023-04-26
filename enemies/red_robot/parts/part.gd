@@ -15,16 +15,16 @@ var _mat
 
 
 func _ready():
-	#_mat = _mesh.mesh.surface_get_material(0).duplicate()
-	#_mesh.mesh.surface_set_material(0, _mat)
-	#randomize()
-	#_mat.next_pass = _mat.next_pass.duplicate()
-	#_lifetime = lifetime + lifetime_random * randf()
+	_mat = _mesh.mesh.surface_get_material(0).duplicate()
+	_mesh.mesh.surface_set_material(0, _mat)
+	randomize()
+	_mat.next_pass = _mat.next_pass.duplicate()
+	_lifetime = lifetime + lifetime_random * randf()
 	pass
 
 
 func start_disappear_countdown():
-	await get_tree().create_timer(_lifetime).timeout
+	await get_tree().create_timer(lifetime).timeout
 	_is_disappearing = true
 
 
