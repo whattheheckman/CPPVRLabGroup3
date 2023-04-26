@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvofp5g3xqf3p"]
+[gd_scene load_steps=17 format=3 uid="uid://dvofp5g3xqf3p"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/props.tscn" id="2"]
 [ext_resource type="VoxelGIData" path="res://level/geometry/giprobe_data.res" id="5"]
-[ext_resource type="PackedScene" path="res://player/player.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://b0ktkobvmgnog" path="res://player/player.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://boq0c6anxfu8v" path="res://enemies/red_robot/red_robot.tscn" id="7"]
 [ext_resource type="AudioStream" uid="uid://dbs43vq7uv67e" path="res://level/level_music.ogg" id="8"]
 [ext_resource type="Script" path="res://level/debug.gd" id="9"]
 [ext_resource type="PackedScene" path="res://level/forklift/flying_forklift.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/lights.tscn" id="13"]
-[ext_resource type="PackedScene" path="res://level/geometry/scenes/core.tscn" id="14"]
+[ext_resource type="Script" path="res://free_look_camera.gd" id="13_515m2"]
+[ext_resource type="PackedScene" uid="uid://dftkm57d000ua" path="res://level/geometry/scenes/core.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/structure.tscn" id="15"]
 [ext_resource type="Environment" uid="uid://ccgec5iv0lu28" path="res://level/geometry/environment.tres" id="16"]
 
@@ -42,10 +43,6 @@ _data = {
 script = ExtResource("1")
 
 [node name="Core" parent="." instance=ExtResource("14")]
-
-[node name="CPUParticles3D" parent="Core/Plasma" index="1"]
-emission_points = PackedVector3Array()
-emission_normals = PackedVector3Array()
 
 [node name="Structure" parent="." instance=ExtResource("15")]
 
@@ -253,6 +250,12 @@ transform = Transform3D(-0.698815, 0, 0.715302, 0, 1, 0, -0.715302, 0, -0.698815
 
 [node name="ReactorWall8" type="OccluderInstance3D" parent="Occluders"]
 transform = Transform3D(-0.267642, 0, 0.963518, 0, 1, 0, -0.963518, 0, -0.267642, 35.8579, 4.54071, -16.814)
+
+[node name="FreeLookCam" type="Camera3D" parent="."]
+transform = Transform3D(-0.575826, 0, -0.817573, 0, 1, 0, 0.817573, 0, -0.575826, 64.8183, -1.0765, 78.7639)
+current = true
+script = ExtResource("13_515m2")
+default_velocity = 12.6
 
 [editable path="Core"]
 [editable path="Core/CoreModel"]

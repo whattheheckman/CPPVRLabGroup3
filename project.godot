@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Godot Third-Person Shooter Demo"
 config/description="Godot Third Person Shooter with high quality assets and lighting"
-run/main_scene="res://main/main.tscn"
+run/main_scene="res://level/level.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/fullsize=false
 config/icon="res://icon.png"
@@ -214,6 +214,7 @@ common/physics_interpolation=true
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
+scaling_3d/mode=1
 occlusion_culling/use_occlusion_culling=true
 environment/defaults/default_environment="res://default_env.tres"
 lights_and_shadows/shadow_atlas/size=2048
@@ -221,3 +222,7 @@ quality/shading/use_physical_light_attenuation=true
 quality/filters/anisotropic_filter_level=8
 gles3/shaders/shader_compilation_mode=2
 quality/filters/msaa=2
+
+[xr]
+
+shaders/enabled=true
