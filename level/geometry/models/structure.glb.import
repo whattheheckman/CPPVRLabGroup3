@@ -28,5 +28,20 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"flat_emitter_orange": {
+"use_external/enabled": true,
+"use_external/path": "res://level/geometry/models/flat_emitter_orange.tres"
+},
+"tile_tech_panels_color": {
+"use_external/enabled": true,
+"use_external/path": "res://level/geometry/models/tile_tech_panels_color.tres"
+},
+"trim_misc_1": {
+"use_external/enabled": true,
+"use_external/path": "res://level/geometry/models/trim_misc_1.tres"
+}
+}
+}
 gltf/embedded_image_handling=1

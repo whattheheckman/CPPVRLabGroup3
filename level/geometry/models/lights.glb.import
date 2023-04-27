@@ -28,5 +28,12 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"light_shafts": {
+"use_external/enabled": true,
+"use_external/path": "res://level/geometry/models/light_shafts.tres"
+}
+}
+}
 gltf/embedded_image_handling=1
