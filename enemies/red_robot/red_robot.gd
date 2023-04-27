@@ -33,7 +33,7 @@ var blast_scene = preload("res://enemies/red_robot/laser/impact_effect/impact_ef
 @onready var animation_tree = $AnimationTree
 @onready var shoot_animation = $ShootAnimation
 
-@onready var model = $RedRobotModel
+@onready var model = $red_robot
 @onready var ray_from = model.get_node("Armature/Skeleton3D/RayFrom")
 @onready var ray_mesh = ray_from.get_node("RayMesh")
 @onready var laser_raycast = ray_from.get_node("RayCast3D")
