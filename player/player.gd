@@ -140,7 +140,7 @@ func _physics_process(delta):
 		on_air = true
 		# Increase airborne time so next frame on_air is still true
 		airborne_time = MIN_AIRBORNE_TIME
-		animation_tree["parameters/state/current"] = "jump_up"
+		animation_tree["parameters/state/transition_request"] = "jump_up"
 		sound_effect_jump.play()
 
 	if on_air:
@@ -150,7 +150,7 @@ func _physics_process(delta):
 			animation_tree["parameters/state/transition_request"] = "jump_down"
 	elif aiming:
 		# Change state to strafe.
-		animation_tree["parameters/state/current_index"] = 0
+		animation_tree["parameters/state/transition_request"] = "strafe"
 
 		# Change aim according to camera rotation.
 		if camera_x_rot >= 0: # Aim up.
@@ -167,7 +167,7 @@ func _physics_process(delta):
 		# The animation's forward/backward axis is reversed.
 		animation_tree["parameters/strafe/blend_position"] = Vector2(motion.x, -motion.y)
 
-		root_motion = animation_tree.get_root_motion_transform()
+		root_motion = Transform3D(animation_tree.get_root_motion_rotation(), animation_tree.get_root_motion_position())
 
 		if Input.is_action_pressed("shoot") and fire_cooldown.time_left == 0:
 			var shoot_origin = shoot_from.global_transform.origin
@@ -212,11 +212,11 @@ func _physics_process(delta):
 		# Aim to zero (no aiming while walking).
 		animation_tree["parameters/aim/add_amount"] = 0
 		# Change state to walk.
-		animation_tree["parameters/state/current"] = 1
+		animation_tree["parameters/state/transition_request"] = "walk"
 		# Blend position for walk speed based on motion.
 		animation_tree["parameters/walk/blend_position"] = Vector2(motion.length(), 0)
 
-		root_motion = animation_tree.get_root_motion_transform()
+		root_motion = Transform3D(animation_tree.get_root_motion_rotation(), animation_tree.get_root_motion_position())
 
 	# Apply root motion to orientation.
 	orientation *= root_motion
