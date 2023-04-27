@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvofp5g3xqf3p"]
+[gd_scene load_steps=18 format=3 uid="uid://dvofp5g3xqf3p"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/props.tscn" id="2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/lights.tscn" id="13"]
 [ext_resource type="Script" path="res://free_look_camera.gd" id="13_515m2"]
 [ext_resource type="PackedScene" uid="uid://dftkm57d000ua" path="res://level/geometry/scenes/core.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://cpoofkfcjglc3" path="res://player/xr_player.tscn" id="14_x04dc"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/structure.tscn" id="15"]
 [ext_resource type="Environment" uid="uid://ccgec5iv0lu28" path="res://level/geometry/environment.tres" id="16"]
 
@@ -256,6 +257,8 @@ transform = Transform3D(-0.575826, 0, -0.817573, 0, 1, 0, 0.817573, 0, -0.575826
 current = true
 script = ExtResource("13_515m2")
 default_velocity = 12.6
+
+[node name="XROrigin3D" parent="." instance=ExtResource("14_x04dc")]
 
 [editable path="Core"]
 [editable path="Core/CoreModel"]
