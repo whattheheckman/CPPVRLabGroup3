@@ -163,11 +163,12 @@ func _physics_process(delta):
 		var angle_to_player = atan2(to_player_local.x, to_player_local.z)
 		var tolerance = deg_to_rad(PLAYER_AIM_TOLERANCE_DEGREES)
 		if angle_to_player > tolerance:
-			animation_tree["parameters/state/current_state"] = "turn_left"
+			animation_tree["parameters/state/transition_request"] = "turn_left"
 		elif angle_to_player < -tolerance:
-			animation_tree["parameters/state/current_state"] = "turn_right"
+			animation_tree["parameters/state/transition_request"] = "turn_right"
 		else:
 			animation_tree["parameters/state/transition_request"] = "idle"
+			
 			
 			# Facing player, try to shoot.
 			shoot_countdown -= delta
