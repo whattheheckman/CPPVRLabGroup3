@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://level/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/props.tscn" id="2"]
 [ext_resource type="VoxelGIData" path="res://level/geometry/giprobe_data.res" id="5"]
-[ext_resource type="PackedScene" uid="uid://b0ktkobvmgnog" path="res://player/player.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://boq0c6anxfu8v" path="res://enemies/red_robot/red_robot.tscn" id="7"]
 [ext_resource type="AudioStream" uid="uid://dbs43vq7uv67e" path="res://level/level_music.ogg" id="8"]
 [ext_resource type="Script" path="res://level/debug.gd" id="9"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dftkm57d000ua" path="res://level/geometry/scenes/core.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://cpoofkfcjglc3" path="res://player/xr_player.tscn" id="14_x04dc"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/structure.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="15_00a2e"]
 [ext_resource type="Environment" uid="uid://ccgec5iv0lu28" path="res://level/geometry/environment.tres" id="16"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -77,9 +77,6 @@ box_projection = true
 transform = Transform3D(0.999799, 0, -0.0200534, 0, 1, 0, 0.0200534, 0, 0.999799, -0.392717, -7.57649, 0.0575469)
 size = Vector3(38.9134, 50, 37.1232)
 box_projection = true
-
-[node name="Player" parent="." instance=ExtResource("6")]
-transform = Transform3D(-0.575826, 0, -0.817573, 0, 1, 0, 0.817573, 0, -0.575826, 64.8183, -1.0765, 78.7639)
 
 [node name="RedRobot1" parent="." instance=ExtResource("7")]
 transform = Transform3D(0.843905, 0, -0.536493, 0, 1, 0, 0.536493, 0, 0.843905, 71.5907, -6.05686, 46.2736)
@@ -258,7 +255,11 @@ current = true
 script = ExtResource("13_515m2")
 default_velocity = 12.6
 
-[node name="XROrigin3D" parent="." instance=ExtResource("14_x04dc")]
+[node name="XR_Player" parent="." instance=ExtResource("14_x04dc")]
+transform = Transform3D(-0.224951, 0, 0.97437, 0, 1, 0, -0.97437, 0, -0.224951, 86.3794, -5.45963, 28.5187)
+
+[node name="StartXR" parent="." instance=ExtResource("15_00a2e")]
+physics_rate_multiplier = 1
 
 [editable path="Core"]
 [editable path="Core/CoreModel"]
