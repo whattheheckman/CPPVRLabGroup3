@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpoofkfcjglc3"]
+[gd_scene load_steps=14 format=3 uid="uid://cpoofkfcjglc3"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_055vm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_eoyud"]
@@ -7,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="4_puevv"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_06eag"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="5_p6lqc"]
+[ext_resource type="Script" path="res://player/box_create_simple.gd" id="6_puxel"]
+[ext_resource type="Texture2D" uid="uid://dnniu8invcwe5" path="res://player/Meter_1m x 1m.png" id="7_1ekjx"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="8_uw8i0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj0pq"]
+albedo_texture = ExtResource("7_1ekjx")
+metallic = 0.31
+metallic_specular = 0.43
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igqpc"]
+transparency = 1
+albedo_color = Color(0.870588, 1, 0.85098, 0.356863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gv2cr"]
+material = SubResource("StandardMaterial3D_igqpc")
 
 [node name="XR_Player" type="XROrigin3D"]
 transform = Transform3D(-0.224951, 0, 0.97437, 0, 1, 0, -0.97437, 0, -0.224951, 0, 0, 0)
@@ -28,6 +43,13 @@ hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionTeleport" parent="LeftHand" instance=ExtResource("4_puevv")]
 
+[node name="Box Creator" type="RayCast3D" parent="LeftHand" node_paths=PackedStringArray("visualize_mesh")]
+target_position = Vector3(0, 0, -100)
+script = ExtResource("6_puxel")
+visualize_mesh = NodePath("../../VisualizeMesh")
+material = SubResource("StandardMaterial3D_yj0pq")
+stick_deadzone = 0
+
 [node name="RightHand" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.544, 0.711, 0)
 tracker = &"right_hand"
@@ -36,3 +58,14 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("5_p6lqc")]
+
+[node name="MovementTurn" parent="RightHand" instance=ExtResource("8_uw8i0")]
+turn_mode = 1
+step_turn_angle = 45.0
+
+[node name="VisualizeMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563, 0.711, -7.45058e-09)
+mesh = SubResource("BoxMesh_gv2cr")
+skeleton = NodePath("../LeftHand/Box Creator")
+
+[connection signal="button_pressed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_button_pressed"]

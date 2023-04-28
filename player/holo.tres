@@ -1,0 +1,51 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://uy1j0ry4tq28"]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_7662h"]
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_x64go"]
+parameter_name = "tolerance"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_ii3l6"]
+output_port_for_preview = 0
+function = 16
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_ouy7k"]
+size = Vector2(351.893, 448.506)
+
+[resource]
+code = "shader_type spatial;
+
+
+
+void fragment() {
+// VectorDecompose:4
+	vec3 n_in4p0 = vec3(0.00000, 0.00000, 0.00000);
+	float n_out4p0 = n_in4p0.x;
+	float n_out4p1 = n_in4p0.y;
+	float n_out4p2 = n_in4p0.z;
+
+
+// FloatFunc:6
+	float n_out6p0 = ceil(n_out4p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out6p0);
+
+
+}
+"
+graph_offset = Vector2(-561.492, -159.76)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorDecompose_7662h")
+nodes/fragment/4/position = Vector2(-140, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeIntParameter_x64go")
+nodes/fragment/5/position = Vector2(-660, 460)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_ii3l6")
+nodes/fragment/6/position = Vector2(-280, 360)
+nodes/fragment/7/node = SubResource("VisualShaderNodeExpression_ouy7k")
+nodes/fragment/7/position = Vector2(-800, -140)
+nodes/fragment/7/size = Vector2(351.893, 448.506)
+nodes/fragment/7/input_ports = ""
+nodes/fragment/7/output_ports = "0,4,output0;1,4,output1;2,4,output2;"
+nodes/fragment/7/expression = ""
+nodes/fragment/connections = PackedInt32Array(6, 0, 0, 0, 4, 0, 6, 0)
