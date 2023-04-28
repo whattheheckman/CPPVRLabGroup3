@@ -14,7 +14,7 @@ extends Node3D
 var start_point = null
 var end_point = null
 
-@onready var raycast = $"../RayCast3D"
+@onready var raycast = self
 @export var visualize_mesh : MeshInstance3D
 
 var stick_y_pos : float = 0
@@ -75,10 +75,8 @@ func _physics_process(delta):
 		clamp(current_range, .5 , max_range)
 		pass
 	#box visualization with left hand
-	if raycast.is_colliding():
-		
+	if raycast.is_colliding() and controller.get_float("trigger") < 0.5:
 		visualize_mesh.global_transform.origin = raycast.get_collision_point()
-		
 		visualize_mesh.visible = true
 	else:
 		visualize_mesh.visible = false
@@ -129,8 +127,16 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 func _on_left_hand_button_pressed(name):
 	if name == create_button:
 		if current_range == max_range:
-			var pos = raycast.get_collision_point() + Vector3(0,1,0)
-			create_mesh(1,1,1, raycast.get_collision_point() + Vector3(0,1,0))
+			create_mesh(2.5,2.5,2.5, raycast.get_collision_point())
 		elif current_range < max_range:
-			var pos = raycast.get_collision_point() - Vector3(0,0,current_range)
-			create_mesh(1,1,1, raycast.get_collision_point() - Vector3(0,0,current_range))
+			create_mesh(2.5,2.5,2.5, raycast.get_collision_point() - Vector3(0,0,current_range))
+
+
+func _on_left_hand_input_float_changed(name, value):
+	print("Name: ")
+	print(name)
+	print("value: ")
+	print(value)
+	if name == "trigger" and value > 0.5:
+		visualize_mesh.visible = false
+		pass

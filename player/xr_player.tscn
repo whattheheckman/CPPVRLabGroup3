@@ -58,6 +58,8 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("5_p6lqc")]
+ranged_distance = 15.0
+ranged_angle = 6.0
 
 [node name="MovementTurn" parent="RightHand" instance=ExtResource("8_uw8i0")]
 turn_mode = 1
@@ -69,3 +71,4 @@ mesh = SubResource("BoxMesh_gv2cr")
 skeleton = NodePath("../LeftHand/Box Creator")
 
 [connection signal="button_pressed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_button_pressed"]
+[connection signal="input_float_changed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_input_float_changed"]
