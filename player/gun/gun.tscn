@@ -1,0 +1,108 @@
+[gd_scene load_steps=20 format=3 uid="uid://noilc7phmu8k"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_n76ui"]
+[ext_resource type="Material" path="res://player/bullet/bullet_material.tres" id="2_by25h"]
+[ext_resource type="Script" path="res://player/gun/xr_gun.gd" id="2_uopoi"]
+[ext_resource type="Texture2D" uid="uid://xlrypx7rbo1r" path="res://player/bullet/effect/FlarePolar.png" id="3_c86d8"]
+[ext_resource type="ArrayMesh" path="res://player/model/muzzle_flash_particle_mesh_Cone.mesh" id="4_ppsd7"]
+[ext_resource type="PackedScene" uid="uid://eukh535xfxjr" path="res://player/gun/blasterA.glb" id="8_3tv84"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="9_56rry"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="10_nvqj7"]
+[ext_resource type="Texture2D" uid="uid://bvycpx6fiafo2" path="res://player/crosshair.png" id="12_pal5l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wlosy"]
+size = Vector3(0.0607311, 0.169097, 0.330774)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36h6c"]
+direction = Vector3(0, 0, -1)
+spread = 15.0
+gravity = Vector3(0, -3, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5gsk0"]
+radius = 0.003
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofvtt"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_c86d8")
+
+[sub_resource type="Gradient" id="Gradient_by3ln"]
+offsets = PackedFloat32Array(0.325926, 1)
+colors = PackedColorArray(0.0507812, 0.955505, 1, 1, 0.875, 0.888672, 1, 0.305882)
+
+[sub_resource type="GradientTexture2D" id="5"]
+gradient = SubResource("Gradient_by3ln")
+width = 32
+
+[sub_resource type="Curve" id="Curve_c2br2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.791139, 0.990909), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="7"]
+width = 64
+curve = SubResource("Curve_c2br2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t4jkl"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("7")
+color_ramp = SubResource("5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67ru3"]
+
+[node name="GAT" instance=ExtResource("1_n76ui")]
+script = ExtResource("2_uopoi")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_wlosy")
+
+[node name="blasterA" parent="." index="1" instance=ExtResource("8_3tv84")]
+transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0, 0)
+
+[node name="ShootFrom" type="Marker3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0431372, -0.186133)
+gizmo_extents = 0.11
+
+[node name="ShootParticle" type="GPUParticles3D" parent="ShootFrom" index="0"]
+transform = Transform3D(1, 2.04891e-08, 0, 3.21306e-08, 1, 5.58794e-09, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_by25h")
+cast_shadow = 0
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.79
+process_material = SubResource("ParticleProcessMaterial_36h6c")
+draw_pass_1 = SubResource("SphereMesh_5gsk0")
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="ShootFrom" index="1"]
+transform = Transform3D(1, 0, -2.00234e-08, 1.21072e-08, -4.37722e-08, -1, -2.98023e-08, 1, -4.74975e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ofvtt")
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_t4jkl")
+draw_pass_1 = ExtResource("4_ppsd7")
+
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("9_56rry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0125627, 0, 0)
+
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("10_nvqj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00342127, -0.0290361, -0.0336675)
+
+[node name="Crosshair" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0927403, -0.11158)
+texture = ExtResource("12_pal5l")
+
+[node name="FireCooldown" type="Timer" parent="." index="6"]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[node name="Shoot" type="AudioStreamPlayer" parent="." index="7"]
+stream = SubResource("AudioStreamRandomizer_67ru3")

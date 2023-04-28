@@ -1,30 +1,24 @@
-extends Node3D
+extends XRToolsPickable
 
-@onready var shoot_from = $ShootFrom
+@onready var shoot_from = player_model.get_node("Robot_Skeleton/Skeleton3D/GunBone/ShootFrom")
 
 @onready var fire_cooldown = $FireCooldown
 
-@onready var crosshair : Sprite3D = $Crosshair
-@onready var xrcameragroup = get_tree().get_nodes_in_group("xrcamera")
-@onready var xrcam : XRCamera3D = xrcameragroup[1]
 
+@onready var sound_effects = $SoundEffects
+@onready var sound_effect_jump = sound_effects.get_node("Jump")
+@onready var sound_effect_land = sound_effects.get_node("Land")
+@onready var sound_effect_shoot = sound_effects.get_node("Shoot")
 
-
-@onready var sound_effect_shoot = $Shoot
-
-@onready var shoot_particle = $ShootFrom/ShootParticle
-@onready var muzzle_particle = $ShootFrom/MuzzleFlash
-
-
-func _physics_process(_delta):
+func _physics_process(delta):
 
 
 	if Input.is_action_pressed("shoot") and fire_cooldown.time_left == 0:
 		var shoot_origin = shoot_from.global_transform.origin
 
 		var ch_pos = crosshair.position + crosshair.size * 0.5
-		var ray_from = shoot_origin.global_transformx
-		var ray_dir = xrcam.project_ray_normal(ch_pos)
+		var ray_from = camera_camera.project_ray_origin(ch_pos)
+		var ray_dir = camera_camera.project_ray_normal(ch_pos)
 
 		var shoot_target
 		var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(ray_from, ray_dir * 1000, 1, [self])
@@ -41,8 +35,10 @@ func _physics_process(_delta):
 		# If we don't rotate the bullets there is no useful way to control the particles ..
 		bullet.look_at(shoot_origin + shoot_dir, Vector3.UP)
 		bullet.add_collision_exception_with(self)
+		var shoot_particle = $PlayerModel/Robot_Skeleton/Skeleton3D/GunBone/ShootFrom/ShootParticle
 		shoot_particle.restart()
 		shoot_particle.emitting = true
+		var muzzle_particle = $PlayerModel/Robot_Skeleton/Skeleton3D/GunBone/ShootFrom/MuzzleFlash
 		muzzle_particle.restart()
 		muzzle_particle.emitting = true
 		fire_cooldown.start()
