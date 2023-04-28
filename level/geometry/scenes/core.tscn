@@ -194,10 +194,9 @@ visible = false
 [node name="Plasma" type="CPUParticles3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -2.3, 0)
 material_override = SubResource("12")
-amount = 4
-lifetime = 3.31
-explosiveness = 0.19
-randomness = 0.6
+amount = 64
+speed_scale = 0.0
+local_coords = true
 mesh = ExtResource("5")
 spread = 180.0
 gravity = Vector3(0, 0, 0)
