@@ -259,10 +259,10 @@ func _clip_ray(length):
 
 
 func _on_area_body_entered(body):
-	if body is Player or body.name == "Target":
+	if body is Player or body is XRToolsPlayerBody or body.name == "Target":
 		player = body
 
 
 func _on_area_body_exited(body):
-	if body is Player:
-		player = null
+	if body is Player or body is XRToolsPlayerBody:
+				player = null
