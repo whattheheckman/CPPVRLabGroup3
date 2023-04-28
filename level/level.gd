@@ -70,7 +70,7 @@ func _ready():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		get_tree().root.set_content_scale_size(Vector2(window_size.x * 540 / window_size.y, 540.0))
 
-
+ 
 
 func _input(event):
 	if event.is_action_pressed("quit"):

@@ -20,5 +20,6 @@ glow_hdr_threshold = 0.9
 glow_hdr_luminance_cap = 3.0
 fog_enabled = true
 fog_light_color = Color(0.403922, 0.25098, 0.105882, 1)
+fog_density = 0.005
 adjustment_enabled = true
 adjustment_saturation = 1.4
