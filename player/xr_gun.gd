@@ -23,7 +23,7 @@ func _physics_process(_delta):
 		var shoot_origin = shoot_from.global_transform.origin
 
 		var ch_pos = crosshair.position + crosshair.size * 0.5
-		var ray_from = shoot_origin.global_transformx
+		var ray_from = shoot_origin.global_transform
 		var ray_dir = xrcam.project_ray_normal(ch_pos)
 
 		var shoot_target
