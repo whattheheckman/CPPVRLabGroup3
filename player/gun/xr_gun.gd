@@ -21,11 +21,11 @@ func _physics_process(_delta):
 
 
 	if Input.is_action_pressed("shoot") and fire_cooldown.time_left == 0:
-		var shoot_origin = shoot_from.global_transform.origin
+		var shoot_origin = shoot_from.position
 
-		var ch_pos = crosshair.position + crosshair.size * 0.5
-		var ray_from = shoot_origin.global_transform
-		var ray_dir = xrcam.project_ray_normal(ch_pos)
+		var ch_pos = crosshair.position + Vector3(crosshair.get_frame_coords().x, crosshair.get_frame_coords().y,0) * 0.5
+		var ray_from = shoot_from.position
+		var ray_dir = xrcam.project_ray_normal(Vector2(ch_pos.x,ch_pos.y))
 
 		var shoot_target
 		var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(ray_from, ray_dir * 1000, 1, [self])
