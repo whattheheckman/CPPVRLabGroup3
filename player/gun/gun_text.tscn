@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c75rgr7merqwt"]
+
+[sub_resource type="Theme" id="Theme_nyiiy"]
+
+[sub_resource type="SystemFont" id="SystemFont_3iifh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.99998
+offset_top = 6.0
+offset_right = 260.799
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(7.05817, 6.86262)
+size_flags_horizontal = 4
+theme = SubResource("Theme_nyiiy")
+theme_override_fonts/font = SubResource("SystemFont_3iifh")
+text = "enerGy Acceleration Tool"
