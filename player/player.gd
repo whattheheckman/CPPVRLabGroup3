@@ -165,7 +165,7 @@ func _physics_process(delta):
 		orientation.basis = Basis(q_from.slerp(q_to, delta * ROTATION_INTERPOLATE_SPEED))
 
 		# The animation's forward/backward axis is reversed.
-		animation_tree["parameters/strafe/blend_position"] = Vector2(motion.x, -motion.y)
+		animation_tree["parameters/strafe/blend_position"] = Vector2(-motion.x, -motion.y)
 
 		root_motion = Transform3D(animation_tree.get_root_motion_rotation(), animation_tree.get_root_motion_position())
 
