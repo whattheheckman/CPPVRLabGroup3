@@ -1,10 +1,10 @@
 [gd_scene load_steps=37 format=3 uid="uid://dftkm57d000ua"]
 
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/collision/radial_colliders.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://level/geometry/scenes/collision/stair_pillar.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c8l0kii8eej1q" path="res://level/geometry/scenes/collision/stair_pillar.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dn508ecj4w81f" path="res://level/geometry/models/core.glb" id="3"]
 [ext_resource type="PackedScene" path="res://level/geometry/scenes/collision/radial_player_only.tscn" id="4"]
-[ext_resource type="ArrayMesh" path="res://level/textures/structure/Core/CoreOutLight_Circle.mesh" id="5"]
+[ext_resource type="ArrayMesh" uid="uid://djc6dq3508pm" path="res://level/textures/structure/Core/CoreOutLight_Circle.mesh" id="5"]
 [ext_resource type="Texture2D" uid="uid://14bnqg1plso8" path="res://level/textures/structure/Core/core_out_light.png" id="6"]
 [ext_resource type="ArrayMesh" path="res://level/textures/structure/Core/CoreOutLight_Sphere.mesh" id="7"]
 [ext_resource type="Texture2D" uid="uid://bjt3jytx13jld" path="res://level/textures/structure/Core/core_inner_noise.png" id="8"]
