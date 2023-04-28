@@ -177,7 +177,8 @@ func _physics_process(delta):
 			var ray_dir = camera_camera.project_ray_normal(ch_pos)
 
 			var shoot_target
-			var col = get_world_3d().direct_space_state.intersect_ray(ray_from + ray_dir * 1000)
+			var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(ray_from, ray_dir * 1000, 1, [self])
+			var col = get_world_3d().direct_space_state.intersect_ray(query) # ray_from + ray_dir * 1000
 			if col.is_empty():
 				shoot_target = ray_from + ray_dir * 1000
 			else:
