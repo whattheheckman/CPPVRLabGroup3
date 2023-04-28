@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpoofkfcjglc3"]
+[gd_scene load_steps=18 format=3 uid="uid://cpoofkfcjglc3"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_055vm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_eoyud"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://player/box_create_simple.gd" id="6_puxel"]
 [ext_resource type="Texture2D" uid="uid://dnniu8invcwe5" path="res://player/Meter_1m x 1m.png" id="7_1ekjx"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="8_uw8i0"]
+[ext_resource type="PackedScene" uid="uid://0xlsitpu17r1" path="res://addons/godot-xr-tools/functions/movement_footstep.tscn" id="11_ibv5b"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/surface_audio_type.gd" id="12_w7bg3"]
+[ext_resource type="AudioStream" uid="uid://dd153xk2x03tj" path="res://player/audio/step.wav" id="13_2co0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj0pq"]
 albedo_texture = ExtResource("7_1ekjx")
@@ -22,6 +25,13 @@ albedo_color = Color(0.870588, 1, 0.85098, 0.356863)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gv2cr"]
 material = SubResource("StandardMaterial3D_igqpc")
+
+[sub_resource type="Resource" id="Resource_iy5dq"]
+script = ExtResource("12_w7bg3")
+name = ""
+walk_sounds = Array[AudioStream]([ExtResource("13_2co0o")])
+walk_pitch_minimum = 0.8
+walk_pitch_maximum = 1.2
 
 [node name="XR_Player" type="XROrigin3D"]
 transform = Transform3D(-0.224951, 0, 0.97437, 0, 1, 0, -0.97437, 0, -0.224951, 0, 0, 0)
@@ -69,6 +79,9 @@ step_turn_angle = 45.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563, 0.711, -7.45058e-09)
 mesh = SubResource("BoxMesh_gv2cr")
 skeleton = NodePath("../LeftHand/Box Creator")
+
+[node name="MovementFootstep" parent="." instance=ExtResource("11_ibv5b")]
+default_surface_audio_type = SubResource("Resource_iy5dq")
 
 [connection signal="button_pressed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_button_pressed"]
 [connection signal="input_float_changed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_input_float_changed"]
