@@ -13,6 +13,7 @@ extends XRToolsPickable
 @onready var shoot_particle = $ShootFrom/ShootParticle
 @onready var muzzle_particle = $ShootFrom/MuzzleFlash
 
+@onready var controller := XRHelpers.get_xr_controller(self) #so we can vibrate the controller
 
 
 func _physics_process(_delta):
@@ -45,4 +46,5 @@ func _on_action_pressed(_pickable):
 		#muzzle_particle.emitting = true
 		fire_cooldown.start()
 		sound_effect_shoot.play()
+		controller.trigger_haptic_pulse("haptic",60,2,.3,0)
 	pass # Replace with function body.

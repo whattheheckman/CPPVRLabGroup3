@@ -116,14 +116,14 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 	mesh_count += 1
 	
 	if mesh_count >= max_meshes:
-		var oldestMesh = created_meshes.pop_back()
+		var oldestMesh = created_meshes.pop_front()
 		oldestMesh.queue_free()
 	
 	meshInstance.name = "BingerBox" + str(mesh_count)
 	meshInstance.set_global_position(location)
 	get_tree().root.add_child(meshInstance) # just add child would parent it to this Binger node
 	created_meshes.push_back(meshInstance)
-	Input.start_joy_vibration(0, 0,.5,.5)
+	controller.trigger_haptic_pulse("haptic",200,1,.3,0)
 	#count_label.text = str(mesh_count) + " / " +  str(max_meshes)
 
 	
