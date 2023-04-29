@@ -182,7 +182,7 @@ func _physics_process(delta):
 					state = State.AIM
 					aim_countdown = AIM_TIME
 					aim_preparing = 0
-					animation_tree["parameters/state/current"] = 0
+					animation_tree["parameters/state/transition_request"] = "idle"
 				else:
 					# Player not in sight, do nothing.
 					shoot_countdown = SHOOT_WAIT
@@ -251,18 +251,18 @@ func shoot_check():
 	test_shoot = true
 
 
-@warning_ignore("unused_parameter")
+
 func _clip_ray(length):
-	@warning_ignore("unused_variable")
 	var mesh_offset = ray_mesh.position.z
-#	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset)
+	## NEED TO ADD RAY MESH SHADER SO BELOW CAN WORK
+	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset) 
 
 
 func _on_area_body_entered(body):
-	if body is Player or body is XRToolsPlayerBody or body.name == "Target":
+	if (body is Player) or (body is XRToolsPlayerBody) or (body.name == "Target"):
 		player = body
 
 
 func _on_area_body_exited(body):
-	if body is Player or body is XRToolsPlayerBody:
+	if (body is Player) or (body is XRToolsPlayerBody):
 				player = null
