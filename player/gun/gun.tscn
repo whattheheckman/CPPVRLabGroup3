@@ -89,6 +89,39 @@ font = ExtResource("12_15jpt")
 font_size = 10
 depth = 0.003
 
+[sub_resource type="Animation" id="Animation_xv7a5"]
+resource_name = "shoot_recoil"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shoot:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0588515, 0.3),
+"transitions": PackedFloat32Array(1, 0.707106, 2.2974),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.387463, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ol37"]
+_data = {
+"shoot_recoil": SubResource("Animation_xv7a5")
+}
+
 [node name="GAT" instance=ExtResource("1_n76ui")]
 script = ExtResource("2_uopoi")
 

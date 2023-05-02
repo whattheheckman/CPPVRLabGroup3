@@ -68,7 +68,7 @@ func resume_approach():
 func hit():
 	if dead:
 		return
-	var hit_num : String = str(randi() % 3 + 1)
+	var hit_num = randi_range(1,3) 
 	animation_tree.set("parameters/hit" + hit_num + "/request", true)
 	hit_sound.play()
 	health -= 1

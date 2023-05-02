@@ -1,24 +1,27 @@
-[gd_scene format=3 uid="uid://dsp7pe2ihdvua"]
+[gd_scene load_steps=2 format=3 uid="uid://dsp7pe2ihdvua"]
+
+[ext_resource type="Texture2D" uid="uid://bbikvsrhhbd2j" path="res://player/heart pixel art 254x254.png" id="1_fruep"]
 
 [node name="Control" type="Control"]
 clip_contents = true
 layout_mode = 3
 anchor_right = 0.234
 anchor_bottom = 0.278
-offset_right = 0.47998
-offset_bottom = -0.160019
+offset_right = 2700.48
+offset_bottom = 1799.84
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -1066.0
+offset_top = 36.0
+offset_right = -304.0
+offset_bottom = 286.0
 grow_horizontal = 2
-
-[node name="TextureRect" type="TextureRect" parent="BoxContainer"]
-layout_mode = 2
+texture = ExtResource("1_fruep")
+stretch_mode = 1

@@ -9,7 +9,7 @@ extends Node3D
 @onready var delete_label = $"../../XRCamera3D/User Interface/Delete"
 @onready var count_label = $"../../XRCamera3D/User Interface/Count"
 
-@onready var controller := XRHelpers.get_xr_controller(self)
+@onready var controller : XRController3D = XRHelpers.get_xr_controller(self)
 
 var start_point = null
 var end_point = null
@@ -141,10 +141,10 @@ func _on_left_hand_button_pressed(name):
 
 @warning_ignore("shadowed_variable_base_class")
 func _on_left_hand_input_float_changed(name, value):
-	print("Name: ")
-	print(name)
-	print("value: ")
-	print(value)
+	# print("Name: ")
+	#print(name)
+	#print("value: ")
+	#print(value)
 	if name == "trigger" and value > 0.5:
 		visualize_mesh.visible = false
 		pass

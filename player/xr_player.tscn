@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpoofkfcjglc3"]
+[gd_scene load_steps=20 format=3 uid="uid://cpoofkfcjglc3"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_055vm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_eoyud"]
@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="5_p6lqc"]
 [ext_resource type="Script" path="res://player/box_create_simple.gd" id="6_puxel"]
 [ext_resource type="Texture2D" uid="uid://dnniu8invcwe5" path="res://player/Meter_1m x 1m.png" id="7_1ekjx"]
-[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="8_mft2s"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="8_uw8i0"]
-[ext_resource type="PackedScene" uid="uid://dsp7pe2ihdvua" path="res://player/player_watch.tscn" id="10_4no01"]
 [ext_resource type="PackedScene" uid="uid://0xlsitpu17r1" path="res://addons/godot-xr-tools/functions/movement_footstep.tscn" id="11_ibv5b"]
 [ext_resource type="Shader" path="res://player/holo_v2.gdshader" id="11_t2xmt"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/audio/surface_audio_type.gd" id="12_w7bg3"]
@@ -76,11 +74,6 @@ script = ExtResource("6_puxel")
 visualize_mesh = NodePath("../../VisualizeMesh")
 material = SubResource("StandardMaterial3D_yj0pq")
 stick_deadzone = 0
-
-[node name="Viewport2Din3D" parent="LeftHand" instance=ExtResource("8_mft2s")]
-transform = Transform3D(0.00666709, 0, -0.999978, 0, 1, 0, 0.999978, 0, 0.00666709, -0.108435, 0, 0.123048)
-screen_size = Vector2(0.06, 0.04)
-scene = ExtResource("10_4no01")
 
 [node name="RightHand" type="XRController3D" parent="."]
 unique_name_in_owner = true

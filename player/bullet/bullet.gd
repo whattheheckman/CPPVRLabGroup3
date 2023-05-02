@@ -21,6 +21,5 @@ func _physics_process(delta):
 		if col.get_collider() and col.get_collider().has_method("hit"):
 			col.get_collider().hit()
 		collision_shape.disabled = true
-		hit_sound.pitch_scale = randf_range(0.95, 1.05)
 		animation_player.play("explode")
 		hit = true
