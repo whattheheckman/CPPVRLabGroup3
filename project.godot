@@ -223,6 +223,7 @@ textures/vram_compression/import_etc2_astc=true
 scaling_3d/mode=1
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=4.0
+vrs/mode=2
 environment/defaults/default_environment="res://default_env.tres"
 lights_and_shadows/shadow_atlas/size=2048
 quality/shading/use_physical_light_attenuation=true
