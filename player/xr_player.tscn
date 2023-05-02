@@ -66,7 +66,7 @@ hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionTeleport" parent="LeftHand" instance=ExtResource("4_puevv")]
 
-[node name="Box Creator" type="RayCast3D" parent="LeftHand" node_paths=PackedStringArray("visualize_mesh")]
+[node name="BoxCreator" type="RayCast3D" parent="LeftHand" node_paths=PackedStringArray("visualize_mesh")]
 target_position = Vector3(0, 0, -100)
 script = ExtResource("6_puxel")
 visualize_mesh = NodePath("../../VisualizeMesh")
@@ -74,6 +74,7 @@ material = SubResource("StandardMaterial3D_yj0pq")
 stick_deadzone = 0
 
 [node name="RightHand" type="XRController3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.544, 0.711, 0)
 tracker = &"right_hand"
 
@@ -91,10 +92,10 @@ step_turn_angle = 45.0
 [node name="VisualizeMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563, 0.711, -7.45058e-09)
 mesh = SubResource("BoxMesh_gv2cr")
-skeleton = NodePath("../LeftHand/Box Creator")
+skeleton = NodePath("../LeftHand/BoxCreator")
 
 [node name="MovementFootstep" parent="." instance=ExtResource("11_ibv5b")]
 default_surface_audio_type = SubResource("Resource_iy5dq")
 
-[connection signal="button_pressed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_button_pressed"]
-[connection signal="input_float_changed" from="LeftHand" to="LeftHand/Box Creator" method="_on_left_hand_input_float_changed"]
+[connection signal="button_pressed" from="LeftHand" to="LeftHand/BoxCreator" method="_on_left_hand_button_pressed"]
+[connection signal="input_float_changed" from="LeftHand" to="LeftHand/BoxCreator" method="_on_left_hand_input_float_changed"]
