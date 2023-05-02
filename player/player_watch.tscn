@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dsp7pe2ihdvua"]
+
+[node name="Control" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchor_right = 0.234
+anchor_bottom = 0.278
+offset_right = 0.47998
+offset_bottom = -0.160019
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer"]
+layout_mode = 2
