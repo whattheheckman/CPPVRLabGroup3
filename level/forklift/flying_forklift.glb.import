@@ -28,5 +28,16 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"flying_forklift": {
+"use_external/enabled": true,
+"use_external/path": "res://level/forklift/flying_forklift.tres"
+},
+"mid_cargo_box": {
+"use_external/enabled": true,
+"use_external/path": "res://level/forklift/mid_cargo_box.tres"
+}
+}
+}
 gltf/embedded_image_handling=1
