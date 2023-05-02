@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-const BULLET_VELOCITY = 20
+@export var BULLET_VELOCITY : float = 20
 
 var time_alive = 5
 var hit = false
 
-@onready var animation_player = $AnimationPlayer
-@onready var collision_shape = $CollisionShape3D
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var collision_shape : CollisionShape3D = $CollisionShape3D
+@onready var hit_sound : AudioStreamPlayer3D = $ExplosionAudio
 
 func _physics_process(delta):
 	if hit:
@@ -20,5 +21,6 @@ func _physics_process(delta):
 		if col.get_collider() and col.get_collider().has_method("hit"):
 			col.get_collider().hit()
 		collision_shape.disabled = true
+		hit_sound.pitch_scale = randf_range(0.95, 1.05)
 		animation_player.play("explode")
 		hit = true
