@@ -106,7 +106,7 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 	meshInstance.add_child(staticBody)
 	
 	var boxShape=BoxShape3D.new()
-	boxShape.extents=Vector3(width/2,height/2,depth/2)
+	boxShape.extents=Vector3(width/4,height/4,depth/4) #for some reason the colission seemed to be 2x the size it needed to be
 
 	var collisionShape=CollisionShape3D.new()
 	collisionShape.shape=boxShape
@@ -119,7 +119,7 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 		var oldestMesh = created_meshes.pop_front()
 		oldestMesh.queue_free()
 	
-	meshInstance.name = "BingerBox" + str(mesh_count)
+	meshInstance.name = "PlayerPlatform" + str(mesh_count)
 	meshInstance.set_global_position(location)
 	get_tree().root.add_child(meshInstance) # just add child would parent it to this Binger node
 	created_meshes.push_back(meshInstance)
