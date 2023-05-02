@@ -130,6 +130,7 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 	pass
 
 
+@warning_ignore("shadowed_variable_base_class") #these functions are automatically created by signals, so i think i should ignore the warnings
 func _on_left_hand_button_pressed(name):
 	if name == create_button:
 		if current_range == max_range:
@@ -138,6 +139,7 @@ func _on_left_hand_button_pressed(name):
 			create_mesh(2.5,2.5,2.5, raycast.get_collision_point() - Vector3(0,0,current_range))
 
 
+@warning_ignore("shadowed_variable_base_class")
 func _on_left_hand_input_float_changed(name, value):
 	print("Name: ")
 	print(name)
