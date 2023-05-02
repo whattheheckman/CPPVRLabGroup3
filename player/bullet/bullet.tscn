@@ -453,10 +453,12 @@ BULLET_VELOCITY = 25.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 visible = false
+layers = 4
 cast_shadow = 0
 mesh = SubResource("1")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+layers = 4
 light_color = Color(0, 1, 0.952941, 1)
 light_energy = 0.0
 light_bake_mode = 0
@@ -480,8 +482,10 @@ max_db = 1.387
 [node name="Blast" type="Node3D" parent="."]
 
 [node name="BlastParticle" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = ExtResource("4")
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.6
 one_shot = true
@@ -489,8 +493,10 @@ process_material = SubResource("8")
 draw_pass_1 = ExtResource("2")
 
 [node name="LightBlast" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = ExtResource("5")
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.15
 one_shot = true
@@ -498,8 +504,10 @@ process_material = SubResource("13")
 draw_pass_1 = SubResource("14")
 
 [node name="BlastSparks" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = SubResource("16")
 cast_shadow = 0
+emitting = false
 amount = 10
 lifetime = 0.3
 one_shot = true
@@ -508,8 +516,10 @@ process_material = SubResource("21")
 draw_pass_1 = SubResource("22")
 
 [node name="Smoke" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = SubResource("23")
 cast_shadow = 0
+emitting = false
 amount = 5
 lifetime = 1.5
 one_shot = true
@@ -518,8 +528,10 @@ process_material = SubResource("30")
 draw_pass_1 = SubResource("31")
 
 [node name="LightParticle" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = SubResource("32")
 cast_shadow = 0
+emitting = false
 amount = 3
 lifetime = 0.8
 one_shot = true
@@ -528,8 +540,10 @@ process_material = SubResource("37")
 draw_pass_1 = SubResource("38")
 
 [node name="InnerBlastLight" type="GPUParticles3D" parent="Blast"]
+layers = 4
 material_override = ExtResource("9")
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.2
 one_shot = true
@@ -538,6 +552,7 @@ draw_pass_1 = SubResource("42")
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="."]
 visible = false
+layers = 4
 material_override = ExtResource("4")
 cast_shadow = 0
 mesh = ExtResource("2")
@@ -546,6 +561,7 @@ mesh = ExtResource("2")
 
 [node name="MainBody" type="GPUParticles3D" parent="BulletBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00988865, 0, 0)
+layers = 4
 cast_shadow = 0
 emitting = false
 amount = 100
@@ -554,6 +570,7 @@ process_material = SubResource("47")
 draw_pass_1 = SubResource("49")
 
 [node name="Trail" type="GPUParticles3D" parent="BulletBody"]
+layers = 4
 material_override = ExtResource("9")
 cast_shadow = 0
 emitting = false

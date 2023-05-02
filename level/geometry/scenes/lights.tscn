@@ -6,6 +6,414 @@
 
 [node name="LightsModel" parent="." instance=ExtResource("1")]
 
+[node name="LightShaft" parent="LightsModel/Lucescontrol" index="0"]
+layers = 8
+
+[node name="LightShaft001" parent="LightsModel/Lucescontrol" index="1"]
+layers = 8
+
+[node name="LightShaft002" parent="LightsModel/Lucescontrol" index="2"]
+layers = 8
+
+[node name="LightShaft003" parent="LightsModel/Lucescontrol" index="3"]
+layers = 8
+
+[node name="LightShaft004" parent="LightsModel/Lucescontrol" index="4"]
+layers = 8
+
+[node name="LightShaft005" parent="LightsModel/Lucescontrol" index="5"]
+layers = 8
+
+[node name="LightShaft006" parent="LightsModel/Lucescontrol" index="6"]
+layers = 8
+
+[node name="LightShaft007" parent="LightsModel/Lucescontrol" index="7"]
+layers = 8
+
+[node name="LightShaft008" parent="LightsModel/Lucescontrol" index="8"]
+layers = 8
+
+[node name="LightShaft009" parent="LightsModel/Lucescontrol" index="9"]
+layers = 8
+
+[node name="LightShaft010" parent="LightsModel/Lucescontrol" index="10"]
+layers = 8
+
+[node name="LightShaft011" parent="LightsModel/Lucescontrol" index="11"]
+layers = 8
+
+[node name="LightShaft012" parent="LightsModel/Lucescontrol" index="12"]
+layers = 8
+
+[node name="LightShaft013" parent="LightsModel/Lucescontrol" index="13"]
+layers = 8
+
+[node name="LightShaft014" parent="LightsModel/Lucescontrol" index="14"]
+layers = 8
+
+[node name="LightShaft015" parent="LightsModel/Lucescontrol" index="15"]
+layers = 8
+
+[node name="LightShaft016" parent="LightsModel/Lucescontrol" index="16"]
+layers = 8
+
+[node name="LightShaft017" parent="LightsModel/Lucescontrol" index="17"]
+layers = 8
+
+[node name="LightShaft018" parent="LightsModel/Lucescontrol" index="18"]
+layers = 8
+
+[node name="LightShaft019" parent="LightsModel/Lucescontrol" index="19"]
+layers = 8
+
+[node name="LightShaft020" parent="LightsModel/Lucescontrol" index="20"]
+layers = 8
+
+[node name="LightShaft021" parent="LightsModel/Lucescontrol" index="21"]
+layers = 8
+
+[node name="LightShaft022" parent="LightsModel/Lucescontrol" index="22"]
+layers = 8
+
+[node name="LightShaft023" parent="LightsModel/Lucescontrol" index="23"]
+layers = 8
+
+[node name="LightShaft024" parent="LightsModel/Lucescontrol" index="24"]
+layers = 8
+
+[node name="LightShaft025" parent="LightsModel/Lucescontrol" index="25"]
+layers = 8
+
+[node name="LightShaft026" parent="LightsModel/Lucescontrol" index="26"]
+layers = 8
+
+[node name="LightShaft027" parent="LightsModel/Lucescontrol" index="27"]
+layers = 8
+
+[node name="LightShaft028" parent="LightsModel/Lucescontrol" index="28"]
+layers = 8
+
+[node name="LightShaft029" parent="LightsModel/Lucescontrol" index="29"]
+layers = 8
+
+[node name="LightShaft030" parent="LightsModel/Lucescontrol" index="30"]
+layers = 8
+
+[node name="LightShaft031" parent="LightsModel/Lucescontrol" index="31"]
+layers = 8
+
+[node name="LightShaft032" parent="LightsModel/Lucescontrol" index="32"]
+layers = 8
+
+[node name="LightShaft033" parent="LightsModel/Lucescontrol" index="33"]
+layers = 8
+
+[node name="LightShaft034" parent="LightsModel/Lucescontrol" index="34"]
+layers = 8
+
+[node name="LightShaft035" parent="LightsModel/Lucescontrol" index="35"]
+layers = 8
+
+[node name="LightShaft036" parent="LightsModel/Lucescontrol" index="36"]
+layers = 8
+
+[node name="LightShaft037" parent="LightsModel/Lucescontrol" index="37"]
+layers = 8
+
+[node name="LightShaft038" parent="LightsModel/Lucescontrol" index="38"]
+layers = 8
+
+[node name="LightShaft039" parent="LightsModel/Lucescontrol" index="39"]
+layers = 8
+
+[node name="LightShaft040" parent="LightsModel/Lucescontrol" index="40"]
+layers = 8
+
+[node name="LightShaft041" parent="LightsModel/Lucescontrol" index="41"]
+layers = 8
+
+[node name="LightShaft042" parent="LightsModel/Lucescontrol" index="42"]
+layers = 8
+
+[node name="LightShaft043" parent="LightsModel/Lucescontrol" index="43"]
+layers = 8
+
+[node name="LightShaft044" parent="LightsModel/Lucescontrol" index="44"]
+layers = 8
+
+[node name="LightShaft045" parent="LightsModel/Lucescontrol" index="45"]
+layers = 8
+
+[node name="LightShaft046" parent="LightsModel/Lucescontrol" index="46"]
+layers = 8
+
+[node name="LightShaft047" parent="LightsModel/Lucescontrol" index="47"]
+layers = 8
+
+[node name="LightShaft048" parent="LightsModel/Lucescontrol" index="48"]
+layers = 8
+
+[node name="LightShaft049" parent="LightsModel/Lucescontrol" index="49"]
+layers = 8
+
+[node name="LightShaft050" parent="LightsModel/Lucescontrol" index="50"]
+layers = 8
+
+[node name="LightShaft051" parent="LightsModel/Lucescontrol" index="51"]
+layers = 8
+
+[node name="LightShaft052" parent="LightsModel/Lucescontrol" index="52"]
+layers = 8
+
+[node name="LightShaft053" parent="LightsModel/Lucescontrol" index="53"]
+layers = 8
+
+[node name="LightShaft054" parent="LightsModel/Lucescontrol" index="54"]
+layers = 8
+
+[node name="LightShaft055" parent="LightsModel/Lucescontrol" index="55"]
+layers = 8
+
+[node name="LightShaft056" parent="LightsModel/Lucescontrol" index="56"]
+layers = 8
+
+[node name="LightShaft057" parent="LightsModel/Lucescontrol" index="57"]
+layers = 8
+
+[node name="LightShaft058" parent="LightsModel/Lucescontrol" index="58"]
+layers = 8
+
+[node name="LightShaft059" parent="LightsModel/Lucescontrol" index="59"]
+layers = 8
+
+[node name="LightShaft060" parent="LightsModel/Lucescontrol" index="60"]
+layers = 8
+
+[node name="LightShaft061" parent="LightsModel/Lucescontrol" index="61"]
+layers = 8
+
+[node name="LightShaft062" parent="LightsModel/Lucescontrol" index="62"]
+layers = 8
+
+[node name="LightShaft063" parent="LightsModel/Lucescontrol" index="63"]
+layers = 8
+
+[node name="LightShaft064" parent="LightsModel/Lucescontrol" index="64"]
+layers = 8
+
+[node name="LightShaft065" parent="LightsModel/Lucescontrol" index="65"]
+layers = 8
+
+[node name="LightShaft066" parent="LightsModel/Lucescontrol" index="66"]
+layers = 8
+
+[node name="LightShaft067" parent="LightsModel/Lucescontrol" index="67"]
+layers = 8
+
+[node name="LightShaft068" parent="LightsModel/Lucescontrol" index="68"]
+layers = 8
+
+[node name="LightShaft069" parent="LightsModel/Lucescontrol" index="69"]
+layers = 8
+
+[node name="LightShaft070" parent="LightsModel/Lucescontrol" index="70"]
+layers = 8
+
+[node name="LightShaft071" parent="LightsModel/Lucescontrol" index="71"]
+layers = 8
+
+[node name="LightShaft072" parent="LightsModel/Lucescontrol" index="72"]
+layers = 8
+
+[node name="LightShaft073" parent="LightsModel/Lucescontrol" index="73"]
+layers = 8
+
+[node name="LightShaft074" parent="LightsModel/Lucescontrol" index="74"]
+layers = 8
+
+[node name="LightShaft075" parent="LightsModel/Lucescontrol" index="75"]
+layers = 8
+
+[node name="LightShaft076" parent="LightsModel/Lucescontrol" index="76"]
+layers = 8
+
+[node name="LightShaft077" parent="LightsModel/Lucescontrol" index="77"]
+layers = 8
+
+[node name="LightShaft078" parent="LightsModel/Lucescontrol" index="78"]
+layers = 8
+
+[node name="LightShaft079" parent="LightsModel/Lucescontrol" index="79"]
+layers = 8
+
+[node name="LightShaft080" parent="LightsModel/Lucescontrol" index="80"]
+layers = 8
+
+[node name="LightShaft081" parent="LightsModel/Lucescontrol" index="81"]
+layers = 8
+
+[node name="LightShaft082" parent="LightsModel/Lucescontrol" index="82"]
+layers = 8
+
+[node name="LightShaft083" parent="LightsModel/Lucescontrol" index="83"]
+layers = 8
+
+[node name="LightShaft084" parent="LightsModel/Lucescontrol" index="84"]
+layers = 8
+
+[node name="LightShaft085" parent="LightsModel/Lucescontrol" index="85"]
+layers = 8
+
+[node name="LightShaft086" parent="LightsModel/Lucescontrol" index="86"]
+layers = 8
+
+[node name="LightShaft087" parent="LightsModel/Lucescontrol" index="87"]
+layers = 8
+
+[node name="LightShaft088" parent="LightsModel/Lucescontrol" index="88"]
+layers = 8
+
+[node name="LightShaft089" parent="LightsModel/Lucescontrol" index="89"]
+layers = 8
+
+[node name="LightShaft090" parent="LightsModel/Lucescontrol" index="90"]
+layers = 8
+
+[node name="LightShaft091" parent="LightsModel/Lucescontrol" index="91"]
+layers = 8
+
+[node name="LightShaft092" parent="LightsModel/Lucescontrol" index="92"]
+layers = 8
+
+[node name="LightShaft093" parent="LightsModel/Lucescontrol" index="93"]
+layers = 8
+
+[node name="LightShaft094" parent="LightsModel/Lucescontrol" index="94"]
+layers = 8
+
+[node name="LightShaft095" parent="LightsModel/Lucescontrol" index="95"]
+layers = 8
+
+[node name="LightShaft096" parent="LightsModel/Lucescontrol" index="96"]
+layers = 8
+
+[node name="LightShaft097" parent="LightsModel/Lucescontrol" index="97"]
+layers = 8
+
+[node name="LightShaft098" parent="LightsModel/Lucescontrol" index="98"]
+layers = 8
+
+[node name="LightShaft099" parent="LightsModel/Lucescontrol" index="99"]
+layers = 8
+
+[node name="LightShaft100" parent="LightsModel/Lucescontrol" index="100"]
+layers = 8
+
+[node name="LightShaft101" parent="LightsModel/Lucescontrol" index="101"]
+layers = 8
+
+[node name="LightShaft102" parent="LightsModel/Lucescontrol" index="102"]
+layers = 8
+
+[node name="LightShaft103" parent="LightsModel/Lucescontrol" index="103"]
+layers = 8
+
+[node name="LightShaft104" parent="LightsModel/Lucescontrol" index="104"]
+layers = 8
+
+[node name="LightShaft105" parent="LightsModel/Lucescontrol" index="105"]
+layers = 8
+
+[node name="LightShaft106" parent="LightsModel/Lucescontrol" index="106"]
+layers = 8
+
+[node name="LightShaft107" parent="LightsModel/Lucescontrol" index="107"]
+layers = 8
+
+[node name="LightShaft108" parent="LightsModel/Lucescontrol" index="108"]
+layers = 8
+
+[node name="LightShaft109" parent="LightsModel/Lucescontrol" index="109"]
+layers = 8
+
+[node name="LightShaft110" parent="LightsModel/Lucescontrol" index="110"]
+layers = 8
+
+[node name="LightShaft111" parent="LightsModel/Lucescontrol" index="111"]
+layers = 8
+
+[node name="LightShaft112" parent="LightsModel/Lucescontrol" index="112"]
+layers = 8
+
+[node name="LightShaft113" parent="LightsModel/Lucescontrol" index="113"]
+layers = 8
+
+[node name="LightShaft114" parent="LightsModel/Lucescontrol" index="114"]
+layers = 8
+
+[node name="LightShaft115" parent="LightsModel/Lucescontrol" index="115"]
+layers = 8
+
+[node name="LightShaft116" parent="LightsModel/Lucescontrol" index="116"]
+layers = 8
+
+[node name="LightShaft117" parent="LightsModel/Lucescontrol" index="117"]
+layers = 8
+
+[node name="LightShaft118" parent="LightsModel/Lucescontrol" index="118"]
+layers = 8
+
+[node name="LightShaft119" parent="LightsModel/Lucescontrol" index="119"]
+layers = 8
+
+[node name="LightShaft120" parent="LightsModel/Lucescontrol" index="120"]
+layers = 8
+
+[node name="LightShaft121" parent="LightsModel/Lucescontrol" index="121"]
+layers = 8
+
+[node name="LightShaft122" parent="LightsModel/Lucescontrol" index="122"]
+layers = 8
+
+[node name="LightShaft123" parent="LightsModel/Lucescontrol" index="123"]
+layers = 8
+
+[node name="LightShaft124" parent="LightsModel/Lucescontrol" index="124"]
+layers = 8
+
+[node name="LightShaft125" parent="LightsModel/Lucescontrol" index="125"]
+layers = 8
+
+[node name="LightShaft126" parent="LightsModel/Lucescontrol" index="126"]
+layers = 8
+
+[node name="LightShaft127" parent="LightsModel/Lucescontrol" index="127"]
+layers = 8
+
+[node name="LightShaft128" parent="LightsModel/Lucescontrol" index="128"]
+layers = 8
+
+[node name="LightShaft129" parent="LightsModel/Lucescontrol" index="129"]
+layers = 8
+
+[node name="LightShaft130" parent="LightsModel/Lucescontrol" index="130"]
+layers = 8
+
+[node name="LightShaft131" parent="LightsModel/Lucescontrol" index="131"]
+layers = 8
+
+[node name="LightShaft132" parent="LightsModel/Lucescontrol" index="132"]
+layers = 8
+
+[node name="LightShaft133" parent="LightsModel/Lucescontrol" index="133"]
+layers = 8
+
+[node name="LightShaft134" parent="LightsModel/Lucescontrol" index="134"]
+layers = 8
+
+[node name="LightShaft135" parent="LightsModel/Lucescontrol" index="135"]
+layers = 8
+
 [node name="Point001_Orientation" parent="LightsModel/Point001" index="0"]
 transform = Transform3D(1, -5.96046e-08, 0, 0, 0, 1, -2.98023e-08, -1, 0, 0, 0, 0)
 light_color = Color(1, 0.647059, 0.0941176, 1)

@@ -33,15 +33,21 @@ script = ExtResource("3")
 
 [node name="RedFlyingForklift" parent="FlyingForkliftModel" index="0"]
 visible = false
+layers = 8
 
 [node name="YellowFlyingForklift" parent="FlyingForkliftModel" index="1"]
 visible = false
+layers = 8
+
+[node name="BlueFlyingForklift" parent="FlyingForkliftModel" index="2"]
+layers = 8
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("1")
 
 [node name="Particles1" type="CPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.471727, -0.377269, -3.29514)
+layers = 8
 amount = 16
 lifetime = 0.5
 fixed_fps = 60
@@ -56,6 +62,7 @@ color_ramp = SubResource("4")
 
 [node name="Particles2" type="CPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.501, -0.377, -3.295)
+layers = 8
 amount = 16
 lifetime = 0.5
 fixed_fps = 60
@@ -70,6 +77,7 @@ color_ramp = SubResource("4")
 
 [node name="Particles3" type="CPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1.427, -0.514, -2.889)
+layers = 8
 amount = 16
 lifetime = 0.5
 fixed_fps = 60
@@ -84,6 +92,7 @@ color_ramp = SubResource("4")
 
 [node name="Particles4" type="CPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1.333, -0.514, -2.889)
+layers = 8
 amount = 16
 lifetime = 0.5
 fixed_fps = 60
