@@ -24,16 +24,16 @@ metallic_specular = 0.43
 render_priority = 0
 shader = ExtResource("11_t2xmt")
 shader_parameter/line_color = Color(0, 1, 1, 1)
-shader_parameter/line_width = 0.005
-shader_parameter/line_blur = 0.2
+shader_parameter/line_width = 0.001
+shader_parameter/line_blur = 0.04
 shader_parameter/line_speed = 0.017
 shader_parameter/straight_lines = true
-shader_parameter/interrupt_width = 0.366
-shader_parameter/interrupt_blur = 0.25
-shader_parameter/interrupt_speed = 0.0710001
-shader_parameter/glow_color = Color(0.5, 0.75, 1, 1)
-shader_parameter/glow_itensity = 4.5
-shader_parameter/glow_amount = 4.5
+shader_parameter/interrupt_width = 0.079
+shader_parameter/interrupt_blur = 0.137
+shader_parameter/interrupt_speed = 0.039
+shader_parameter/glow_color = Color(0.501961, 0.74902, 1, 1)
+shader_parameter/glow_itensity = 4.179
+shader_parameter/glow_amount = 0.65
 shader_parameter/flickering = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_gv2cr"]
@@ -81,8 +81,8 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("5_p6lqc")]
-ranged_distance = 15.0
-ranged_angle = 6.0
+ranged_distance = 30.0
+ranged_angle = 12.087
 
 [node name="MovementTurn" parent="RightHand" instance=ExtResource("8_uw8i0")]
 turn_mode = 1
