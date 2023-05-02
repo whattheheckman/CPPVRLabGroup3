@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Godot Third-Person Shooter Demo"
-config/description="Godot Third Person Shooter with high quality assets and lighting"
+config/name="CPP VR Lab Group 3 Demo"
+config/description="CPP VR Lab Group 3 Demo based on the Godot Third Person Shooter demo with high quality assets and lighting"
 run/main_scene="res://level/level.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/fullsize=false
