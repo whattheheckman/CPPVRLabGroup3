@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://umalste54hnf"
+path="res://.godot/imported/Two Moons - Bobby Richards.mp3-e7e2a04b0bb2380ad5489f3a62a12280.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/Two Moons - Bobby Richards.mp3"
+dest_files=["res://.godot/imported/Two Moons - Bobby Richards.mp3-e7e2a04b0bb2380ad5489f3a62a12280.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
