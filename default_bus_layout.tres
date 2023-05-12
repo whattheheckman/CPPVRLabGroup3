@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://nnwtmh11j53l"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://nnwtmh11j53l"]
 
 [sub_resource type="AudioEffectReverb" id="1"]
 resource_name = "Reverb"
@@ -11,6 +11,28 @@ resource_name = "Reverb"
 room_size = 0.74
 hipass = 0.14
 wet = 0.56
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_4lnoo"]
+resource_name = "EQ"
+band_db/32_hz = -60.0
+band_db/100_hz = -15.5
+band_db/320_hz = -40.8
+band_db/1000_hz = -5.2
+band_db/3200_hz = -13.7
+band_db/10000_hz = -60.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_miryq"]
+resource_name = "Compressor"
+threshold = -15.6
+ratio = 15.7
+gain = 18.4
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_ghsuj"]
+resource_name = "Distortion"
+mode = 1
+pre_gain = -0.12
+drive = 0.51
+post_gain = 3.62
 
 [resource]
 bus/0/volume_db = -10.0
@@ -34,8 +56,14 @@ bus/3/name = &"Radio"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
+bus/3/volume_db = -0.923751
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectEQ_4lnoo")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectCompressor_miryq")
+bus/3/effect/1/enabled = true
+bus/3/effect/2/effect = SubResource("AudioEffectDistortion_ghsuj")
+bus/3/effect/2/enabled = true
 bus/4/name = &"Music"
 bus/4/solo = false
 bus/4/mute = false

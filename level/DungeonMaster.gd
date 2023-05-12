@@ -7,9 +7,17 @@ var levers = 3
 
 
 
-@onready var announcement = $Announcer
-@onready var angrymusic = 
-@onready var happymusic = 
+@onready var leversSound2 = $"Announcer/2 Levers"
+@onready var leversSound1 = $"Announcer/1 Levers"
+@onready var core_destruct_sound = $"Announcer/Core Imminent"
+
+@onready var angrymusic = $"Music/Angry Music"
+@onready var happymusic = $"Music/Happy Music"
+
+@onready var radio_gain_access = $Radio/GainAccessDialouge
+@onready var radio_deactivate = $Radio/DeactivateDialouge
+
+@onready var countdown = $Countdown
 
 
 # Called when the node enters the scene tree for the first time.
