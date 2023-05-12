@@ -6,7 +6,8 @@ extends Node
 var total_levers = 3
 var current_levers = 3
 
-
+@export var robot : PackedScene
+@export var robotlocations : PackedVector3Array
 
 @onready var leversSound = $Announcer/Deactivated
 @onready var core_destruct_sound = $Announcer/Sequence
