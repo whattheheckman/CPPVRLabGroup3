@@ -16,7 +16,7 @@ var current_levers = 3
 @onready var happymusic = $"Music/Happy Music"
 
 @onready var radio_gain_access = $Radio/GainAccessDialouge
-@onready var radio_deactivate = $Radio/DeactivateDialouge
+
 
 @onready var countdown = $Countdown
 
@@ -38,6 +38,8 @@ func doomsday():
 	await  get_tree().create_timer(2.0).timeout
 	countdown.start()
 	core_destruct_sound.play()
+	
+	
 	
 	
 	
