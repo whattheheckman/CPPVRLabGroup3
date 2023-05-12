@@ -1,5 +1,5 @@
 extends Node3D
-var dungeon_master
+@export_node_path("Node") var dungeon_master
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +12,6 @@ func _process(delta):
 
 
 func _on_interactable_lever_hinge_moved(angle):
-	if (angle > 45):
-		dungeon_master.levers -= 1;
-	pass # Replace with function body.
+	if angle > abs(35):
+		dungeon_master.pulllever()
+
