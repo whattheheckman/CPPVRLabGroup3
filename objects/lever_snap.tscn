@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dxgv8axd355m7"]
+[gd_scene load_steps=17 format=3 uid="uid://dxgv8axd355m7"]
 
 [ext_resource type="Material" path="res://assets/wahooney.itch.io/blue_grid.tres" id="1"]
+[ext_resource type="Script" path="res://objects/lever_script.gd" id="1_wqocb"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
 [ext_resource type="Material" path="res://assets/wahooney.itch.io/brown_grid_triplanar.tres" id="3"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
@@ -38,6 +39,7 @@ margin = 0.12
 radius = 0.06
 
 [node name="LeverSnap" type="Node3D"]
+script = ExtResource("1_wqocb")
 
 [node name="Frame" type="StaticBody3D" parent="."]
 
@@ -52,10 +54,8 @@ surface_material_override/0 = ExtResource("1")
 transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="InteractableLever" type="Node3D" parent="LeverOrigin"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 script = ExtResource("2")
 hinge_steps = 1.0
-hinge_position = -45.0
 default_position = -45.0
 
 [node name="HingeBody" type="StaticBody3D" parent="LeverOrigin/InteractableLever"]
@@ -95,3 +95,5 @@ right_pose = ExtResource("7_r4cxy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle/HandPoseArea"]
 shape = SubResource("SphereShape3D_2c34s")
+
+[connection signal="hinge_moved" from="LeverOrigin/InteractableLever" to="." method="_on_interactable_lever_hinge_moved"]
