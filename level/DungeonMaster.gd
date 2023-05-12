@@ -8,6 +8,7 @@ var current_levers := levers_needed
 
 @export var robot : PackedScene
 @export var robotlocations : PackedVector3Array
+@export var robotrotation : PackedInt32Array
 
 @onready var leversSound = $Announcer/Deactivated
 @onready var core_destruct_sound = $Announcer/Sequence
@@ -41,10 +42,9 @@ func doomsday():
     
     for location in robotlocations:
         var new_robot = robot
-        new_robot.
+        new_robot.health = 10
         new_robot.set_global_position(location)
         get_tree().root.add_child(new_robot)
-    
     
     
     
