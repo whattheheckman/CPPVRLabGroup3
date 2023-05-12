@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpoofkfcjglc3"]
+[gd_scene load_steps=21 format=3 uid="uid://cpoofkfcjglc3"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_055vm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_eoyud"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://player/box_create_simple.gd" id="6_puxel"]
 [ext_resource type="Texture2D" uid="uid://dnniu8invcwe5" path="res://player/Meter_1m x 1m.png" id="7_1ekjx"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="8_uw8i0"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="9_13ygf"]
 [ext_resource type="PackedScene" uid="uid://0xlsitpu17r1" path="res://addons/godot-xr-tools/functions/movement_footstep.tscn" id="11_ibv5b"]
 [ext_resource type="Shader" path="res://player/holo_v2.gdshader" id="11_t2xmt"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/audio/surface_audio_type.gd" id="12_w7bg3"]
@@ -75,6 +76,8 @@ visualize_mesh = NodePath("../../VisualizeMesh")
 material = SubResource("StandardMaterial3D_yj0pq")
 stick_deadzone = 0
 
+[node name="MovementDirect" parent="LeftHand" instance=ExtResource("9_13ygf")]
+
 [node name="RightHand" type="XRController3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.544, 0.711, 0)
@@ -84,8 +87,9 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("5_p6lqc")]
-ranged_distance = 30.0
-ranged_angle = 12.087
+grab_distance = 0.5
+ranged_distance = 40.0
+ranged_angle = 25.667
 
 [node name="MovementTurn" parent="RightHand" instance=ExtResource("8_uw8i0")]
 turn_mode = 1

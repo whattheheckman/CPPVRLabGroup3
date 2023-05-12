@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://nnwtmh11j53l"]
+[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://nnwtmh11j53l"]
 
 [sub_resource type="AudioEffectReverb" id="1"]
 resource_name = "Reverb"
@@ -49,6 +49,10 @@ wet = 0.65
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_4hj62"]
 resource_name = "Delay"
 
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_dfpuy"]
+resource_name = "Amplify"
+volume_db = 11.08
+
 [resource]
 bus/0/volume_db = -10.0
 bus/1/name = &"Outside"
@@ -71,7 +75,7 @@ bus/3/name = &"Radio"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 3.2425
+bus/3/volume_db = -6.24739
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectEQ_4lnoo")
 bus/3/effect/0/enabled = true
@@ -83,7 +87,7 @@ bus/4/name = &"Music"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -9.2092
+bus/4/volume_db = -26.6051
 bus/4/send = &"Master"
 bus/4/effect/0/effect = SubResource("AudioEffectCompressor_ce80m")
 bus/4/effect/0/enabled = true
@@ -91,12 +95,14 @@ bus/5/name = &"Announcer"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = 2.84698
+bus/5/volume_db = 3.44248
 bus/5/send = &"Master"
 bus/5/effect/0/effect = SubResource("AudioEffectReverb_6bavb")
 bus/5/effect/0/enabled = true
 bus/5/effect/1/effect = SubResource("AudioEffectDelay_4hj62")
 bus/5/effect/1/enabled = true
+bus/5/effect/2/effect = SubResource("AudioEffectAmplify_dfpuy")
+bus/5/effect/2/enabled = true
 bus/6/name = &"SFX"
 bus/6/solo = false
 bus/6/mute = false

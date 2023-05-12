@@ -1,5 +1,5 @@
 extends Node3D
-@export_node_path("Node") var dungeon_master
+@export var dungeon_master : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
