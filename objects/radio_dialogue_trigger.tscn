@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dibwsy4mu3nx7"]
+
+[ext_resource type="Script" path="res://level/ReactorDialogueTrigger.gd" id="1_pbmq7"]
+[ext_resource type="AudioStream" uid="uid://dirngrlg6sh0o" path="res://assets/sound/gain access.wav" id="2_tni02"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ix280"]
+size = Vector3(28.1105, 10.1639, 21.1276)
+
+[node name="RadioDialogueTrigger" type="Area3D" node_paths=PackedStringArray("dialogue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6, 4.8, 79.2)
+script = ExtResource("1_pbmq7")
+dialogue = NodePath("GainAccessDialouge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.955479, 0, -0.295058, 0, 1, 0, 0.295058, 0, 0.955479, 0, 0, 0)
+shape = SubResource("BoxShape3D_ix280")
+
+[node name="GainAccessDialouge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_tni02")
+pitch_scale = 1.06
+bus = &"Radio"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
