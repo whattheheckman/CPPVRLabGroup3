@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dftkm57d000ua"]
+[gd_scene load_steps=38 format=3 uid="uid://dftkm57d000ua"]
 
 [ext_resource type="PackedScene" uid="uid://c84nkswfi6k0u" path="res://level/geometry/scenes/collision/radial_colliders.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c8l0kii8eej1q" path="res://level/geometry/scenes/collision/stair_pillar.tscn" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bm8rt4mmptjo6" path="res://level/textures/structure/Core/core_laval_spotches.png" id="11"]
 [ext_resource type="ArrayMesh" path="res://level/textures/structure/Core/CoreOutLight_Circle001.mesh" id="12"]
 [ext_resource type="Texture2D" uid="uid://bi7lqv7n6lh1i" path="res://level/textures/structure/Core/core_fire_noise.png" id="13"]
+[ext_resource type="PackedScene" uid="uid://dj3hfykma5sid" path="res://objects/slider_snap.tscn" id="14_2d3nu"]
 
 [sub_resource type="Shader" id="11"]
 code = "shader_type spatial;
@@ -300,5 +301,10 @@ transform = Transform3D(-0.956305, 0, 0.292371, 0, 1, 0, -0.292371, 0, -0.956305
 
 [node name="StairPillar3" parent="." instance=ExtResource("2")]
 transform = Transform3D(0.224951, 0, -0.97437, 0, 1, 0, 0.97437, 0, 0.224951, 5.62378, 2, 24.3593)
+
+[node name="Switches" type="Node3D" parent="."]
+
+[node name="SliderSnap" parent="Switches" instance=ExtResource("14_2d3nu")]
+transform = Transform3D(0.718915, 0, 0.695098, 0, 1, 0, -0.695098, 0, 0.718915, 22.4738, 8.92696, -18.4827)
 
 [editable path="CoreModel"]
