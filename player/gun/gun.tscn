@@ -111,10 +111,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0588515, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 0.707106, 2.2974),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.387463, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -3.14159, 0), Vector3(0.387463, -3.14159, 0), Vector3(0, -3.14159, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ol37"]
@@ -124,13 +124,13 @@ _data = {
 
 [node name="GAT" instance=ExtResource("1_n76ui")]
 script = ExtResource("2_uopoi")
+hold_method = 1
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0420118, -0.0995015)
 shape = SubResource("BoxShape3D_wlosy")
 
 [node name="blasterA" parent="." index="1" instance=ExtResource("8_3tv84")]
-transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0.0420118, -0.0995015)
+transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0, 0)
 
 [node name="blasterA2" parent="blasterA" index="0"]
 layers = 8
@@ -138,7 +138,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_kf00f")
 surface_material_override/2 = SubResource("StandardMaterial3D_0ln4s")
 
 [node name="ShootFrom" type="Marker3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085149, -0.285634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49012e-08, 0.0484713, -0.174955)
 gizmo_extents = 0.11
 
 [node name="ShootParticle" type="GPUParticles3D" parent="ShootFrom" index="0"]
@@ -167,15 +167,15 @@ process_material = SubResource("ParticleProcessMaterial_t4jkl")
 draw_pass_1 = ExtResource("4_ppsd7")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("9_56rry")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0125627, 0.0420118, -0.0995015)
+transform = Transform3D(1, 0, 0, 0, 0.997801, -0.0662739, 0, 0.0662739, 0.997801, -0.008, -0.005, -0.028)
 visible = true
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("10_nvqj7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00342127, 0.0129757, -0.133169)
+transform = Transform3D(1, 0, 0, 0, 0.997831, -0.0658211, 0, 0.0658211, 0.997831, -0.00342127, -0.00526484, -0.0280473)
 visible = true
 
 [node name="Crosshair" type="Sprite3D" parent="." index="5"]
-transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.134752, -0.211081)
+transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0989939, -0.10273)
 modulate = Color(0, 0.803922, 1, 0.878431)
 texture = ExtResource("12_pal5l")
 
@@ -189,7 +189,7 @@ autostart = true
 stream = SubResource("AudioStreamRandomizer_67ru3")
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0898673, -0.282292)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0499368, 0)
 target_position = Vector3(0, 0, -100)
 collision_mask = 3
 
@@ -197,7 +197,6 @@ collision_mask = 3
 mesh = SubResource("SphereMesh_lgcd6")
 
 [node name="XRToolsHighlightVisible" type="Node3D" parent="." index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0420118, -0.0995015)
 script = ExtResource("10_qxvac")
 
 [node name="blasterA" parent="XRToolsHighlightVisible" index="0" instance=ExtResource("8_3tv84")]
@@ -211,12 +210,12 @@ surface_material_override/2 = ExtResource("11_sdsgf")
 surface_material_override/3 = ExtResource("11_sdsgf")
 
 [node name="GunName" type="MeshInstance3D" parent="." index="10"]
-transform = Transform3D(-6.55671e-09, 0.106066, -0.106066, 0, 0.106066, 0.106066, 0.15, 4.63629e-09, -4.63629e-09, -0.0181605, 0.103012, -0.0675239)
+transform = Transform3D(-6.55671e-09, 0.106066, -0.106066, 0, 0.106066, 0.106066, 0.15, 4.63629e-09, -4.63629e-09, -0.0181605, 0, 0)
 layers = 8
 mesh = SubResource("TextMesh_q2juc")
 
 [node name="GunName2" type="MeshInstance3D" parent="." index="11"]
-transform = Transform3D(-6.55671e-09, -0.106066, 0.106066, 0, 0.106066, 0.106066, -0.15, 4.63629e-09, -4.63629e-09, 0.018, 0.103012, -0.0675015)
+transform = Transform3D(-6.55671e-09, -0.106066, 0.106066, 0, 0.106066, 0.106066, -0.15, 4.63629e-09, -4.63629e-09, 0.018, 0, 0)
 layers = 8
 mesh = SubResource("TextMesh_q2juc")
 

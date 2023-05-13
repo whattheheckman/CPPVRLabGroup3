@@ -25,7 +25,7 @@ size = Vector3(7, 2, 1.5)
 size = Vector3(25, 4, 3)
 
 [sub_resource type="BoxShape3D" id="8"]
-size = Vector3(5.25, 8, 1.6)
+size = Vector3(3.35521, 8, 1.6)
 
 [sub_resource type="BoxShape3D" id="9"]
 size = Vector3(16, 6.4, 20)
