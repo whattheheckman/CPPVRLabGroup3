@@ -19,6 +19,7 @@ var end_point = null
 
 var stick_y_pos : float = 0
 
+
 var mesh_count = 0
 var created_meshes = []
 
@@ -76,8 +77,9 @@ func _physics_process(delta):
         clamp(current_range, .5 , max_range)
         pass
     #box visualization with left hand
-    if raycast.is_colliding() and controller.get_float("trigger") < 0.5:
-        visualize_mesh.global_transform.origin = raycast.get_collision_point()
+    
+    if raycast.is_colliding() and controller.get_float("trigger") < 0.5 and create_mode == true:
+        visualize_mesh.global_transform.origin = raycast.get_collision_point() - Vector3(0,0,current_range) # IF BOX STOPS WORKING REMOVE THE CURRENT RANGE VECOTR FORM THIS STATEMENT
         visualize_mesh.visible = true
     else:
         visualize_mesh.visible = false
@@ -132,16 +134,18 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 
 @warning_ignore("shadowed_variable_base_class") #these functions are automatically created by signals, so i think i should ignore the warnings
 func _on_left_hand_button_pressed(name):
-    if name == create_button:
+    if name == delete_button:
+        create_mode = !create_mode
+    if name == create_button and create_mode == true:
         if current_range == max_range:
             create_mesh(2.5,2.5,2.5, raycast.get_collision_point())
         elif current_range < max_range:
-            create_mesh(2.5,2.5,2.5, raycast.get_collision_point() - Vector3(0,0,current_range))
+            create_mesh(2.5,2.5,2.5, raycast.get_collision_point() -  Vector3(0,0,current_range))
 
 
 @warning_ignore("shadowed_variable_base_class")
 func _on_left_hand_input_float_changed(name, value):
-    # print("Name: ")
+    #print("Name: ")
     #print(name)
     #print("value: ")
     #print(value)
