@@ -79,7 +79,7 @@ func _physics_process(delta):
     #box visualization with left hand
     
     if raycast.is_colliding() and controller.get_float("trigger") < 0.5 and create_mode == true:
-        visualize_mesh.global_transform.origin = raycast.get_collision_point() - Vector3(0,0,current_range) # IF BOX STOPS WORKING REMOVE THE CURRENT RANGE VECOTR FORM THIS STATEMENT
+        visualize_mesh.global_transform.origin = raycast.get_collision_point() # IF BOX STOPS WORKING REMOVE THE CURRENT RANGE VECOTR FORM THIS STATEMENT EDIT 5/13 11:14PM IT STOPPED WORKING LMAOO
         visualize_mesh.visible = true
     else:
         visualize_mesh.visible = false
@@ -134,8 +134,12 @@ func create_mesh(height : float,width : float, depth : float, location : Vector3
 
 @warning_ignore("shadowed_variable_base_class") #these functions are automatically created by signals, so i think i should ignore the warnings
 func _on_left_hand_button_pressed(name):
+    #print_debug("left_hand_button_pressed: " + str(name))
+    #print_debug("create mode status: " + str(create_mode))
     if name == delete_button:
         create_mode = !create_mode
+        print_debug("CREATE MODE STATE CHANGED, MESH SHOULD BE VISIBLE")
+        print_debug("MESH VISIBLE: " +str(visualize_mesh.visible) )
     if name == create_button and create_mode == true:
         if current_range == max_range:
             create_mesh(2.5,2.5,2.5, raycast.get_collision_point())
