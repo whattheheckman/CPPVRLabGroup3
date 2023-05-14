@@ -271,7 +271,8 @@ func _physics_process(delta):
                 color = cant_teleport_color
 
             # check our axis to see if we need to rotate
-            teleport_rotation += (delta * controller.get_vector2(rotation_action).x * -4.0)
+            # INFO: CUSTOMIZED THE TELEPORT FUNCTION HERE TO GET ROTATION DIRECTLY FROM THE JOYSTICK INSTEAD OF ROTATING THE JOYSTICK
+            teleport_rotation = atan2(controller.get_vector2(rotation_action).normalized().y, controller.get_vector2(rotation_action).normalized().x)
 
             # update target and colour
             var target_basis = Basis()

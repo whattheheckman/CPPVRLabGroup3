@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpoofkfcjglc3"]
+[gd_scene load_steps=23 format=3 uid="uid://cpoofkfcjglc3"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_055vm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_eoyud"]
 [ext_resource type="Script" path="res://player/xr_player_life.gd" id="1_hbbcx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_8cs7w"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="3_fgave"]
 [ext_resource type="Material" uid="uid://dy4ya7w0k18ds" path="res://addons/godot-xr-tools/hands/materials/glove_caucasian_dark_camo.material" id="4_8x45i"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="4_puevv"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_06eag"]
@@ -16,6 +17,18 @@
 [ext_resource type="Shader" path="res://player/holo_v2.gdshader" id="11_t2xmt"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/audio/surface_audio_type.gd" id="12_w7bg3"]
 [ext_resource type="AudioStream" uid="uid://dd153xk2x03tj" path="res://player/audio/step.wav" id="13_2co0o"]
+
+[sub_resource type="Resource" id="Resource_cwj0b"]
+script = ExtResource("3_fgave")
+flags = 0
+move_drag = 5.0
+move_traction = 30.0
+stop_on_slope = true
+move_max_slope = 45.0
+jump_max_slope = 45.0
+jump_velocity = 3.0
+bounciness = 0.0
+bounce_threshold = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj0pq"]
 albedo_texture = ExtResource("7_1ekjx")
@@ -53,6 +66,7 @@ transform = Transform3D(-0.224951, 0, 0.97437, 0, 1, 0, -0.97437, 0, -0.224951, 
 script = ExtResource("1_hbbcx")
 
 [node name="PlayerBody" parent="." instance=ExtResource("1_eoyud")]
+physics = SubResource("Resource_cwj0b")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="." groups=["xrcamera"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
@@ -68,6 +82,8 @@ tracker = &"left_hand"
 hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionTeleport" parent="LeftHand" instance=ExtResource("4_puevv")]
+strength = 10.0
+max_slope = 45.0
 
 [node name="BoxCreator" type="RayCast3D" parent="LeftHand" node_paths=PackedStringArray("visualize_mesh")]
 target_position = Vector3(0, 0, -100)
@@ -77,6 +93,7 @@ material = SubResource("StandardMaterial3D_yj0pq")
 stick_deadzone = 0
 
 [node name="MovementDirect" parent="LeftHand" instance=ExtResource("9_13ygf")]
+enabled = false
 
 [node name="RightHand" type="XRController3D" parent="."]
 unique_name_in_owner = true
