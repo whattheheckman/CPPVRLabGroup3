@@ -1,6 +1,6 @@
 @tool
 @icon("res://addons/godot-xr-tools/editor/icons/function.svg")
-class_name XRToolsFunctionTeleport
+
 extends CharacterBody3D
 
 # should really change this to Node3D once #17401 is resolved

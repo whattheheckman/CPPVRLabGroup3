@@ -168,11 +168,9 @@ draw_pass_1 = ExtResource("4_ppsd7")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("9_56rry")]
 transform = Transform3D(1, 0, 0, 0, 0.997801, -0.0662739, 0, 0.0662739, 0.997801, -0.008, -0.005, -0.028)
-visible = true
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("10_nvqj7")]
 transform = Transform3D(1, 0, 0, 0, 0.997831, -0.0658211, 0, 0.0658211, 0.997831, -0.00342127, -0.00526484, -0.0280473)
-visible = true
 
 [node name="Crosshair" type="Sprite3D" parent="." index="5"]
 transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0989939, -0.10273)
