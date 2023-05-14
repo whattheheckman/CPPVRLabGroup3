@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var dialogue : AudioStreamPlayer
+var has_played := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,4 +14,5 @@ func _process(delta):
 
 
 func _on_body_entered(body): 
-    dialogue.play()
+    if not has_played:
+        dialogue.play()

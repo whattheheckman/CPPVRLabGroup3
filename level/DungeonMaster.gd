@@ -6,13 +6,16 @@ extends Node
 @export var levers_needed := 3
 var current_levers := levers_needed
 
+var in_reactor := false
+
 @export var robot : PackedScene
 @export var robotlocations : PackedVector3Array
-@export var robotrotation : PackedInt32Array
+@export var robotrotation : PackedFloat32Array
 
 @export var levers_Sound : AudioStreamPlayer
 @export var core_destruct_sound : AudioStreamPlayer
 
+@onready var reactormusic = $"Music/Reactor Music"
 @onready var angrymusic = $"Music/Angry Music"
 @onready var happymusic = $"Music/Happy Music"
 
@@ -35,6 +38,7 @@ func pulllever():
     
 func doomsday():
     happymusic.stop()
+    reactormusic.stop()
     angrymusic.start()
     await get_tree().create_timer(2.0).timeout
     countdown.start()
@@ -47,21 +51,41 @@ func doomsday():
         get_tree().root.add_child(new_robot)
     
     
-    
-    
-    
-    
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-    
+func win():
     pass
-func _physics_process(delta):
-    while not countdown.is_stopped():
-        
-
-
-
+    
+    
+    
 
 
 func _on_safezone_body_entered(body):
-    pass # Replace with function body.
+    while not countdown.is_stopped():
+        win()
+
+
+
+func _on_reactor_dialogue_trigger_body_entered(body):
+    if not in_reactor and body is XRCamera3D:
+        fade_out(happymusic)
+        reactormusic.play()
+    
+@onready var tween_out = get_tree().create_tween()
+var transition_duration = 2.50
+var transition_type = 1 # TRANS_SINE
+var last_stream_faded : AudioStreamPlayer
+var last_vol : float
+
+func fade_out(stream_player : AudioStreamPlayer):
+    # tween music volume down to 0
+    last_stream_faded = stream_player
+    last_vol = stream_player.volume_db
+    tween_out.interpolate_property(stream_player, "volume_db", last_vol, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
+    tween_out.start()
+    # when the tween ends, the music will be stopped
+
+func _on_TweenOut_tween_completed(object, key):
+    # stop the music -- otherwise it continues to run at silent volume
+    object.stop()
+    last_stream_faded.volume_db = last_vol
+    
+    
