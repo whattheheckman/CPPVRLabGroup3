@@ -70,7 +70,7 @@ color_ramp = SubResource("5")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67ru3"]
 streams_count = 1
-random_volume_offset_db = 2.25
+random_volume_offset_db = 2.7
 stream_0/stream = ExtResource("10_mq0bw")
 stream_0/weight = 1.0
 
@@ -123,6 +123,8 @@ _data = {
 }
 
 [node name="GAT" instance=ExtResource("1_n76ui")]
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
+disable_mode = 1
 script = ExtResource("2_uopoi")
 hold_method = 1
 
@@ -173,7 +175,7 @@ transform = Transform3D(1, 0, 0, 0, 0.997801, -0.0662739, 0, 0.0662739, 0.997801
 transform = Transform3D(1, 0, 0, 0, 0.997831, -0.0658211, 0, 0.0658211, 0.997831, -0.00342127, -0.00526484, -0.0280473)
 
 [node name="Crosshair" type="Sprite3D" parent="." index="5"]
-transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0989939, -0.10273)
+transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0890975, -0.110855)
 modulate = Color(0, 0.803922, 1, 0.878431)
 texture = ExtResource("12_pal5l")
 
@@ -185,6 +187,7 @@ autostart = true
 
 [node name="Shoot" type="AudioStreamPlayer" parent="." index="7"]
 stream = SubResource("AudioStreamRandomizer_67ru3")
+bus = &"SFX"
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0499368, 0)
@@ -208,12 +211,12 @@ surface_material_override/2 = ExtResource("11_sdsgf")
 surface_material_override/3 = ExtResource("11_sdsgf")
 
 [node name="GunName" type="MeshInstance3D" parent="." index="10"]
-transform = Transform3D(-6.55671e-09, 0.106066, -0.106066, 0, 0.106066, 0.106066, 0.15, 4.63629e-09, -4.63629e-09, -0.0181605, 0, 0)
+transform = Transform3D(-6.55671e-09, 0.106066, -0.106066, 0, 0.106066, 0.106066, 0.15, 4.63629e-09, -4.63629e-09, -0.0181605, 0.0613523, 0)
 layers = 8
 mesh = SubResource("TextMesh_q2juc")
 
 [node name="GunName2" type="MeshInstance3D" parent="." index="11"]
-transform = Transform3D(-6.55671e-09, -0.106066, 0.106066, 0, 0.106066, 0.106066, -0.15, 4.63629e-09, -4.63629e-09, 0.018, 0, 0)
+transform = Transform3D(-6.55671e-09, -0.106066, 0.106066, 0, 0.106066, 0.106066, -0.15, 4.63629e-09, -4.63629e-09, 0.018, 0.0613523, 0)
 layers = 8
 mesh = SubResource("TextMesh_q2juc")
 
