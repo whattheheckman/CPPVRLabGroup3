@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://nnwtmh11j53l"]
+[gd_resource type="AudioBusLayout" load_steps=11 format=3 uid="uid://nnwtmh11j53l"]
 
 [sub_resource type="AudioEffectReverb" id="1"]
 resource_name = "Reverb"
@@ -34,10 +34,6 @@ pre_gain = -0.12
 drive = 0.51
 post_gain = 3.62
 
-[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ce80m"]
-resource_name = "Compressor"
-threshold = -12.4
-
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_6bavb"]
 resource_name = "Reverb"
 room_size = 0.58
@@ -52,6 +48,17 @@ resource_name = "Delay"
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_dfpuy"]
 resource_name = "Amplify"
 volume_db = 11.08
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_ponru"]
+resource_name = "EQ"
+band_db/1000_hz = -12.6
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_7qsu4"]
+resource_name = "Reverb"
+room_size = 0.75
+damping = 0.3
+hipass = 0.08
+wet = 0.24
 
 [resource]
 bus/0/volume_db = -10.0
@@ -75,7 +82,7 @@ bus/3/name = &"Radio"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = -6.24739
+bus/3/volume_db = -0.723771
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectEQ_4lnoo")
 bus/3/effect/0/enabled = true
@@ -87,10 +94,8 @@ bus/4/name = &"Music"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -26.6051
+bus/4/volume_db = -2.91905
 bus/4/send = &"Master"
-bus/4/effect/0/effect = SubResource("AudioEffectCompressor_ce80m")
-bus/4/effect/0/enabled = true
 bus/5/name = &"Announcer"
 bus/5/solo = false
 bus/5/mute = false
@@ -109,3 +114,7 @@ bus/6/mute = false
 bus/6/bypass_fx = false
 bus/6/volume_db = 0.0
 bus/6/send = &"Master"
+bus/6/effect/0/effect = SubResource("AudioEffectEQ_ponru")
+bus/6/effect/0/enabled = true
+bus/6/effect/1/effect = SubResource("AudioEffectReverb_7qsu4")
+bus/6/effect/1/enabled = true

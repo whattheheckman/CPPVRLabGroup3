@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhukohvm0a6nn"
+path="res://.godot/imported/Surrender - Asher Fulero.mp3-a1217efd80136bce20937a53822a4b59.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/music/Surrender - Asher Fulero.mp3"
+dest_files=["res://.godot/imported/Surrender - Asher Fulero.mp3-a1217efd80136bce20937a53822a4b59.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.5
+bpm=0.0
+beat_count=0
+bar_beats=4

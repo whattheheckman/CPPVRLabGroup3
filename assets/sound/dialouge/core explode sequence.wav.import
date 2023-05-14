@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsqbar3dj0h1a"
+path="res://.godot/imported/core explode sequence.wav-82cfa92e654892b88095c9eafa01f588.sample"
+
+[deps]
+
+source_file="res://assets/sound/dialouge/core explode sequence.wav"
+dest_files=["res://.godot/imported/core explode sequence.wav-82cfa92e654892b88095c9eafa01f588.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

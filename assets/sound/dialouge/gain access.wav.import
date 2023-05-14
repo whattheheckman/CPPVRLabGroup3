@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dirngrlg6sh0o"
+path="res://.godot/imported/gain access.wav-f3baf081891a937f0dd6628f1ce4486a.sample"
+
+[deps]
+
+source_file="res://assets/sound/dialouge/gain access.wav"
+dest_files=["res://.godot/imported/gain access.wav-f3baf081891a937f0dd6628f1ce4486a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

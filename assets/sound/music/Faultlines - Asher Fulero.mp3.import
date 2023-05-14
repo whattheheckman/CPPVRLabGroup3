@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdnnah0ocvdp5"
+path="res://.godot/imported/Faultlines - Asher Fulero.mp3-9016cd853625156a249500973ef98a44.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/music/Faultlines - Asher Fulero.mp3"
+dest_files=["res://.godot/imported/Faultlines - Asher Fulero.mp3-9016cd853625156a249500973ef98a44.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
