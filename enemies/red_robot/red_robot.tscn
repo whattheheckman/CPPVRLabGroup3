@@ -477,6 +477,18 @@ bones/59/rotation = Quaternion(-0.396466, -0.585504, -0.396466, 0.585504)
 bones/60/position = Vector3(0.937933, 1.23785, -1.52284)
 bones/61/position = Vector3(-1.05149, 1.13607, -1.48048)
 
+[node name="EvilRoboBody" parent="red_robot/Armature/Skeleton3D" index="0"]
+layers = 2
+
+[node name="EvilRoboBody001" parent="red_robot/Armature/Skeleton3D" index="1"]
+layers = 2
+
+[node name="EvilRoboShield-L" parent="red_robot/Armature/Skeleton3D" index="2"]
+layers = 2
+
+[node name="EvilRoboShield-R" parent="red_robot/Armature/Skeleton3D" index="3"]
+layers = 2
+
 [node name="RayFrom" type="BoneAttachment3D" parent="red_robot/Armature/Skeleton3D" index="4"]
 transform = Transform3D(-0.999086, -0.0042241, 0.0425528, 0.042582, -0.00706541, 0.999068, -0.0039195, 0.999966, 0.00723864, 0.0667979, 2.02471, 0.190818)
 bone_name = "CannonAnimRecoil"
@@ -484,11 +496,13 @@ bone_idx = 17
 
 [node name="Circle" type="MeshInstance3D" parent="red_robot/Armature/Skeleton3D/RayFrom"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+layers = 2
 mesh = ExtResource("3_4moav")
 skeleton = NodePath("")
 
 [node name="RayMesh" type="MeshInstance3D" parent="red_robot/Armature/Skeleton3D/RayFrom"]
 transform = Transform3D(1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 9.31323e-10, 1.49012e-08, 1, 0, 7, 0)
+layers = 2
 mesh = SubResource("BoxMesh_0py0t")
 skeleton = NodePath("")
 
