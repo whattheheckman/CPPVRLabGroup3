@@ -259,10 +259,11 @@ func _clip_ray(length):
 
 
 func _on_area_body_entered(body):
-    if (body is Player) or (body is XRCamera3D) or (body.name == "Target"):
+    print("RedRobot spoted a class of: " + str(body.get_class()))
+    if body.has_node("XRCamera3D"):
         player = body
 
 
-func _on_area_body_exited(body):
-    if (body is Player) or (body is XRCamera3D):
+func _on_area_body_exited(body): 
+    if body.has_node("XRCamera3D"):
                 player = null
