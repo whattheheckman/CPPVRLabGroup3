@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dibwsy4mu3nx7"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://level/ReactorDialogueTrigger.gd" id="1_pbmq7"]
+[ext_resource type="Script" path="res://level/DialogueTrigger.gd" id="1_pbmq7"]
 [ext_resource type="AudioStream" uid="uid://dirngrlg6sh0o" path="res://assets/sound/gain access.wav" id="2_tni02"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ix280"]
