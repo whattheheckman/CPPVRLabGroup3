@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c52oq132qivqp"]
+
+[ext_resource type="AudioStream" uid="uid://bf8osi0q1ji8u" path="res://player/audio/shoot.wav" id="1_f5kyq"]
+
+[resource]
+streams_count = 1
+random_volume_offset_db = 2.7
+stream_0/stream = ExtResource("1_f5kyq")
+stream_0/weight = 1.0

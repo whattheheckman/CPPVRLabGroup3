@@ -71,7 +71,7 @@ hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionTeleport" parent="LeftHand" instance=ExtResource("4_puevv")]
 strength = 10.0
-max_slope = 45.0
+max_slope = 50.0
 
 [node name="BoxCreator" type="RayCast3D" parent="LeftHand" node_paths=PackedStringArray("visualize_mesh")]
 target_position = Vector3(0, 0, -100)
@@ -93,8 +93,8 @@ hand_material_override = ExtResource("4_8x45i")
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("5_p6lqc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020049, -0.0348984, 0.0611938)
-grab_distance = 2.0
-ranged_distance = 40.0
+grab_distance = 1.0
+ranged_distance = 20.0
 ranged_angle = 25.667
 
 [node name="MovementTurn" parent="RightHand" instance=ExtResource("8_uw8i0")]

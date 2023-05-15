@@ -7,6 +7,7 @@ extends Node
 var current_levers := levers_needed
 
 var in_reactor := false
+var has_won = true
 
 @export var robot : PackedScene
 @export var robotlocations : PackedVector3Array
@@ -48,8 +49,9 @@ func doomsday():
 	animationPlayer.play("Doomsday")
 	core_destruct_sound.play()
 	
+	var four_count : Array
 	for location in robotlocations:
-		var new_robot = robot
+		var new_robot = robot.instantiate()
 		#new_robot.health = 10 #FIXME: not picking up the health field for somereason, probably bc it's a scene
 		new_robot.set_global_position(location)
 		get_tree().root.add_child(new_robot)
@@ -66,14 +68,17 @@ func win():
 
 func _on_safezone_body_entered(body):
 	while not countdown.is_stopped():
+		has_won = true
 		win()
 
 
 
-func _on_reactor_dialogue_trigger_body_entered(body):
-	if not in_reactor and body is XRCamera3D:
-		fade_out(happymusic)
+func _on_reactor_dialogue_trigger_body_entered(_body):
+	print("RECEIEVE REACTOR SIGNAL")
+	if  in_reactor == false:
+		happymusic.stop()
 		reactormusic.play()
+		in_reactor = true
 	
 @onready var tween_out = get_tree().create_tween()
 var transition_duration = 2.50

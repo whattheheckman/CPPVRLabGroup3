@@ -14,6 +14,6 @@ func _process(delta):
 
 
 func _on_body_entered(body): 
-	if not has_played:
+	if has_played == false:
 		dialogue.play()
 		has_played = true

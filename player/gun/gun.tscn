@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://noilc7phmu8k"]
+[gd_scene load_steps=31 format=3 uid="uid://noilc7phmu8k"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_n76ui"]
 [ext_resource type="Material" path="res://player/bullet/bullet_material.tres" id="2_by25h"]
@@ -7,7 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dxkiv5j246cuf" path="res://player/model/muzzle_flash_particle_mesh_Cone.mesh" id="4_ppsd7"]
 [ext_resource type="PackedScene" uid="uid://eukh535xfxjr" path="res://player/gun/blasterA.glb" id="8_3tv84"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="9_56rry"]
-[ext_resource type="AudioStream" uid="uid://bf8osi0q1ji8u" path="res://player/audio/shoot.wav" id="10_mq0bw"]
+[ext_resource type="AudioStream" uid="uid://c52oq132qivqp" path="res://player/gun/shoot_sound_random.tres" id="10_jeplw"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="10_nvqj7"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="10_qxvac"]
 [ext_resource type="Material" uid="uid://fjcadbqjoxhe" path="res://player/gun/highlight_material.tres" id="11_sdsgf"]
@@ -31,10 +31,22 @@ metallic = 0.97
 metallic_specular = 0.54
 roughness = 0.55
 
+[sub_resource type="TextMesh" id="TextMesh_q2juc"]
+text = "enerGy Acceleration Tool"
+font = ExtResource("12_15jpt")
+font_size = 10
+depth = 0.003
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36h6c"]
+particle_flag_align_y = true
 direction = Vector3(0, 0, -1)
-spread = 15.0
-gravity = Vector3(0, -3, 0)
+spread = 53.58
+flatness = 0.08
+gravity = Vector3(0, 3, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+turbulence_enabled = true
+turbulence_noise_strength = 2.29
 
 [sub_resource type="SphereMesh" id="SphereMesh_5gsk0"]
 radius = 0.003
@@ -68,12 +80,6 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("7")
 color_ramp = SubResource("5")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67ru3"]
-streams_count = 1
-random_volume_offset_db = 2.7
-stream_0/stream = ExtResource("10_mq0bw")
-stream_0/weight = 1.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_263i5"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 0.168627)
@@ -83,18 +89,12 @@ material = SubResource("StandardMaterial3D_263i5")
 radius = 0.02
 height = 0.04
 
-[sub_resource type="TextMesh" id="TextMesh_q2juc"]
-text = "enerGy Acceleration Tool"
-font = ExtResource("12_15jpt")
-font_size = 10
-depth = 0.003
-
 [sub_resource type="Animation" id="Animation_ph8re"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("OmniLight3D:visible")
+tracks/0/path = NodePath("blasterA/OmniLight3D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,6 +103,42 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterA/AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterA:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("XRToolsHighlightVisible:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_xv7a5"]
 resource_name = "shoot_recoil"
@@ -110,11 +146,11 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shoot:playing")
+tracks/0/path = NodePath("blasterA/OmniLight3D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.00871866, 0.148437),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -122,11 +158,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:visible")
+tracks/1/path = NodePath("blasterA/AudioStreamPlayer3D:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -134,14 +170,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation:x")
+tracks/2/path = NodePath("blasterA:rotation:x")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 0.707, 2.29001),
+"times": PackedFloat32Array(0.00096874, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 0.707, 2.2901),
 "update": 0,
-"values": [0.0, 0.5, 0.0]
+"values": [0.0, -0.5, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ol37"]
@@ -151,28 +187,61 @@ _data = {
 }
 
 [node name="GAT" instance=ExtResource("1_n76ui")]
-rotation_order = 1
+rotation_order = 3
 mass = 0.5
 script = ExtResource("2_uopoi")
+bullet_speed = 1.0
 ranged_grab_method = 2
+ranged_grab_speed = 10.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("BoxShape3D_wlosy")
 
 [node name="blasterA" parent="." index="1" instance=ExtResource("8_3tv84")]
-transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0, 0)
+transform = Transform3D(-0.4, 0, -1.01407e-06, 0, 0.4, 0, 1.01407e-06, 0, -0.4, 0, 0, 0)
 
 [node name="blasterA2" parent="blasterA" index="0"]
 layers = 8
 surface_material_override/0 = SubResource("StandardMaterial3D_kf00f")
 surface_material_override/2 = SubResource("StandardMaterial3D_0ln4s")
 
+[node name="Crosshair" type="Sprite3D" parent="blasterA" index="1"]
+transform = Transform3D(-0.1625, -2.22045e-16, 1.04565e-07, 2.25514e-16, 0.1625, -7.45058e-09, -2.45368e-08, 9.31323e-10, -0.6925, -4.18466e-08, 0.222744, 0.277137)
+modulate = Color(0, 0.803922, 1, 0.878431)
+texture = ExtResource("12_pal5l")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="blasterA" index="2"]
+transform = Transform3D(-2.5, 0, 3.77489e-07, 3.46945e-15, 2.5, 0, -3.77489e-07, 0, -2.5, 0, 0, 0)
+stream = ExtResource("10_jeplw")
+bus = &"SFX"
+
+[node name="GunName" type="MeshInstance3D" parent="blasterA" index="3"]
+transform = Transform3D(7.30152e-08, -0.265165, 0.265165, 0, 0.265165, 0.265165, -0.375, -5.02914e-08, 5.02914e-08, 0.0454012, 0.153381, 6.51926e-09)
+layers = 8
+mesh = SubResource("TextMesh_q2juc")
+skeleton = NodePath("../..")
+
+[node name="GunName2" type="MeshInstance3D" parent="blasterA" index="4"]
+transform = Transform3D(-4.02316e-08, 0.265165, -0.265165, 0, 0.265165, 0.265165, 0.375, 2.79397e-08, -2.79397e-08, -0.045, 0.153381, -6.51926e-09)
+layers = 8
+mesh = SubResource("TextMesh_q2juc")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="blasterA" index="5"]
+transform = Transform3D(-2.5, 0, 3.77489e-07, 3.46945e-15, 2.5, 0, -3.77489e-07, 0, -2.5, -8.8824e-08, 0.209372, 0.588255)
+visible = false
+light_color = Color(0.52549, 1, 1, 1)
+light_energy = 7.135
+shadow_enabled = true
+omni_range = 6.023
+omni_attenuation = 0.329877
+omni_shadow_mode = 0
+
 [node name="ShootFrom" type="Marker3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49012e-08, 0.0484713, -0.174955)
 gizmo_extents = 0.11
 
 [node name="ShootParticle" type="GPUParticles3D" parent="ShootFrom" index="0"]
-transform = Transform3D(1, 2.04891e-08, 0, 3.21306e-08, 1, 5.58794e-09, 0, 0, 1, 0, 0, 0)
 material_override = ExtResource("2_by25h")
 cast_shadow = 0
 emitting = false
@@ -203,22 +272,17 @@ transform = Transform3D(1, 0, 0, 0, 0.997801, -0.0662739, 0, 0.0662739, 0.997801
 transform = Transform3D(1, 0, 0, 0, 0.997831, -0.0658211, 0, 0.0658211, 0.997831, -0.00342127, -0.00526484, -0.0280473)
 visible = true
 
-[node name="Crosshair" type="Sprite3D" parent="." index="5"]
-transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.277, 0, 0.0890975, -0.110855)
-modulate = Color(0, 0.803922, 1, 0.878431)
-texture = ExtResource("12_pal5l")
-
-[node name="FireCooldown" type="Timer" parent="." index="6"]
+[node name="FireCooldown" type="Timer" parent="." index="5"]
 process_callback = 0
-wait_time = 0.4
+wait_time = 0.2
 one_shot = true
 autostart = true
 
-[node name="Shoot" type="AudioStreamPlayer" parent="." index="7"]
-stream = SubResource("AudioStreamRandomizer_67ru3")
+[node name="Shoot" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("10_jeplw")
 bus = &"SFX"
 
-[node name="RayCast3D" type="RayCast3D" parent="." index="8"]
+[node name="RayCast3D" type="RayCast3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0499368, 0)
 target_position = Vector3(0, 0, -100)
 collision_mask = 3
@@ -226,7 +290,7 @@ collision_mask = 3
 [node name="Laser" type="MeshInstance3D" parent="RayCast3D" index="0"]
 mesh = SubResource("SphereMesh_lgcd6")
 
-[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="9"]
+[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="8"]
 script = ExtResource("10_qxvac")
 
 [node name="blasterA" parent="XRToolsHighlightVisible" index="0" instance=ExtResource("8_3tv84")]
@@ -239,29 +303,10 @@ surface_material_override/1 = ExtResource("11_sdsgf")
 surface_material_override/2 = ExtResource("11_sdsgf")
 surface_material_override/3 = ExtResource("11_sdsgf")
 
-[node name="GunName" type="MeshInstance3D" parent="." index="10"]
-transform = Transform3D(-6.55671e-09, 0.106066, -0.106066, 0, 0.106066, 0.106066, 0.15, 4.63629e-09, -4.63629e-09, -0.0181605, 0.0613523, 0)
-layers = 8
-mesh = SubResource("TextMesh_q2juc")
-
-[node name="GunName2" type="MeshInstance3D" parent="." index="11"]
-transform = Transform3D(-6.55671e-09, -0.106066, 0.106066, 0, 0.106066, 0.106066, -0.15, 4.63629e-09, -4.63629e-09, 0.018, 0.0613523, 0)
-layers = 8
-mesh = SubResource("TextMesh_q2juc")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 "": SubResource("AnimationLibrary_2ol37")
 }
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0837489, -0.235302)
-visible = false
-light_color = Color(0.52549, 1, 1, 1)
-light_energy = 6.06
-shadow_enabled = true
-omni_attenuation = 0.450625
-omni_shadow_mode = 0
 
 [connection signal="action_pressed" from="." to="." method="_on_action_pressed"]
 
