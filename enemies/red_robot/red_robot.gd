@@ -37,6 +37,8 @@ var blast_scene = preload("res://enemies/red_robot/laser/impact_effect/impact_ef
 @onready var ray_from = model.get_node("Armature/Skeleton3D/RayFrom")
 @onready var ray_mesh = ray_from.get_node("RayMesh")
 @onready var laser_raycast = ray_from.get_node("RayCast3D")
+@onready var laser_ember = $red_robot/Armature/Skeleton3D/RayFrom/LaserEmber
+
 @onready var collision_shape = $CollisionShape3D
 
 @onready var explosion_sound = $SoundEffects/Explosion
@@ -52,7 +54,7 @@ var blast_scene = preload("res://enemies/red_robot/laser/impact_effect/impact_ef
 @onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 func _ready():
-	orientation = global_transform
+	orientation = self.get_global_transform()
 	orientation.origin = Vector3()
 	$AnimationTree.active = true
 	if test_shoot:
@@ -112,7 +114,7 @@ func shoot():
 	var ray_dir = -gt.basis.z
 	var max_dist = 1000
 
-	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_dir * max_dist, 1, [self])
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_dir * max_dist, $PlayerDetectionArea.get_collision_mask_value(), [self])
 	
 	var col = get_world_3d().direct_space_state.intersect_ray(query)
 	if not col.is_empty():
@@ -122,8 +124,8 @@ func shoot():
 	# Clip ray in shader.
 	_clip_ray(max_dist)
 	# Position laser ember particles
-	var mesh_offset = ray_mesh.position.z
-	var laser_ember = $RedRobotModel/Armature/Skeleton3D/RayFrom/LaserEmber
+	var mesh_offset : float = ray_mesh.position.z
+	#var laser_ember = $red_robot/Armature/Skeleton3D/RayFrom/LaserEmber moved to on ready
 	laser_ember.position = Vector3(0.0, 0.0, -max_dist / 2.0 - mesh_offset)
 	laser_ember.emission_box_extents.z = (max_dist - abs(mesh_offset)) / 2.0
 	if not col.is_empty():
@@ -148,7 +150,6 @@ func _physics_process(delta):
 		set_velocity(gravity * delta)
 		set_up_direction(Vector3.UP)
 		move_and_slide()
-		velocity = velocity
 		return
 
 	if state == State.APPROACH:
@@ -158,16 +159,16 @@ func _physics_process(delta):
 				aim_preparing = 0
 			animation_tree["parameters/aiming/blend_amount"] = aim_preparing / AIM_PREPARE_TIME
 
-		var to_player_local = player.global_transform.origin * global_transform
+		var to_player_local = player.global_transform.origin * self.global_transform
 		# The front of the robot is +Z, and atan2 is zero at +X, so we need to use the Z for the X parameter (second one).
 		var angle_to_player = atan2(to_player_local.x, to_player_local.z)
 		var tolerance = deg_to_rad(PLAYER_AIM_TOLERANCE_DEGREES)
 		if angle_to_player > tolerance:
-			animation_tree["parameters/state/transition_request"] = "turn_left"
-		elif angle_to_player < -tolerance:
 			animation_tree["parameters/state/transition_request"] = "turn_right"
+		elif angle_to_player < -tolerance:
+			animation_tree["parameters/state/transition_request"] = "turn_left"
 		else:
-			animation_tree["parameters/state/transition_request"] = "idle"
+			animation_tree["parameters/state/transition_request"] = "walk"
 			
 			
 			# Facing player, try to shoot.
@@ -260,9 +261,11 @@ func _clip_ray(length):
 
 func _on_area_body_entered(body):
 	print("RedRobot spoted a class of: " + str(body.get_class()))
-	print("RedRobot spoted these groups" + str(body.get_groups()) + " in the body" +str(body))
+	print("RedRobot spoted these groups" + str(body.get_groups()) + " in the body " +str(body))
 	if body.is_in_group("player_body") or body.has_meta("XR_Player"):
-		player = body
+		# FIXME: this is where the robot script detects the player, comment this out to ignore the player
+		#player = body 
+		pass
 
 
 func _on_area_body_exited(body): 
