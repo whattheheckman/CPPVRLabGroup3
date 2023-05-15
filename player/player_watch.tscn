@@ -13,15 +13,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 texture_filter = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -1066.0
-offset_top = 36.0
-offset_right = -304.0
-offset_bottom = 286.0
+offset_left = -1508.0
+offset_top = 7.0
+offset_right = -746.0
+offset_bottom = 257.0
 grow_horizontal = 2
 texture = ExtResource("1_fruep")
 stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 95.0
+offset_right = 375.0
+offset_bottom = 135.0

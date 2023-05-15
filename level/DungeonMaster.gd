@@ -22,6 +22,7 @@ var has_won = true
 
 @onready var radio_gain_access = $Radio/GainAccessDialouge
 
+@onready var exploded_text = $"../XR_Player/XRCamera3D/exploded text"
 
 @onready var countdown = $Countdown
 @export var animationPlayer : AnimationPlayer 
@@ -30,14 +31,16 @@ var has_won = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$"../Safezone/Mission Accomplished".set_visible(false)
-	$"../XR_Player/exploded text".set_visible(false)
+	exploded_text.set_visible(false)
 	pass # Replace with function body.
 
 func pulllever():
-	current_levers -= 1;
-	levers_Sound.play()
-	if (current_levers <= 0):
+	if (current_levers == levers_needed):
 		doomsday()
+	else:
+		current_levers += 1;
+		levers_Sound.play()
+	
 	
 func doomsday():
 	happymusic.stop()
@@ -49,13 +52,13 @@ func doomsday():
 	animationPlayer.play("Doomsday")
 	core_destruct_sound.play()
 	
-	var four_count : Array
-	for location in robotlocations:
+	var four_count : Array = [robotlocations[0], robotlocations[1],robotlocations[2],robotlocations[3]]
+	for location in four_count:
 		var new_robot = robot.instantiate()
-		#new_robot.health = 10 #FIXME: not picking up the health field for somereason, probably bc it's a scene
+
 		new_robot.set_global_position(location)
 		get_tree().root.add_child(new_robot)
-		
+		new_robot.health = 10 #FIXME: not picking up the health field for somereason, probably bc it's a scene
 	
 	
 func win():
@@ -66,9 +69,11 @@ func win():
 	
 
 
-func _on_safezone_body_entered(body):
+func _on_safezone_body_entered(_body):
+	print(str(_body))
 	while not countdown.is_stopped():
 		has_won = true
+		# FIXME: you can't win wtf
 		win()
 
 
@@ -94,7 +99,7 @@ func fade_out(stream_player : AudioStreamPlayer):
 	tween_out.start()
 	# when the tween ends, the music will be stopped
 
-func _on_TweenOut_tween_completed(object, key):
+func _on_TweenOut_tween_completed(object, _key):
 	# stop the music -- otherwise it continues to run at silent volume
 	object.stop()
 	last_stream_faded.volume_db = last_vol
@@ -103,7 +108,12 @@ func _on_TweenOut_tween_completed(object, key):
 
 
 func _on_countdown_timeout():
+	angrymusic.stop()
+	happymusic.stop()
+	reactormusic.stop()
+
 	$"../CoreExplodeSound".stop()
 	$"Music/Credits Music".play()
-	$"../XR_Player/exploded text".set_visible(true)
+	exploded_text.set_visible(true)
+	tween_out.tween_property(exploded_text, "albedo_color", Color(Color.RED,.8), 3)
 	pass # Replace with function body.
