@@ -28,7 +28,8 @@ var in_reactor := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
+	$"../Safezone/Mission Accomplished".set_visible(false)
+	$"../XR_Player/exploded text".set_visible(false)
 	pass # Replace with function body.
 
 func pulllever():
@@ -43,6 +44,7 @@ func doomsday():
 	angrymusic.play()
 	await get_tree().create_timer(2.0).timeout
 	countdown.start()
+	$"../CoreNorminal".stop()
 	animationPlayer.play("Doomsday")
 	core_destruct_sound.play()
 	
@@ -55,6 +57,7 @@ func doomsday():
 	
 	
 func win():
+	$"../Safezone/Mission Accomplished".set_visibile(true)
 	pass
 	
 	
@@ -92,3 +95,10 @@ func _on_TweenOut_tween_completed(object, key):
 	last_stream_faded.volume_db = last_vol
 	
 	
+
+
+func _on_countdown_timeout():
+	$"../CoreExplodeSound".stop()
+	$"Music/Credits Music".play()
+	$"../XR_Player/exploded text".set_visible(true)
+	pass # Replace with function body.
