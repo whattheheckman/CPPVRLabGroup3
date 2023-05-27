@@ -4,10 +4,11 @@ extends Node
 
 
 @export var levers_needed := 3
-var current_levers := levers_needed
+var current_levers = 0
 
-var in_reactor := false
-var has_won = true
+var in_reactor : bool = false
+var game_ended  : bool = false
+var doomsday_started : bool = false
 
 @export var robot : PackedScene
 @export var robotlocations : PackedVector3Array
@@ -19,10 +20,12 @@ var has_won = true
 @onready var reactormusic = $"Music/Reactor Music"
 @onready var angrymusic = $"Music/Angry Music"
 @onready var happymusic = $"Music/Happy Music"
+@onready var creditsmusic = $"Music/Credits Music"
 
-@onready var radio_gain_access = $Radio/GainAccessDialouge
+@onready var radio_extraction = $Radio/ExtractionDialogue
 
-@onready var exploded_text = $"../XR_Player/XRCamera3D/exploded text"
+@onready var exploded_text : MeshInstance3D = $"../XR_Player/XRCamera3D/exploded text"
+@onready var accomplished_text : MeshInstance3D = $"../Safezone/Mission Accomplished"
 
 @onready var countdown = $Countdown
 @export var animationPlayer : AnimationPlayer 
@@ -35,7 +38,8 @@ func _ready():
 	pass # Replace with function body.
 
 func pulllever():
-	if (current_levers == levers_needed):
+	
+	if (current_levers == levers_needed - 1):
 		doomsday()
 	else:
 		current_levers += 1;
@@ -43,6 +47,7 @@ func pulllever():
 	
 	
 func doomsday():
+	doomsday_started = true
 	happymusic.stop()
 	reactormusic.stop()
 	angrymusic.play()
@@ -50,7 +55,7 @@ func doomsday():
 	countdown.start()
 	$"../CoreNorminal".stop()
 	animationPlayer.play("Doomsday")
-	core_destruct_sound.play()
+	#core_destruct_sound.play() controlled by animation
 	
 	var four_count : Array = [robotlocations[0], robotlocations[1],robotlocations[2],robotlocations[3]]
 	for location in four_count:
@@ -61,18 +66,19 @@ func doomsday():
 		new_robot.health = 10 #FIXME: not picking up the health field for somereason, probably bc it's a scene
 	
 	
-func win():
-	$"../Safezone/Mission Accomplished".set_visibile(true)
-	pass
+
 	
 	
-	
+
+##func _process(delta):
+##	countdown_label.text = countdown.time_left
+## TODO: implement countdown timer
 
 
 func _on_safezone_body_entered(_body):
 	print(str(_body))
-	while not countdown.is_stopped():
-		has_won = true
+	while not countdown.is_stopped() and doomsday_started and game_ended == false:
+		game_ended = true
 		# FIXME: you can't win wtf
 		win()
 
@@ -108,12 +114,38 @@ func _on_TweenOut_tween_completed(object, _key):
 
 
 func _on_countdown_timeout():
+	if game_ended == false:
+		lose()
+	pass
+
+
+func win():
+	game_ended == true
+	accomplished_text.set_visible(true)
+	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n You had " + str(countdown.time_left) + " seconds left")
+	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n Thank you for playing :)")
+	countdown.paused = true
+	countdown.stop()
+	angrymusic.stop()
+	happymusic.stop()
+	reactormusic.stop()
+	$"../CoreExplodeSound".stop()
+	core_destruct_sound.stop()
+	creditsmusic.play()
+	pass
+
+
+
+
+
+func lose():
+	game_ended = true
 	angrymusic.stop()
 	happymusic.stop()
 	reactormusic.stop()
 
-	$"../CoreExplodeSound".stop()
-	$"Music/Credits Music".play()
+	core_destruct_sound.stop()
+	creditsmusic.play()
 	exploded_text.set_visible(true)
-	tween_out.tween_property(exploded_text, "albedo_color", Color(Color.RED,.8), 3)
+
 	pass # Replace with function body.

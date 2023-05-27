@@ -79,7 +79,8 @@ func hit():
 		var base_xf = global_transform.basis
 		animation_tree.active = false
 		model.visible = false
-		death.visible = true
+		if !(OS.get_name() == "Android"):
+			death.set_visible(true)
 		collision_shape.disabled = true
 
 		death_shield1.get_node("Col1").disabled = false
@@ -255,7 +256,7 @@ func shoot_check():
 
 func _clip_ray(length):
 	var mesh_offset = ray_mesh.position.z
-	## NEED TO ADD RAY MESH SHADER SO BELOW CAN WORK
+	# FIXME: NEED TO ADD RAY MESH SHADER SO BELOW CAN WORK
 	ray_mesh.get_surface_override_material(0).set_shader_parameter("clip", length + mesh_offset) 
 
 
