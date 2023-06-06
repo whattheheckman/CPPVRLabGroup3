@@ -83,6 +83,12 @@ stick_deadzone = 0
 [node name="MovementDirect" parent="LeftHand" instance=ExtResource("9_13ygf")]
 enabled = false
 
+[node name="FunctionPickup" parent="LeftHand" instance=ExtResource("5_p6lqc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020049, -0.0348984, 0.0611938)
+grab_distance = 1.0
+ranged_distance = 20.0
+ranged_angle = 25.667
+
 [node name="RightHand" type="XRController3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.544, 0.711, 0)

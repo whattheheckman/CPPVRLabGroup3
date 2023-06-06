@@ -124,7 +124,7 @@ func win():
 	accomplished_text.set_visible(true)
 	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n You had " + str(countdown.time_left) + " seconds left")
 	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n Thank you for playing :)")
-	countdown.queue_free()
+	countdown.queue_free() #i could just pause the count down but might as well get rid of it
 	angrymusic.stop()
 	happymusic.stop()
 	reactormusic.stop()
