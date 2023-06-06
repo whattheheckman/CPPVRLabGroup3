@@ -120,12 +120,11 @@ func _on_countdown_timeout():
 
 
 func win():
-	game_ended == true
+	game_ended = true
 	accomplished_text.set_visible(true)
 	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n You had " + str(countdown.time_left) + " seconds left")
 	accomplished_text.mesh.set_text(accomplished_text.mesh.get_text() + " \n Thank you for playing :)")
-	countdown.paused = true
-	countdown.stop()
+	countdown.queue_free()
 	angrymusic.stop()
 	happymusic.stop()
 	reactormusic.stop()
